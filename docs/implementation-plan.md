@@ -57,7 +57,7 @@ Routes:
 
 - `/` — Home page
 - `/search?q=...&platform=...&page=...&limit=...` — Search page (IGDB results)
-- `/games/:igdbId` — Game details page
+- `/game/:igdbId` — Game details page
 - `/collection?q=...&platform=...&page=...&limit=...` — Collection page
 - `/platforms` — Platforms page
 
@@ -71,7 +71,7 @@ Routes:
 - Debounced suggestions whilst typing
 
 **Backend endpoints:**
-- **POST** - `/api/games/search`
+- **POST** - `/api/game/search`
 
 #### Search page
 
@@ -85,7 +85,7 @@ Routes:
 - Pagination (`page`/`limit`)
 
 **Backend endpoints:**
-- **POST** - `/api/games/result?search=&platform=&page=&limit=`
+- **POST** - `/api/game/result?search=&platform=&page=&limit=`
   - Query params:
     - `search` (required)
     - `platform` (optional)
@@ -108,8 +108,8 @@ Routes:
 - **TODO**: Be able to view games already in collection, show multiple game options if same game on multiple platforms in collection + also be able to edit game from here. Need to update API to support this.
 
 **Backend endpoints:**
-- **POST** - `/api/games/game-details/:igdbId`
-- **PUT** - `/api/games` (TODO)
+- **POST** - `/api/game/game-details/:igdbId`
+- **PUT** - `/api/game` (TODO)
 
 #### Collection page
 
@@ -125,7 +125,7 @@ Routes:
 
 
 **Backend endpoints:**
-- **GET** - `/api/games?search=&platform=&page=&limit=`
+- **GET** - `/api/game?search=&platform=&page=&limit=`
   - Query params:
     - `search` (optional; defaults to fetching “all games”)
     - `platform` (optional)
@@ -192,7 +192,7 @@ Implementation notes:
 ### Milestone 1 — Project setup + routing + MUI shell
 
 - Initialise Vite React TS project
-- Add routes: `/`, `/search`, `/games/:igdbId`, `/collection`, `/platforms`
+- Add routes: `/`, `/search`, `/game/:igdbId`, `/collection`, `/platforms`
 - Add MUI theme
 - Set up `tss-react/mui` styling conventions
 - Add env var for API base URL, e.g. `VITE_API_BASE_URL`
@@ -244,13 +244,13 @@ Implementation notes:
 
 - Fetch IGDB details by `igdbId`
 - Render IGDB metadata + media
-- Implement “Add to collection” modal and `POST /api/games`
+- Implement “Add to collection” modal and `POST /api/game`
 
 **Exit criteria:** detail renders; can add game to collection.
 
 ### Milestone 7 — Collection page
 
-- Fetch from collection (`GET /api/games`)
+- Fetch from collection (`GET /api/game`)
 - Add top search bar (binds to `search`)
 - Add platform filter
 - Add grid/list toggle
