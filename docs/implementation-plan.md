@@ -191,78 +191,78 @@ Implementation notes:
 
 ### Milestone 1 — Project setup + routing + MUI shell
 
-- Initialise Vite React TS project
-- Add routes: `/`, `/search`, `/game/:igdbId`, `/collection`, `/platforms`
-- Add MUI theme
-- Set up `tss-react/mui` styling conventions
-- Add env var for API base URL, e.g. `VITE_API_BASE_URL`
+- [x] Initialise Vite React TS project
+- [x] Add routes: `/`, `/search`, `/game/:igdbId`, `/collection`, `/platforms`
+- [ ] Add MUI theme
+- [ ] Set up `tss-react/mui` styling conventions
+- [ ] Add env var for API base URL, e.g. `VITE_API_BASE_URL`
 
 **Exit criteria:** app boots, routes render, MUI theme applied.
 
 ### Milestone 2 — GitHub Actions CI
 
-- Add workflow for:
-  - typecheck
-  - lint
-  - build
-  - test
+- [ ] Add workflow for:
+  - [ ] typecheck
+  - [ ] lint
+  - [ ] build
+  - [ ] test
 
 **Exit criteria:** Pipeline runs when pushing.
 
 ### Milestone 3 — Axios client + API module layer
 
-- Create a shared Axios client:
-  - `baseURL`
-  - Error handling
-- Add API modules for:
-  - Platforms
-  - IGDB search results
-  - IGDB game details
-  - Fetch from collection
-  - Create/update/delete saved game
+- [ ] Create a shared Axios client:
+  - [ ] `baseURL`
+  - [ ] Error handling
+- [ ] Add API modules for:
+  - [ ] Platforms
+  - [ ] IGDB search results
+  - [ ] IGDB game details
+  - [ ] Fetch from collection
+  - [ ] Create/update/delete saved game
 
 **Exit criteria:** can fetch platforms and render data in simple lists.
 
 ### Milestone 4 — Home page
 
-- Build centered search layout
-- On submit navigate to `/search?q=...`
-- Typeahead suggestions (debounced)
+- [ ] Build centered search layout
+- [ ] On submit navigate to `/search?q=...`
+- [ ] Typeahead suggestions (debounced)
 
 **Exit criteria:** search submit navigates; typeahead suggestions work.
 
 ### Milestone 5 — Search page (IGDB results)
 
-- Results grid/list components
-- Hover title behavior in grid view
-- View toggle persists (Redux UI state)
-- Pagination controls (`page`/`limit`)
+- [ ] Results grid/list components
+- [ ] Hover title behavior in grid view
+- [ ] View toggle persists (Redux UI state)
+- [ ] Pagination controls (`page`/`limit`)
 
 **Exit criteria:** results display correctly in both views; paging works.
 
 ### Milestone 6 — Game details page
 
-- Fetch IGDB details by `igdbId`
-- Render IGDB metadata + media
-- Implement “Add to collection” modal and `POST /api/game`
+- [ ] Fetch IGDB details by `igdbId`
+- [ ] Render IGDB metadata + media
+- [ ] Implement “Add to collection” modal and `POST /api/game`
 
 **Exit criteria:** detail renders; can add game to collection.
 
 ### Milestone 7 — Collection page
 
-- Fetch from collection (`GET /api/game`)
-- Add top search bar (binds to `search`)
-- Add platform filter
-- Add grid/list toggle
-- Add pagination (`page`/`limit`)
+- [ ] Fetch from collection (`GET /api/game`)
+- [ ] Add top search bar (binds to `search`)
+- [ ] Add platform filter
+- [ ] Add grid/list toggle
+- [ ] Add pagination (`page`/`limit`)
 
 **Exit criteria:** collection browsing works with filters and paging.
 
 ### Milestone 8 — Platforms page
 
-- Fetch platforms list
-- Add grid/list toggle
-- Platform click navigates to `/collection?search=&platform=...&page=1&limit=6`
+- [ ] Fetch platforms list
+- [ ] Add grid/list toggle
+- [ ] Platform click navigates to `/collection?search=&platform=...&page=1&limit=6`
 
 **Exit criteria:** platforms browse works; navigation applies filter.
 
