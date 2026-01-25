@@ -5,32 +5,32 @@ import Home from "../pages/Home";
 import Platforms from "../pages/Platforms";
 import Search from "../pages/Search";
 
-const pagesData: RouterType[] = [
+const publicRoutes: RouterType[] = [
   {
     path: "/",
-    title: "home",
+    title: "Home",
     element: <Home />,
   },
   {
     path: "/search",
-    title: "search",
+    title: "Search",
     element: <Search />,
   },
   {
     path: "/collection",
-    title: "collection",
+    title: "Collection",
     element: <Collection />,
   },
   {
     path: "/platforms",
-    title: "platforms",
+    title: "Platforms",
     element: <Platforms />,
   },
   {
     path: "/game",
-    title: "game",
+    title: "Game",
     element: <GameDetails />,
   },
 ];
 
-export default pagesData;
+export default publicRoutes;
