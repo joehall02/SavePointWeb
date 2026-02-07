@@ -1,6 +1,6 @@
 import type { JSX } from "react";
 
-export interface RouterType {
+export type RouterType = {
 	path: string;
 	title: string;
 	element: JSX.Element;

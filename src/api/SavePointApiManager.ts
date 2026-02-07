@@ -1,10 +1,6 @@
 import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios"
 import axios from "axios"
-
-type ApiError = {
-	statusCode: number
-	error: string
-}
+import type { ApiError } from "../types/apiError.types"
 
 /**
  * Manager for handling all requests to the SavePoint API
@@ -99,8 +95,9 @@ class SavePointApiManager {
 	// HTTP Methods
 
 	/**
+	 * GET Request
 	 * @param url - API URL
-	 * @param config - Configuration parameters (e.g. Pagaination)
+	 * @param config - Configuration parameters (e.g. Pagaination, search, etc)
 	 * @returns API response
 	*/
 	public get<T = unknown>(url: string, config?: AxiosRequestConfig) {
@@ -108,9 +105,10 @@ class SavePointApiManager {
 	}
 	
 	/**
+	 * POST Request
 	 * @param url - API URL
 	 * @param body - Request body
-	 * @param config - Configuration parameters (e.g. Pagaination)
+	 * @param config - Configuration parameters (e.g. Pagaination, search, etc)
 	 * @returns API response
 	*/
 	public post<T = unknown, B = unknown>(url: string, body?: B, config?: AxiosRequestConfig) {
@@ -118,9 +116,10 @@ class SavePointApiManager {
 	}
 	
 	/**
+	 * PUT Request
 	 * @param url - API URL
 	 * @param body - Request body
-	 * @param config - Configuration parameters (e.g. Pagaination)
+	 * @param config - Configuration parameters (e.g. Pagaination, search, etc)
 	 * @returns API response
 	*/
 	public put<T = unknown, B = unknown>(url: string, body?: B, config?: AxiosRequestConfig) {
@@ -128,8 +127,9 @@ class SavePointApiManager {
 	}
 	
 	/**
+	 * DELETE Request
 	 * @param url - API URL
-	 * @param config - Configuration parameters (e.g. Pagaination)
+	 * @param config - Configuration parameters (e.g. Pagaination, search, etc)
 	 * @returns API response
 	*/
 	public delete<T = unknown>(url: string, config?: AxiosRequestConfig) {
