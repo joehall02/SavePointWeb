@@ -28,7 +28,8 @@ export default defineConfig([
     rules: {
       "@stylistic/indent": ["warn", "tab"],
       "react/jsx-indent": ["error", "tab"],
-      "react/jsx-indent-props": ["error", "tab"]
+      "react/jsx-indent-props": ["error", "tab"],
+      "no-console": ["warn", { "allow": ["warn", "error"] }]
     },
     languageOptions: {
       ecmaVersion: 2020,
