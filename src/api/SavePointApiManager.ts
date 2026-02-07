@@ -1,12 +1,19 @@
-import type { AxiosError, AxiosInstance, AxiosResponse } from "axios"
+import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios"
 import axios from "axios"
 
-// API error type
 type ApiError = {
 	statusCode: number
 	error: string
 }
 
+/**
+ * Manager for handling all requests to the SavePoint API
+ * 
+ * Responsibilities:
+ * - Handle HTTP requests to the API
+ * - Centralised error handling
+ * - Provide singleton that can be accessed throughout the app
+ */
 class SavePointApiManager {
 	private static instance: SavePointApiManager
 	private client: AxiosInstance
@@ -38,7 +45,10 @@ class SavePointApiManager {
 		)
 	}
 
-	// Normalise error method
+	/**
+	 * @param error - AxiosError for a failed request
+	 * @returns Normalised ApiError object
+	*/
 	private normaliseError(error: AxiosError): ApiError {
 		// Check error response isn't null or undefined AND check the type of data is an object
 		if (error.response?.data && typeof error.response?.data === 'object') {
@@ -60,7 +70,7 @@ class SavePointApiManager {
 		if (error.request) {
 			const apiError: ApiError = {
 				statusCode: 503,
-				error: "Network Error"
+				error: error.message || "Network Error"
 			}
 
 			return apiError;
@@ -69,13 +79,16 @@ class SavePointApiManager {
 		// Default error
 		const apiError: ApiError = {
 			statusCode: 520,
-			error: "Unknown Error"
+			error: error.message || "Unknown Error"
 		}
 
 		return apiError;
 	}
 
-	// Get instance method (creates new instance if it doesn't exist already)
+	/**
+	 * Create an instance of the SavePointApiManager class if it doesn't exist already
+	 * @returns Instance of SavePointApiManager
+	*/
 	public static getInstance(): SavePointApiManager {
 		if (!SavePointApiManager.instance) {
 			SavePointApiManager.instance = new SavePointApiManager();
@@ -85,6 +98,43 @@ class SavePointApiManager {
 	
 	// HTTP Methods
 
+	/**
+	 * @param url - API URL
+	 * @param config - Configuration parameters (e.g. Pagaination)
+	 * @returns API response
+	*/
+	public get<T = unknown>(url: string, config?: AxiosRequestConfig) {
+		return this.client.get<T>(url, config);
+	}
+	
+	/**
+	 * @param url - API URL
+	 * @param body - Request body
+	 * @param config - Configuration parameters (e.g. Pagaination)
+	 * @returns API response
+	*/
+	public post<T = unknown, B = unknown>(url: string, body?: B, config?: AxiosRequestConfig) {
+		return this.client.post<T, B>(url, body, config);
+	}
+	
+	/**
+	 * @param url - API URL
+	 * @param body - Request body
+	 * @param config - Configuration parameters (e.g. Pagaination)
+	 * @returns API response
+	*/
+	public put<T = unknown, B = unknown>(url: string, body?: B, config?: AxiosRequestConfig) {
+		return this.client.put<T, B>(url, body, config);
+	}
+	
+	/**
+	 * @param url - API URL
+	 * @param config - Configuration parameters (e.g. Pagaination)
+	 * @returns API response
+	*/
+	public delete<T = unknown>(url: string, config?: AxiosRequestConfig) {
+		return this.client.delete<T>(url, config)
+	}
 }
 
 // export get instance
