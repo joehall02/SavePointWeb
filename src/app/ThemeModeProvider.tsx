@@ -5,7 +5,7 @@ import { ThemeProvider, CssBaseline } from "@mui/material";
 type ThemeMode = "light" | "dark";
 type ThemeModeContextValue = { mode: ThemeMode; toggleMode: () => void };
 
-export const ThemeModeContext = createContext<ThemeModeContextValue | null>(null);
+const ThemeModeContext = createContext<ThemeModeContextValue | null>(null);
 
 function getInitialMode(): ThemeMode {
 	// Fetch mode from local storage if available

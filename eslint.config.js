@@ -23,7 +23,7 @@ export default defineConfig([
       reactRefresh.configs.vite,
     ],
     plugins: {
-      '@stylistic': stylistic,
+      '@stylistic': stylistic
     },
     rules: {
       "@stylistic/indent": ["warn", "tab"],
@@ -38,5 +38,12 @@ export default defineConfig([
   {
     files: ["**/*.test.{ts,tsx}"],
     extends: [jest.configs["flat/recommended"]],
+  },
+  {
+    settings: {
+      react: {
+        version: "detect"
+      }
+    }
   }
 ])
