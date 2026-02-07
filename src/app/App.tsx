@@ -8,12 +8,12 @@ import ThemeModeProvider from "./ThemeModeProvider";
 
 
 function App() {
-  return (
-    <ThemeModeProvider>
-      <Nav />
-      <Outlet />
-    </ThemeModeProvider>
-  );
+	return (
+		<ThemeModeProvider>
+			<Nav />
+			<Outlet />
+		</ThemeModeProvider>
+	);
 }
 
 export default App;

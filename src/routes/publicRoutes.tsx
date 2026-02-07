@@ -6,31 +6,31 @@ import Platforms from "../pages/Platforms";
 import Search from "../pages/Search";
 
 const publicRoutes: RouterType[] = [
-  {
-    path: "/",
-    title: "Home",
-    element: <Home />,
-  },
-  {
-    path: "/search",
-    title: "Search",
-    element: <Search />,
-  },
-  {
-    path: "/collection",
-    title: "Collection",
-    element: <Collection />,
-  },
-  {
-    path: "/platforms",
-    title: "Platforms",
-    element: <Platforms />,
-  },
-  {
-    path: "/game",
-    title: "Game",
-    element: <GameDetails />,
-  },
+	{
+		path: "/",
+		title: "Home",
+		element: <Home />,
+	},
+	{
+		path: "/search",
+		title: "Search",
+		element: <Search />,
+	},
+	{
+		path: "/collection",
+		title: "Collection",
+		element: <Collection />,
+	},
+	{
+		path: "/platforms",
+		title: "Platforms",
+		element: <Platforms />,
+	},
+	{
+		path: "/game",
+		title: "Game",
+		element: <GameDetails />,
+	},
 ];
 
 export default publicRoutes;

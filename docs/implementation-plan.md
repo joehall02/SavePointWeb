@@ -193,7 +193,7 @@ Implementation notes:
 
 - [x] Initialise Vite React TS project
 - [x] Add routes: `/`, `/search`, `/game/:igdbId`, `/collection`, `/platforms`
-- [ ] Add MUI theme
+- [x] Add MUI theme
 - [ ] Set up `tss-react/mui` styling conventions
 - [ ] Add env var for API base URL, e.g. `VITE_API_BASE_URL`
 
