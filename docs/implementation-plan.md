@@ -194,17 +194,17 @@ Implementation notes:
 - [x] Initialise Vite React TS project
 - [x] Add routes: `/`, `/search`, `/game/:igdbId`, `/collection`, `/platforms`
 - [x] Add MUI theme
-- [ ] Set up `tss-react/mui` styling conventions
-- [ ] Add env var for API base URL, e.g. `VITE_API_BASE_URL`
+- [x] Set up `tss-react/mui` styling conventions
+- [x] Add env var for API base URL, e.g. `VITE_API_BASE_URL`
 
 **Exit criteria:** app boots, routes render, MUI theme applied.
 
 ### Milestone 2 — GitHub Actions CI
 
 - [ ] Add workflow for:
-  - [ ] typecheck
-  - [ ] lint
-  - [ ] build
+  - [x] typecheck
+  - [x] lint
+  - [x] build
   - [ ] test
 
 **Exit criteria:** Pipeline runs when pushing.
