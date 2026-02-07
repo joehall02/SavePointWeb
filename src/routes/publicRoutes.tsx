@@ -1,9 +1,9 @@
-import type { RouterType } from "../types/router.types";
 import Collection from "../pages/Collection";
 import GameDetails from "../pages/GameDetails";
 import Home from "../pages/Home";
 import Platforms from "../pages/Platforms";
 import Search from "../pages/Search";
+import type { RouterType } from "../types/router.types";
 
 const publicRoutes: RouterType[] = [
 	{

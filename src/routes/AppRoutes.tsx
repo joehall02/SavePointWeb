@@ -1,8 +1,9 @@
 import { Route, Routes } from "react-router-dom";
-import type { RouterType } from "../types/router.types";
+
 import App from "../app/App";
-import publicRoutes from "./publicRoutes";
+import type { RouterType } from "../types/router.types";
 import fallbackRoutes from "./fallbackRoutes";
+import publicRoutes from "./publicRoutes";
 
 export function AppRoutes() {
 	const routeBuilder = (routes: RouterType[]) => {

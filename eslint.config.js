@@ -7,6 +7,7 @@ import react from "eslint-plugin-react"
 import jsxA11y from "eslint-plugin-jsx-a11y"
 import jest from "eslint-plugin-jest"
 import stylistic from '@stylistic/eslint-plugin'
+import simpleImportSort from "eslint-plugin-simple-import-sort"
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
@@ -23,13 +24,16 @@ export default defineConfig([
       reactRefresh.configs.vite,
     ],
     plugins: {
-      '@stylistic': stylistic
+      '@stylistic': stylistic,
+      'simple-import-sort': simpleImportSort
     },
     rules: {
       "@stylistic/indent": ["warn", "tab"],
       "react/jsx-indent": ["error", "tab"],
       "react/jsx-indent-props": ["error", "tab"],
-      "no-console": ["warn", { "allow": ["warn", "error"] }]
+      "no-console": ["warn", { "allow": ["warn", "error"] }],
+      "simple-import-sort/imports": "error",
+      "simple-import-sort/exports": "error"
     },
     languageOptions: {
       ecmaVersion: 2020,
