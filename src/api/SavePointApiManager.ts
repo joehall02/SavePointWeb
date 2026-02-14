@@ -113,7 +113,7 @@ class SavePointApiManager {
 	 * @returns API response
 	*/
 	public post<T = unknown, B = unknown>(url: string, body?: B, config?: AxiosRequestConfig) {
-		return this.client.post<T, B>(url, body, config);
+		return this.client.post<T, AxiosResponse<T>, B>(url, body, config);
 	}
 	
 	/**
@@ -124,7 +124,7 @@ class SavePointApiManager {
 	 * @returns API response
 	*/
 	public put<T = unknown, B = unknown>(url: string, body?: B, config?: AxiosRequestConfig) {
-		return this.client.put<T, B>(url, body, config);
+		return this.client.put<T, AxiosResponse<T>, B>(url, body, config);
 	}
 	
 	/**

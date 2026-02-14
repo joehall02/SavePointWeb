@@ -1,9 +1,9 @@
 import type { AxiosRequestConfig } from "axios";
 
-import { mapGameDaoToGame } from "../../helpers/daoMappers";
-import type { FetchFromCollectionGame } from "../../types/game.types";
-import type { FetchFromCollectionOptions } from "../../types/game.types";
-import type { FetchFromCollectionDao } from "../../types/gameDao.types";
+import { mapEditGameDaoToEditGame, mapGameDaoToGame, mapGameDetailsDaoToGameDetails } from "../../helpers/daoMappers";
+import type { CreateGame, EditGame, FetchFromCollectionGame, GameDetails } from "../../types/game.types";
+import type { FetchFromCollectionParams } from "../../types/game.types";
+import type { CreateGameDao, EditGameDao, FetchFromCollectionDao, GameDetailsDao } from "../../types/gameDao.types";
 import SavePointApiManager from "../SavePointApiManager";
 
 class GameService {
@@ -13,7 +13,7 @@ class GameService {
 		title,
 		platform,
 		pagination
-	}: FetchFromCollectionOptions = {}): Promise<FetchFromCollectionGame[]> {
+	}: FetchFromCollectionParams = {}): Promise<FetchFromCollectionGame[]> {
 		const params = {
 			params: {
 				title,
@@ -27,6 +27,34 @@ class GameService {
 			.get<FetchFromCollectionDao[]>(`${this.gamesBaseUrl}`, params)
 			.then((response) => response.data.map(mapGameDaoToGame))
 	}
-}
 
+	public static async createGame(
+		game: CreateGame
+	): Promise<void> {
+		SavePointApiManager.post<CreateGameDao, CreateGame>(`${this.gamesBaseUrl}`, game)
+	}
+
+	public static async getGameDetails(
+		id: number
+	): Promise<GameDetails> {
+		return SavePointApiManager
+			.get<GameDetailsDao>(`${this.gamesBaseUrl}/${id}`)
+			.then((response) => mapGameDetailsDaoToGameDetails(response.data))
+	}
+
+	public static async editGame(
+		id: number,
+		updatedGame: EditGame
+	): Promise<EditGame> {
+		return SavePointApiManager
+			.put<EditGameDao, EditGame>(`${this.gamesBaseUrl}/${id}`, updatedGame)
+			.then((response) => mapEditGameDaoToEditGame(response.data))
+	}
+
+	public static async deleteGame(
+		id: number
+	): Promise<void> {
+		SavePointApiManager.delete<void>(`${this.gamesBaseUrl}/${id}`);
+	}
+}
 export default GameService;
