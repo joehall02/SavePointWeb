@@ -9,22 +9,22 @@ import SavePointApiManager from "../SavePointApiManager";
 class GameService {
 	private static gamesBaseUrl = '/api/games';
 
-	public static async fetchFromCollection({
-		title,
-		platform,
-		pagination
-	}: FetchFromCollectionParams = {}): Promise<FetchFromCollectionGame[]> {
-		const params = {
+	public static async fetchFromCollection(
+		params: FetchFromCollectionParams = {}
+	): Promise<FetchFromCollectionGame[]> {
+		const { title, platform, pagination } = params
+	
+		const config: AxiosRequestConfig = {
 			params: {
 				title,
 				platform,
 				page: pagination?.page,
 				limit: pagination?.limit
 			}
-		} as AxiosRequestConfig;
+		}
 		
 		return SavePointApiManager
-			.get<FetchFromCollectionDao[]>(`${this.gamesBaseUrl}`, params)
+			.get<FetchFromCollectionDao[]>(`${this.gamesBaseUrl}`, config)
 			.then((response) => response.data.map(mapGameDaoToGame))
 	}
 
@@ -65,36 +65,38 @@ class GameService {
 			.then((response) => response.data.map(mapExternalGameDaoToExternalGame));
 	}
 
-	public static async searchGameResults({
-		search,
-		platform,
-		pagination
-	}: SearchGameResultsParams = {}): Promise<ExternalGame[]> {
-		const params = {
+	public static async searchGameResults(
+		params: SearchGameResultsParams = {}
+	): Promise<ExternalGame[]> {
+		const { search, platform, pagination } = params
+
+		const config: AxiosRequestConfig = {
 			params: {
 				search,
 				platform,
 				page: pagination?.page,
 				limit: pagination?.limit
 			}
-		} as AxiosRequestConfig
+		}
 
 		return SavePointApiManager
-			.post<ExternalGameDao[]>(`${this.gamesBaseUrl}/results`, undefined, params)
+			.post<ExternalGameDao[]>(`${this.gamesBaseUrl}/results`, undefined, config)
 			.then((response) => response.data.map(mapExternalGameDaoToExternalGame))
 	}
 
-	public static async getExternalGameDetails({
-		gameId
-	}: GetExternalGameDetailsParams = {}): Promise<ExternalGameDetails> {
-		const params = {
+	public static async getExternalGameDetails(
+		params: GetExternalGameDetailsParams = {}
+	): Promise<ExternalGameDetails> {
+		const { gameId } = params
+	
+		const config: AxiosRequestConfig = {
 			params: { 
 				gameId
 			}
-		} as AxiosRequestConfig
+		}
 
 		return SavePointApiManager
-			.post<ExternalGameDetailsDao>(`${this.gamesBaseUrl}/game-details`, undefined, params)
+			.post<ExternalGameDetailsDao>(`${this.gamesBaseUrl}/game-details`, undefined, config)
 			.then((response) => mapExGameDetailsDaoToExGameDetails(response.data))
 	}
 }
