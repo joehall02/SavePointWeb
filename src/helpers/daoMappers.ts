@@ -1,5 +1,5 @@
-import type { EditGame, FetchFromCollectionGame, GameDetails } from "../types/game.types";
-import type { EditGameDao, FetchFromCollectionDao, GameDetailsDao } from "../types/gameDao.types";
+import type { EditGame, ExternalGame, ExternalGameDetails, FetchFromCollectionGame, GameDetails } from "../types/game.types";
+import type { EditGameDao, ExternalGameDao, ExternalGameDetailsDao, FetchFromCollectionDao, GameDetailsDao } from "../types/gameDao.types";
 
 export function mapGameDaoToGame(dto: FetchFromCollectionDao): FetchFromCollectionGame {
 	return {
@@ -29,5 +29,28 @@ export function mapEditGameDaoToEditGame(dto: EditGameDao): EditGame {
 		notes: dto.notes,
 		boxIncluded: dto.boxIncluded,
 		rating: dto.rating
+	}
+}
+
+export function mapExternalGameDaoToExternalGame(dto: ExternalGameDao): ExternalGame {
+	return {
+		id: dto.id,
+		name: dto.name,
+		cover: dto.cover.url
+	}
+}
+
+export function mapExGameDetailsDaoToExGameDetails(dto: ExternalGameDetailsDao): ExternalGameDetails {
+	return {
+		id: dto.id,
+		name: dto.name,
+		storyline: dto.storyline,
+		summary: dto.summary,
+		platforms: dto.platforms,
+		cover: dto.cover,
+		videos: dto.videos,
+		genres: dto.genres,
+		artworks: dto.artworks,
+		release_dates: dto.release_dates
 	}
 }

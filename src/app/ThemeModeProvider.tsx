@@ -36,7 +36,7 @@ function ThemeModeProvider({ children }: { children: ReactNode }) {
 	const theme = useMemo(() => (mode === "light" ? lightTheme : darkTheme), [mode]);
 
 	return (
-	// .Provider allows children to access the context value
+		// .Provider allows children to access the context value
 		<ThemeModeContext.Provider value={{ mode, toggleMode }}>
 			<ThemeProvider theme={theme}>
 				<CssBaseline />

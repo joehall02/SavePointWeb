@@ -211,17 +211,17 @@ Implementation notes:
 
 ### Milestone 3 — Axios client + API module layer
 
-- [ ] Create a shared Axios client:
-  - [ ] `baseURL`
+- [x] Create a shared Axios manager:
+  - [x] `baseURL`
   - [ ] Error handling
-- [ ] Add API modules for:
-  - [ ] Platforms
-  - [ ] IGDB search results
-  - [ ] IGDB game details
-  - [ ] Fetch from collection
-  - [ ] Create/update/delete saved game
+- [x] Add API modules for:
+  - [x] Platforms
+  - [x] IGDB search results
+  - [x] IGDB game details
+  - [x] Fetch from collection
+  - [x] Create/update/delete saved game
 
-**Exit criteria:** can fetch platforms and render data in simple lists.
+**Exit criteria:** can use SavePoint API and render data in simple lists.
 
 ### Milestone 4 — Home page
 
