@@ -9,6 +9,10 @@ import SavePointApiManager from "../SavePointApiManager";
 class GameService {
 	private static gamesBaseUrl = '/api/games';
 
+	/**
+	 * @param params - Parameters to filter the games 
+	 * @returns Normalised list of games
+	 */
 	public static async fetchFromCollection(
 		params: FetchFromCollectionParams = {}
 	): Promise<FetchFromCollectionGame[]> {
@@ -28,12 +32,19 @@ class GameService {
 			.then((response) => response.data.map(mapGameDaoToGame))
 	}
 
+	/**
+	 * @param game - Game object to be created
+	 */
 	public static async createGame(
 		game: CreateGame
 	): Promise<void> {
 		SavePointApiManager.post<CreateGameDao, CreateGame>(`${this.gamesBaseUrl}`, game)
 	}
 
+	/**
+	 * @param id - Id of the game data to be retrieved
+	 * @returns - Normalised game details
+	 */
 	public static async getGameDetails(
 		id: number
 	): Promise<GameDetails> {
@@ -42,6 +53,11 @@ class GameService {
 			.then((response) => mapGameDetailsDaoToGameDetails(response.data))
 	}
 
+	/**
+	 * @param id - Id of the game to be edited
+	 * @param updatedGame - Updated game data
+	 * @returns Game data of game that has been edited
+	 */
 	public static async editGame(
 		id: number,
 		updatedGame: EditGame
@@ -51,12 +67,19 @@ class GameService {
 			.then((response) => mapEditGameDaoToEditGame(response.data))
 	}
 
+	/**
+	 * @param id - Id of game to be deleted
+	 */
 	public static async deleteGame(
 		id: number
 	): Promise<void> {
 		SavePointApiManager.delete<void>(`${this.gamesBaseUrl}/${id}`);
 	}
 
+	/**
+	 * @param searchTerm - Search term to filter game list
+	 * @returns Normalised list of external games
+	 */
 	public static async searchGameHome(
 		searchTerm: string
 	): Promise<ExternalGame[]> {
@@ -65,6 +88,10 @@ class GameService {
 			.then((response) => response.data.map(mapExternalGameDaoToExternalGame));
 	}
 
+	/**
+	 * @param params - Params to filter the games
+	 * @returns Normalised list of external games
+	 */
 	public static async searchGameResults(
 		params: SearchGameResultsParams = {}
 	): Promise<ExternalGame[]> {
@@ -84,6 +111,10 @@ class GameService {
 			.then((response) => response.data.map(mapExternalGameDaoToExternalGame))
 	}
 
+	/**
+	 * @param params - Params to filter external game details
+	 * @returns Normalised external game details
+	 */
 	public static async getExternalGameDetails(
 		params: GetExternalGameDetailsParams = {}
 	): Promise<ExternalGameDetails> {
