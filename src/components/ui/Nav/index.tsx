@@ -41,14 +41,20 @@ function Nav() {
 	)
 	
 	return (
-		<AppBar position="fixed">
+		<AppBar className={classes.root} position="fixed">
 			<Container maxWidth="xl">
 				<Box>
 					<Toolbar className={classes.navContent} disableGutters={true}>
-						<Box className={classes.navLeftContent}>
+						<IconButton 
+							className={classes.navLeftContent}
+							component={Link}
+							disableRipple
+							focusRipple
+							to={'/'}
+						>
 							<Typography variant='h6'>SavePoint</Typography>
 							<LogoDevIcon />
-						</Box>
+						</IconButton>
 
 						<Box>
 							{isMobile ? (
@@ -58,7 +64,12 @@ function Nav() {
 									</IconButton>
 
 									<Drawer className={classes.mobileDrawer} open={mobileOpen} anchor='right'>
-										<IconButton className={classes.mobileCloseContainer} disableRipple={true} focusRipple={false} onClick={toggleMobileOpen}>
+										<IconButton 
+											className={classes.mobileCloseContainer}
+											disableRipple
+											focusRipple
+											onClick={toggleMobileOpen}
+										>
 											<Close />
 										</IconButton>
 

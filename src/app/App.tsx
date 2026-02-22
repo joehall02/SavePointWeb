@@ -13,8 +13,8 @@ import ThemeModeProvider from "./ThemeModeProvider";
 function App() {
 	return (
 		<ThemeModeProvider>
+			<Nav />
 			<Container maxWidth="xl">
-				<Nav />
 				<Outlet />
 			</Container>
 		</ThemeModeProvider>

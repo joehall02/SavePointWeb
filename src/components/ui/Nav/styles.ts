@@ -2,6 +2,9 @@ import type { Theme } from "@mui/material"
 import { makeStyles } from "tss-react/mui"
 
 export const useStyles = makeStyles()((theme: Theme) => ({
+	root: {
+		position: 'static'
+	},
 	navContent: {
 		display: 'flex',
 		justifyContent: 'space-between'
