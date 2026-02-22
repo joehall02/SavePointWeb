@@ -1,5 +1,7 @@
 import type { EditGame, ExternalGame, ExternalGameDetails, FetchFromCollectionGame, GameDetails } from "../types/game.types";
 import type { EditGameDao, ExternalGameDao, ExternalGameDetailsDao, FetchFromCollectionDao, GameDetailsDao } from "../types/gameDao.types";
+import type { Platform } from "../types/platform.types";
+import type { PlatformDao } from "../types/platformDao.types";
 
 export function mapGameDaoToGame(dto: FetchFromCollectionDao): FetchFromCollectionGame {
 	return {
@@ -52,5 +54,13 @@ export function mapExGameDetailsDaoToExGameDetails(dto: ExternalGameDetailsDao):
 		genres: dto.genres,
 		artworks: dto.artworks,
 		release_dates: dto.release_dates
+	}
+}
+
+export function mapPlatformDaoToPlatform(dto: PlatformDao): Platform {
+	return {
+		id: dto.id,
+		title: dto.title,
+		cover: dto.cover
 	}
 }

@@ -11,8 +11,8 @@ const GameList = () => {
 	useEffect(() => {
 		const fetchGames = async () => {
 			const pagination: Pagination = { page: 1, limit: 4}
-			const platform: string = "original_xbox"
-			const title: string = "Crash"
+			// const platform: string = "original_xbox"
+			// const title: string = "Crash"
             
 			const response = await GameService.fetchFromCollection({pagination})
 

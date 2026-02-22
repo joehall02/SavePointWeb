@@ -201,7 +201,7 @@ Implementation notes:
 
 ### Milestone 2 — GitHub Actions CI
 
-- [ ] Add workflow for:
+- [x] Add workflow for:
   - [x] typecheck
   - [x] lint
   - [x] build
