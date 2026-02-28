@@ -1,12 +1,9 @@
 import { CssBaseline,ThemeProvider } from "@mui/material";
-import { createContext, type ReactNode,useCallback, useEffect, useMemo, useState } from "react";
+import { type ReactNode,useCallback, useEffect, useMemo, useState } from "react";
 
+import { ThemeModeContext } from "../context/ThemeModeContext";
+import type { ThemeMode } from "../types/themeMode.types";
 import { darkTheme,lightTheme } from "./themes";
-
-type ThemeMode = "light" | "dark";
-type ThemeModeContextValue = { mode: ThemeMode; toggleMode: () => void };
-
-const ThemeModeContext = createContext<ThemeModeContextValue | null>(null);
 
 function getInitialMode(): ThemeMode {
 	// Fetch mode from local storage if available
@@ -18,7 +15,7 @@ function getInitialMode(): ThemeMode {
 	return "light"
 }
 
-function ThemeModeProvider({ children }: { children: ReactNode }) {
+export function ThemeModeProvider({ children }: { children: ReactNode }) {
 	// Use state expects generic type of ThemeMode
 	const [mode, setMode] = useState<ThemeMode>(() => getInitialMode());
 
@@ -31,7 +28,7 @@ function ThemeModeProvider({ children }: { children: ReactNode }) {
 	const toggleMode = useCallback(() => {
 		setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
 	}, []);
-
+	
 	// useMemo caches the result of the function between renders
 	const theme = useMemo(() => (mode === "light" ? lightTheme : darkTheme), [mode]);
 
@@ -45,5 +42,3 @@ function ThemeModeProvider({ children }: { children: ReactNode }) {
 		</ThemeModeContext.Provider>
 	);
 }
-
-export default ThemeModeProvider;

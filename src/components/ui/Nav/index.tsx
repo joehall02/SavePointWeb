@@ -12,7 +12,7 @@ const pages = [
 	{label: 'Collection', href: '/collection'}
 ]
 
-function Nav() {
+export const Nav = () => {
 	const theme = useTheme()
 	const isMobile = useMediaQuery(theme.breakpoints.down('md'))
 

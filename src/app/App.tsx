@@ -6,8 +6,9 @@ import "@fontsource/roboto/700.css";
 import { Container } from "@mui/material";
 import { Outlet } from "react-router-dom";
 
-import Nav from "../components/ui/Nav";
-import ThemeModeProvider from "./ThemeModeProvider";
+import { ThemeModeToggle } from "../components/ThemeModeToggle";
+import { Nav } from "../components/ui/Nav";
+import { ThemeModeProvider } from "./ThemeModeProvider";
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
 		<ThemeModeProvider>
 			<Nav />
 			<Container maxWidth="xl">
+				<ThemeModeToggle />
 				<Outlet />
 			</Container>
 		</ThemeModeProvider>
