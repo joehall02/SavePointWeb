@@ -1,7 +1,7 @@
 export type FetchFromCollectionDao = {
 	id: number;
 	title: string;
-}
+};
 
 export type CreateGameDao = {
 	title: string,
@@ -11,7 +11,7 @@ export type CreateGameDao = {
 	rating?: number,
 	igdbId: number,
 	platformId: number
-}
+};
 
 export type GameDetailsDao = {
 	id: number,
@@ -22,7 +22,7 @@ export type GameDetailsDao = {
 	rating: number,
 	igdbId: number,
 	platformId: number
-}
+};
 
 export type EditGameDao = {
 	id: number,
@@ -33,38 +33,38 @@ export type EditGameDao = {
 	rating: number,
 	igdbId: number,
 	platformId: number
-}
+};
 
 export type ExternalGameDao = {
 	id: number,
 	name: string,
 	cover: CoverDao
-}
+};
 
 type PlatformDao = {
 	name?: string,
-}
+};
 
 type CoverDao = {
 	url?: string
-}
+};
 
 type VideoDao = {
 	url?: string
-}
+};
 
 type GenreDao = {
 	name?: string
-}
+};
 
 type ArtworkDao = {
 	url?: string
-}
+};
 
 type ReleaseDateDao = {
 	date?: string,
 	region?: string | null
-}
+};
 
 export type ExternalGameDetailsDao = {
 	id: number,
@@ -77,4 +77,4 @@ export type ExternalGameDetailsDao = {
 	genres?: GenreDao[] | null
 	artworks?: ArtworkDao[] | null
 	release_dates?: ReleaseDateDao[] | null
-}
+};

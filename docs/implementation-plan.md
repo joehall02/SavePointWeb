@@ -228,6 +228,7 @@ Implementation notes:
 - [ ] Build centered search layout
 - [ ] On submit navigate to `/search?q=...`
 - [ ] Typeahead suggestions (debounced)
+- [x] Theme mode toggle
 
 **Exit criteria:** search submit navigates; typeahead suggestions work.
 

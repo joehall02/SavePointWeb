@@ -1,7 +1,7 @@
-import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios"
-import axios from "axios"
+import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios from 'axios';
 
-import type { ApiError } from "../types/apiError.types"
+import type { ApiError } from '../types/apiError.types';
 
 /**
  * Manager for handling all requests to the SavePoint API
@@ -12,22 +12,22 @@ import type { ApiError } from "../types/apiError.types"
  * - Provide singleton that can be accessed throughout the app
  */
 class SavePointApiManager {
-	private static instance: SavePointApiManager
-	private client: AxiosInstance
+	private static instance: SavePointApiManager;
+	private client: AxiosInstance;
 
 	private constructor() {
 		// Create axios instance
 		this.client = axios.create({
 			baseURL: import.meta.env.VITE_API_BASE_URL,
 			headers: {
-				"Content-Type": "application/json",
-			}
-		})
+				'Content-Type': 'application/json',
+			},
+		});
 
 		// Auth token interceptor, no-op for now
 		this.client.interceptors.request.use((config) => {
 			return config;
-		})
+		});
 
 		// Error handling interceptor
 		this.client.interceptors.response.use(
@@ -36,10 +36,10 @@ class SavePointApiManager {
 			// If the request fails, return normalised error and reject promise
 			(error: AxiosError) => {
 				const apiError = this.normaliseError(error);
-				console.error("API Error:", apiError);
+				console.error('API Error:', apiError);
 				return Promise.reject(apiError);
-			}
-		)
+			},
+		);
 	}
 
 	/**
@@ -52,12 +52,12 @@ class SavePointApiManager {
 			
 			// Extract error from axios response data, backend does not
 			// return status code in response body so we use Partial
-			const data = error.response?.data as Partial<ApiError>
+			const data = error.response?.data as Partial<ApiError>;
 			
 			// Create ApiError object using response status code and 'error' from api response body
 			const apiError = {
 				statusCode: error.response.status,
-				error: data.error
+				error: data.error,
 			} as ApiError;
 
 			return apiError;
@@ -67,8 +67,8 @@ class SavePointApiManager {
 		if (error.request) {
 			const apiError: ApiError = {
 				statusCode: 503,
-				error: error.message || "Network Error"
-			}
+				error: error.message || 'Network Error',
+			};
 
 			return apiError;
 		}
@@ -76,8 +76,8 @@ class SavePointApiManager {
 		// Default error
 		const apiError: ApiError = {
 			statusCode: 520,
-			error: error.message || "Unknown Error"
-		}
+			error: error.message || 'Unknown Error',
+		};
 
 		return apiError;
 	}
@@ -90,7 +90,7 @@ class SavePointApiManager {
 		if (!SavePointApiManager.instance) {
 			SavePointApiManager.instance = new SavePointApiManager();
 		}
-		return SavePointApiManager.instance
+		return SavePointApiManager.instance;
 	}
 	
 	// HTTP Methods
@@ -134,7 +134,7 @@ class SavePointApiManager {
 	 * @returns API response
 	*/
 	public delete<T = unknown>(url: string, config?: AxiosRequestConfig) {
-		return this.client.delete<T>(url, config)
+		return this.client.delete<T>(url, config);
 	}
 }
 

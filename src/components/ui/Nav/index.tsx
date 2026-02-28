@@ -88,5 +88,3 @@ export const Nav = () => {
 		</AppBar>
 	);
 }
-
-export default Nav;

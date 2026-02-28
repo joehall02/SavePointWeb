@@ -1,10 +1,10 @@
-import type { AxiosRequestConfig } from "axios";
+import type { AxiosRequestConfig } from 'axios';
 
-import { mapEditGameDaoToEditGame, mapExGameDetailsDaoToExGameDetails, mapExternalGameDaoToExternalGame, mapGameDaoToGame, mapGameDetailsDaoToGameDetails } from "../../helpers/daoMappers";
-import type { CreateGame, EditGame, ExternalGame, ExternalGameDetails, FetchFromCollectionGame, GameDetails, GetExternalGameDetailsParams, SearchGameResultsParams } from "../../types/game.types";
-import type { FetchFromCollectionParams } from "../../types/game.types";
-import { type CreateGameDao, type EditGameDao, type ExternalGameDao, type ExternalGameDetailsDao, type FetchFromCollectionDao, type GameDetailsDao } from "../../types/gameDao.types";
-import SavePointApiManager from "../SavePointApiManager";
+import { mapEditGameDaoToEditGame, mapExGameDetailsDaoToExGameDetails, mapExternalGameDaoToExternalGame, mapGameDaoToGame, mapGameDetailsDaoToGameDetails } from '../../helpers/daoMappers';
+import type { CreateGame, EditGame, ExternalGame, ExternalGameDetails, FetchFromCollectionGame, GameDetails, GetExternalGameDetailsParams, SearchGameResultsParams } from '../../types/game.types';
+import type { FetchFromCollectionParams } from '../../types/game.types';
+import { type CreateGameDao, type EditGameDao, type ExternalGameDao, type ExternalGameDetailsDao, type FetchFromCollectionDao, type GameDetailsDao } from '../../types/gameDao.types';
+import SavePointApiManager from '../SavePointApiManager';
 
 class GameService {
 	private static gamesBaseUrl = '/api/games';
@@ -14,31 +14,31 @@ class GameService {
 	 * @returns Normalised list of games
 	 */
 	public static async fetchFromCollection(
-		params: FetchFromCollectionParams = {}
+		params: FetchFromCollectionParams = {},
 	): Promise<FetchFromCollectionGame[]> {
-		const { title, platform, pagination } = params
+		const { title, platform, pagination } = params;
 	
 		const config: AxiosRequestConfig = {
 			params: {
 				title,
 				platform,
 				page: pagination?.page,
-				limit: pagination?.limit
-			}
-		}
+				limit: pagination?.limit,
+			},
+		};
 		
 		return SavePointApiManager
 			.get<FetchFromCollectionDao[]>(`${this.gamesBaseUrl}`, config)
-			.then((response) => response.data.map(mapGameDaoToGame))
+			.then((response) => response.data.map(mapGameDaoToGame));
 	}
 
 	/**
 	 * @param game - Game object to be created
 	 */
 	public static async createGame(
-		game: CreateGame
+		game: CreateGame,
 	): Promise<void> {
-		SavePointApiManager.post<CreateGameDao, CreateGame>(`${this.gamesBaseUrl}`, game)
+		SavePointApiManager.post<CreateGameDao, CreateGame>(`${this.gamesBaseUrl}`, game);
 	}
 
 	/**
@@ -46,11 +46,11 @@ class GameService {
 	 * @returns - Normalised game details
 	 */
 	public static async getGameDetails(
-		id: number
+		id: number,
 	): Promise<GameDetails> {
 		return SavePointApiManager
 			.get<GameDetailsDao>(`${this.gamesBaseUrl}/${id}`)
-			.then((response) => mapGameDetailsDaoToGameDetails(response.data))
+			.then((response) => mapGameDetailsDaoToGameDetails(response.data));
 	}
 
 	/**
@@ -60,18 +60,18 @@ class GameService {
 	 */
 	public static async editGame(
 		id: number,
-		updatedGame: EditGame
+		updatedGame: EditGame,
 	): Promise<EditGame> {
 		return SavePointApiManager
 			.put<EditGameDao, EditGame>(`${this.gamesBaseUrl}/${id}`, updatedGame)
-			.then((response) => mapEditGameDaoToEditGame(response.data))
+			.then((response) => mapEditGameDaoToEditGame(response.data));
 	}
 
 	/**
 	 * @param id - Id of game to be deleted
 	 */
 	public static async deleteGame(
-		id: number
+		id: number,
 	): Promise<void> {
 		SavePointApiManager.delete<void>(`${this.gamesBaseUrl}/${id}`);
 	}
@@ -81,7 +81,7 @@ class GameService {
 	 * @returns Normalised list of external games
 	 */
 	public static async searchGameHome(
-		searchTerm: string
+		searchTerm: string,
 	): Promise<ExternalGame[]> {
 		return SavePointApiManager
 			.post<ExternalGameDao[], string>(`${this.gamesBaseUrl}/search`, searchTerm)
@@ -93,22 +93,22 @@ class GameService {
 	 * @returns Normalised list of external games
 	 */
 	public static async searchGameResults(
-		params: SearchGameResultsParams = {}
+		params: SearchGameResultsParams = {},
 	): Promise<ExternalGame[]> {
-		const { search, platform, pagination } = params
+		const { search, platform, pagination } = params;
 
 		const config: AxiosRequestConfig = {
 			params: {
 				search,
 				platform,
 				page: pagination?.page,
-				limit: pagination?.limit
-			}
-		}
+				limit: pagination?.limit,
+			},
+		};
 
 		return SavePointApiManager
 			.post<ExternalGameDao[]>(`${this.gamesBaseUrl}/results`, undefined, config)
-			.then((response) => response.data.map(mapExternalGameDaoToExternalGame))
+			.then((response) => response.data.map(mapExternalGameDaoToExternalGame));
 	}
 
 	/**
@@ -116,19 +116,19 @@ class GameService {
 	 * @returns Normalised external game details
 	 */
 	public static async getExternalGameDetails(
-		params: GetExternalGameDetailsParams = {}
+		params: GetExternalGameDetailsParams = {},
 	): Promise<ExternalGameDetails> {
-		const { gameId } = params
+		const { gameId } = params;
 	
 		const config: AxiosRequestConfig = {
 			params: { 
-				gameId
-			}
-		}
+				gameId,
+			},
+		};
 
 		return SavePointApiManager
 			.post<ExternalGameDetailsDao>(`${this.gamesBaseUrl}/game-details`, undefined, config)
-			.then((response) => mapExGameDetailsDaoToExGameDetails(response.data))
+			.then((response) => mapExGameDetailsDaoToExGameDetails(response.data));
 	}
 }
 

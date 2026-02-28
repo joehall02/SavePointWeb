@@ -8,6 +8,7 @@ import jsxA11y from "eslint-plugin-jsx-a11y"
 import jest from "eslint-plugin-jest"
 import stylistic from '@stylistic/eslint-plugin'
 import simpleImportSort from "eslint-plugin-simple-import-sort"
+import unusedImports from "eslint-plugin-unused-imports"
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
@@ -25,13 +26,23 @@ export default defineConfig([
     ],
     plugins: {
       '@stylistic': stylistic,
-      'simple-import-sort': simpleImportSort
+      'simple-import-sort': simpleImportSort,
+      'unused-imports': unusedImports
     },
     rules: {
       "@stylistic/indent": ["warn", "tab"],
+      "@stylistic/semi": ["error", "always"],
+      "@stylistic/comma-dangle": ["error", "always-multiline"],
+      "@stylistic/quotes": ["error", "single", { "avoidEscape": true }],
+      "@stylistic/object-curly-spacing": ["error", "always"],
       "react/jsx-indent": ["error", "tab"],
       "react/jsx-indent-props": ["error", "tab"],
+      "react/jsx-tag-spacing": ["error", { "beforeSelfClosing": "always" }],
+      "jsx-quotes": ["error", "prefer-single"],
       "no-console": ["warn", { "allow": ["warn", "error"] }],
+      "no-unused-vars": "off",
+      "unused-imports/no-unused-imports": "error",
+      "unused-imports/no-unused-vars": ["warn", { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }],
       "simple-import-sort/imports": "error",
       "simple-import-sort/exports": "error"
     },
