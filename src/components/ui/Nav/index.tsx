@@ -1,24 +1,25 @@
 import { Close, Menu } from '@mui/icons-material';
 import LogoDevIcon from '@mui/icons-material/LogoDev';
-import { AppBar, Box, Container, Drawer, IconButton, List, ListItemButton, ListItemText, Toolbar, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { AppBar, Box, Container, Drawer, IconButton, List, ListItemButton, ListItemText, Toolbar, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 import { useStyles } from './styles';
 
 const pages = [
-	{label: 'Home', href: '/'},
-	{label: 'Platforms', href: '/platforms'},
-	{label: 'Collection', href: '/collection'}
-]
+	{ label: 'Home', href: '/' },
+	{ label: 'Platforms', href: '/platforms' },
+	{ label: 'Collection', href: '/collection' },
+];
 
 export const Nav = () => {
-	const theme = useTheme()
+	const theme = useTheme();
 	const isMobile = useMediaQuery(theme.breakpoints.down('md'))
+	const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
 	const [mobileOpen, setMobileOpen] = useState<boolean>(false);
 
-	const toggleMobileOpen = () => setMobileOpen(!mobileOpen)
+	const toggleMobileOpen = () => setMobileOpen(!mobileOpen);
 
 	const { classes } = useStyles();
 	
@@ -38,11 +39,11 @@ export const Nav = () => {
 				</ListItemButton>
 			))}
 		</List>
-	)
+	);
 	
 	return (
-		<AppBar className={classes.root} position="fixed">
-			<Container maxWidth="xl">
+		<AppBar className={classes.root} position='fixed'>
+			<Container maxWidth='xl'>
 				<Box>
 					<Toolbar className={classes.navContent} disableGutters={true}>
 						<IconButton 
@@ -87,4 +88,4 @@ export const Nav = () => {
 			</Container>
 		</AppBar>
 	);
-}
+};

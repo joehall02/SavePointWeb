@@ -1,26 +1,26 @@
-import { Card, CardContent, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Card, CardContent, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
 
-import GameService from "../../api/services/GameService";
-import type { FetchFromCollectionGame } from "../../types/game.types";
-import type { Pagination } from "../../types/pagination.types";
+import GameService from '../../api/services/GameService';
+import type { FetchFromCollectionGame } from '../../types/game.types';
+import type { Pagination } from '../../types/pagination.types';
 
 const GameList = () => {
-	const [games, setGames] = useState<FetchFromCollectionGame[]>()
+	const [games, setGames] = useState<FetchFromCollectionGame[]>();
 
 	useEffect(() => {
 		const fetchGames = async () => {
-			const pagination: Pagination = { page: 1, limit: 4}
+			const pagination: Pagination = { page: 1, limit: 4 };
 			// const platform: string = "original_xbox"
 			// const title: string = "Crash"
             
-			const response = await GameService.fetchFromCollection({pagination})
+			const response = await GameService.fetchFromCollection({ pagination });
 
-			setGames(response)
-		}
+			setGames(response);
+		};
 
-		fetchGames()
-	}, [])
+		fetchGames();
+	}, []);
 
 	return (
 		<div>
@@ -32,7 +32,7 @@ const GameList = () => {
 				</Card>
 			))}
 		</div>
-	)
-}
+	);
+};
 
 export default GameList;

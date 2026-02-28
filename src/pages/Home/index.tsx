@@ -1,26 +1,21 @@
-import { HomeFilled } from "@mui/icons-material";
-import Button from "@mui/material/Button";
+import { HomeFilled } from '@mui/icons-material';
+import Button from '@mui/material/Button';
 
-import GameList from "../../components/game";
-import { useStyles } from "./styles";
+import { useStyles } from './styles';
 
-function Home() {
+export const Home = () => {
 	const { classes } = useStyles();
 	
-	return (
-		<>
-			<div>
-				Home
-				<Button color="primary" variant="contained" className={classes.testButton}>
-					<HomeFilled />
-					Click
-				</Button>
-			</div>
-			<div>
-				<GameList />
-			</div>
-		</>
-	);
-}
+	// const [searchTerm, setSearchTerm] = useState<string>('');
 
-export default Home;
+	return (
+		<div>
+			Home
+			<Button color='primary' variant='contained' className={classes.testButton}>
+				<HomeFilled />
+				Click
+			</Button>
+		</div>
+	);
+};
+
