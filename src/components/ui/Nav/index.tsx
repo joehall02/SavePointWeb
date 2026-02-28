@@ -14,7 +14,7 @@ const pages = [
 
 export const Nav = () => {
 	const theme = useTheme();
-	const isMobile = useMediaQuery(theme.breakpoints.down('md'))
+
 	const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
 	const [mobileOpen, setMobileOpen] = useState<boolean>(false);
