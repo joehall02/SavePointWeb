@@ -34,6 +34,10 @@ export default defineConfig([
       "@stylistic/semi": ["error", "always"],
       "@stylistic/comma-dangle": ["error", "always-multiline"],
       "@stylistic/quotes": ["error", "single", { "avoidEscape": true }],
+      "@stylistic/max-len": ["warn", {
+        "code": 150,
+        "ignoreComments": true,
+      }],
       "@stylistic/object-curly-spacing": ["error", "always"],
       "react/jsx-indent": ["error", "tab"],
       "react/jsx-indent-props": ["error", "tab"],

@@ -1,9 +1,31 @@
 import type { AxiosRequestConfig } from 'axios';
 
-import { mapEditGameDaoToEditGame, mapExGameDetailsDaoToExGameDetails, mapExternalGameDaoToExternalGame, mapGameDaoToGame, mapGameDetailsDaoToGameDetails } from '../../helpers/daoMappers';
-import type { CreateGame, EditGame, ExternalGame, ExternalGameDetails, FetchFromCollectionGame, GameDetails, GetExternalGameDetailsParams, SearchGameResultsParams } from '../../types/game.types';
+import { 
+	mapEditGameDaoToEditGame, 
+	mapExGameDetailsDaoToExGameDetails, 
+	mapExternalGameDaoToExternalGame, 
+	mapGameDaoToGame, 
+	mapGameDetailsDaoToGameDetails, 
+} from '../../helpers/daoMappers';
+import type { 
+	CreateGame, 
+	EditGame, 
+	ExternalGame, 
+	ExternalGameDetails, 
+	FetchFromCollectionGame, 
+	GameDetails, 
+	GetExternalGameDetailsParams, 
+	SearchGameResultsParams, 
+} from '../../types/game.types';
 import type { FetchFromCollectionParams } from '../../types/game.types';
-import { type CreateGameDao, type EditGameDao, type ExternalGameDao, type ExternalGameDetailsDao, type FetchFromCollectionDao, type GameDetailsDao } from '../../types/gameDao.types';
+import type { 
+	CreateGameDao, 
+	EditGameDao, 
+	ExternalGameDao, 
+	ExternalGameDetailsDao, 
+	FetchFromCollectionDao, 
+	GameDetailsDao ,
+} from '../../types/gameDao.types';
 import SavePointApiManager from '../SavePointApiManager';
 
 class GameService {
