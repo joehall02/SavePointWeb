@@ -8,7 +8,6 @@ import { usePageTitle } from '../../hooks/usePageTitle';
 import type { ExternalGame } from '../../types/game.types';
 import { useStyles } from './styles';
 
-
 export const Home = () => {
 	const { classes } = useStyles();
 	const [searchResults, setSearchResults] = useState<ExternalGame[]>([]);
@@ -42,4 +41,3 @@ export const Home = () => {
 		</Box>
 	);
 };
-

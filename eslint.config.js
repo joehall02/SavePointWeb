@@ -48,7 +48,8 @@ export default defineConfig([
       "unused-imports/no-unused-imports": "error",
       "unused-imports/no-unused-vars": ["warn", { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }],
       "simple-import-sort/imports": "error",
-      "simple-import-sort/exports": "error"
+      "simple-import-sort/exports": "error",
+      "no-multiple-empty-lines": ["error", { "max": 1, "maxBOF": 0, "maxEOF": 0 }]
     },
     languageOptions: {
       ecmaVersion: 2020,

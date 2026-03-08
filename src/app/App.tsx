@@ -11,7 +11,6 @@ import { Nav } from '../components/ui/Nav';
 import { useStyles } from './styles';
 import { ThemeModeProvider } from './ThemeModeProvider';
 
-
 function App() {
 	const { classes } = useStyles();
 
