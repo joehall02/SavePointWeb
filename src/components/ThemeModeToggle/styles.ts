@@ -7,6 +7,7 @@ export const useStyles = makeStyles()((theme: Theme) => ({
 		justifyContent: 'flex-end',
 		alignItems: 'center',
 		gap: theme.spacing(0.5),
+		padding: theme.spacing(1.5, 0.5),
 	},
 	themeText: {
 		opacity: 0.65,

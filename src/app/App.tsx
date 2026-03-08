@@ -8,17 +8,22 @@ import { Outlet } from 'react-router-dom';
 
 import { ThemeModeToggle } from '../components/ThemeModeToggle';
 import { Nav } from '../components/ui/Nav';
+import { useStyles } from './styles';
 import { ThemeModeProvider } from './ThemeModeProvider';
 
 
 function App() {
+	const { classes } = useStyles();
+
 	return (
 		<ThemeModeProvider>
-			<Nav />
-			<Container maxWidth='xl'>
-				<ThemeModeToggle />
-				<Outlet />
-			</Container>
+			<div className={classes.root}>
+				<Nav />
+				<Container className={classes.content} maxWidth='xl'>
+					<ThemeModeToggle />
+					<Outlet />
+				</Container>
+			</div>
 		</ThemeModeProvider>
 	);
 }

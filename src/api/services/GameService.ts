@@ -26,6 +26,7 @@ import type {
 	FetchFromCollectionDao, 
 	GameDetailsDao ,
 } from '../../types/gameDao.types';
+import type { SearchParam } from '../../types/search.types';
 import SavePointApiManager from '../SavePointApiManager';
 
 class GameService {
@@ -106,7 +107,7 @@ class GameService {
 		searchTerm: string,
 	): Promise<ExternalGame[]> {
 		return SavePointApiManager
-			.post<ExternalGameDao[], string>(`${this.gamesBaseUrl}/search`, searchTerm)
+			.post<ExternalGameDao[], SearchParam>(`${this.gamesBaseUrl}/search`, { 'searchParam': searchTerm })
 			.then((response) => response.data.map(mapExternalGameDaoToExternalGame));
 	}
 
