@@ -1,16 +1,19 @@
 import type { Theme } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
-type IStyleParams = {
+interface IStyleProps {
 	themeType: 'light' | 'dark';
 	input: string;
 	isSelected: boolean;
+	isExpanded: boolean;
 };
 
-export const useStyles = makeStyles<IStyleParams>()((theme: Theme, { themeType, input, isSelected }) => ({
+const BORDER_RADIUS = 1.2;
+
+export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { themeType, input, isSelected, isExpanded }) => ({
 	root: {
 		display: 'flex',
-		flexDirection: 'row',
+		flexDirection: 'column',
 		alignItems: 'center',
 		justifyContent: 'center',
 		width: '100%',
@@ -25,7 +28,10 @@ export const useStyles = makeStyles<IStyleParams>()((theme: Theme, { themeType, 
 		width: '100%',
 		height: 36,
 		background: theme.palette.secondary.main,		
-		borderRadius: theme.spacing(1.2),
+		borderRadius: theme.spacing(BORDER_RADIUS),
+		...(isExpanded && {
+			borderBottomLeftRadius: 0,
+		}),
 	},
 	inputContainer: {
 		display: 'flex',
@@ -59,10 +65,13 @@ export const useStyles = makeStyles<IStyleParams>()((theme: Theme, { themeType, 
 	},
 	searchButton: {
 		background: theme.palette.primary.main,
-		borderRadius: theme.spacing(1.2),
+		borderRadius: theme.spacing(BORDER_RADIUS),
 		borderTopLeftRadius: 0,
 		borderBottomLeftRadius: 0,
 		alignSelf: 'stretch',
+		...(isExpanded && {
+			borderBottomRightRadius: 0,
+		}),
 	},
 	discardButton: {
 		background: theme.palette.secondary.main,
@@ -78,5 +87,17 @@ export const useStyles = makeStyles<IStyleParams>()((theme: Theme, { themeType, 
 	},
 	searchIcon: {
 		color: themeType === 'dark' ? theme.palette.common.white : theme.palette.common.black,
+	},
+	expandedContainer: {
+		display: 'flex',
+		flexDirection: 'column',
+		width: '100%',
+		background: themeType === 'dark' ? theme.palette.grey[600] : theme.palette.grey[300],
+		borderRadius: theme.spacing(BORDER_RADIUS),
+		borderTopLeftRadius: 0,
+		borderTopRightRadius: 0,
+	},
+	divider: {
+		background: theme.palette.secondary.main,
 	},
 }));

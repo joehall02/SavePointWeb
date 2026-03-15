@@ -1,6 +1,6 @@
 import IncompleteCircleRoundedIcon from '@mui/icons-material/IncompleteCircleRounded';
 import { Box } from '@mui/material';
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 import GameService from '../../api/services/GameService';
 import { SearchBar } from '../../components/ui/SearchBar';
@@ -15,17 +15,26 @@ export const Home = () => {
 	
 	usePageTitle('Home');
 	
-	const handleSearch = async (searchParam: string) => {
+	const handleSearch = useCallback(async (searchParam: string) => {
+		if (searchParam === '') {
+			setSearchResults([]);
+			return;
+		}
+		
 		const results = await GameService.searchGameHome(searchParam);
 		
-		setSearchResults(results);
-	};
+		if (results.length > 0) {
+			setSearchResults(results);
+		} else {
+			setSearchResults([]);
+		}
+	}, []);
 
-	const handleDebounce = (input: string, delay: number) => {
+	const handleDebounce = useCallback((input: string, delay: number) => {
 		clearTimeout(timeout.current);
 		
 		timeout.current = setTimeout(() => handleSearch(input), delay);
-	};
+	}, [handleSearch]);
 
 	return (
 		<Box className={classes.root}>

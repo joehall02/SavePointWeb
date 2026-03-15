@@ -17,9 +17,9 @@ export type GameDetailsDao = {
 	id: number,
 	title: string,
 	condition: string,
-	notes: string,
+	notes?: string,
 	boxIncluded: boolean,
-	rating: number,
+	rating?: number,
 	igdbId: number,
 	platformId: number
 };
@@ -28,9 +28,9 @@ export type EditGameDao = {
 	id: number,
 	title: string,
 	condition: string,
-	notes: string,
+	notes?: string,
 	boxIncluded: boolean,
-	rating: number,
+	rating?: number,
 	igdbId: number,
 	platformId: number
 };
@@ -38,7 +38,7 @@ export type EditGameDao = {
 export type ExternalGameDao = {
 	id: number,
 	name: string,
-	cover: CoverDao
+	cover?: CoverDao
 };
 
 type PlatformDao = {

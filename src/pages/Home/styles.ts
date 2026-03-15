@@ -22,7 +22,10 @@ export const useStyles = makeStyles()((theme: Theme) => ({
 		},
 	},
 	logo: {
-		width: '10%',
+		width: '35%',
+		[theme.breakpoints.up('md')]: {
+			width: '15%',
+		},
 		height: 'auto',
 		
 	},

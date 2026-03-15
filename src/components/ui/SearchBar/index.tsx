@@ -1,10 +1,12 @@
 import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
-import { Box, Button } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { Box, Button, Divider } from '@mui/material';
+import { useState } from 'react';
+import React from 'react';
 
 import { useThemeMode } from '../../../hooks/useThemeMode';
 import type { ExternalGame } from '../../../types/game.types';
+import { Game } from '../../Game';
 import { useStyles } from './styles';
 
 interface ISearchBarProps {
@@ -19,12 +21,9 @@ export const SearchBar = ({ searchResults, handleSearch, handleDebounce }: ISear
 	
 	const themeType = useThemeMode();
 
-	const { classes } = useStyles({ themeType: themeType.mode, input, isSelected });
+	const isExpanded = (searchResults && searchResults.length > 0 && input.length > 0) ?? false;
 
-	useEffect(() => {
-		// eslint-disable-next-line no-console
-		console.log(searchResults);
-	}, [searchResults]);
+	const { classes } = useStyles({ themeType: themeType.mode, input, isSelected, isExpanded });
 
 	const onSearch = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -42,10 +41,10 @@ export const SearchBar = ({ searchResults, handleSearch, handleDebounce }: ISear
 						maxLength={35} 
 						placeholder='Search...'
 						value={input}
-						onChange={(e) => {
-							setInput(e.target.value);
+						onInput={(e) => {
+							setInput(e.currentTarget.value);
 							if (handleDebounce) {
-								handleDebounce(input, 500);
+								handleDebounce(e.currentTarget.value, 150);
 							}
 						}}
 						onFocus={() => setIsSelected(true)}
@@ -53,7 +52,10 @@ export const SearchBar = ({ searchResults, handleSearch, handleDebounce }: ISear
 					/>
 					<CloseIcon 
 						className={classes.discardButton}
-						onClick={() => setInput('')}
+						onClick={() => {
+							setInput('');
+							handleSearch('');
+						}}
 						fontSize='small'
 					/>
 				</div>
@@ -61,6 +63,16 @@ export const SearchBar = ({ searchResults, handleSearch, handleDebounce }: ISear
 					<SearchIcon className={classes.searchIcon} />
 				</Button>
 			</div>
+			{isExpanded && (
+				<div className={classes.expandedContainer}>
+					{searchResults?.map((game) => (
+						<React.Fragment key={game.id}>
+							<Divider className={classes.divider} />
+							<Game name={game.name} cover={game.cover} />
+						</React.Fragment>
+					))}
+				</div>
+			)}
 		</Box>
 	);
 };

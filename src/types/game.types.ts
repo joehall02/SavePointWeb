@@ -25,9 +25,9 @@ export type GameDetails = {
 	id: number,
 	title: string,
 	condition: string,
-	notes: string,
+	notes?: string,
 	boxIncluded: boolean,
-	rating: number,
+	rating?: number,
 	igdbId: number,
 	platformId: number
 };

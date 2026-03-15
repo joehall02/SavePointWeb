@@ -38,7 +38,7 @@ export function mapExternalGameDaoToExternalGame(dto: ExternalGameDao): External
 	return {
 		id: dto.id,
 		name: dto.name,
-		cover: dto.cover.url,
+		cover: dto.cover?.url,
 	};
 }
 

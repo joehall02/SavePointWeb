@@ -1,38 +1,25 @@
-import { Card, CardContent, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
+import ImageNotSupportedIcon from '@mui/icons-material/ImageNotSupported';
+import { Box, Typography } from '@mui/material';
 
-import GameService from '../../api/services/GameService';
-import type { FetchFromCollectionGame } from '../../types/game.types';
-import type { Pagination } from '../../types/pagination.types';
+import { useStyles } from './styles';
 
-const GameList = () => {
-	const [games, setGames] = useState<FetchFromCollectionGame[]>();
+interface IGameProps {
+	name: string;
+	cover?: string
+}
 
-	useEffect(() => {
-		const fetchGames = async () => {
-			const pagination: Pagination = { page: 1, limit: 4 };
-			// const platform: string = "original_xbox"
-			// const title: string = "Crash"
-            
-			const response = await GameService.fetchFromCollection({ pagination });
+export const Game = ({ name, cover }: IGameProps) => {
 
-			setGames(response);
-		};
-
-		fetchGames();
-	}, []);
+	const { classes } = useStyles();
 
 	return (
-		<div>
-			{games?.map((game) => (
-				<Card key={game.id}>
-					<CardContent>
-						<Typography>{game.title}</Typography>
-					</CardContent>
-				</Card>
-			))}
-		</div>
+		<Box className={classes.root}>
+			{cover ? (
+				<img className={classes.cover} src={cover} alt={name} />
+			) : (
+				<ImageNotSupportedIcon className={classes.cover} />
+			)}
+			<Typography variant='body1' noWrap={true}>{name}</Typography>
+		</Box>
 	);
 };
-
-export default GameList;
