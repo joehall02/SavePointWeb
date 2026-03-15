@@ -15,10 +15,11 @@ interface ISearchBarProps {
 
 export const SearchBar = ({ searchResults, handleSearch, handleDebounce }: ISearchBarProps) => {
 	const [input, setInput] = useState<string>('');
+	const [isSelected, setIsSelected] = useState<boolean>(false);
 	
 	const themeType = useThemeMode();
 
-	const { classes } = useStyles({ themeType: themeType.mode, input });
+	const { classes } = useStyles({ themeType: themeType.mode, input, isSelected });
 
 	useEffect(() => {
 		// eslint-disable-next-line no-console
@@ -47,6 +48,8 @@ export const SearchBar = ({ searchResults, handleSearch, handleDebounce }: ISear
 								handleDebounce(input, 500);
 							}
 						}}
+						onFocus={() => setIsSelected(true)}
+						onBlur={() => setIsSelected(false)}
 					/>
 					<CloseIcon 
 						className={classes.discardButton}

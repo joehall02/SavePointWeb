@@ -4,16 +4,19 @@ import { makeStyles } from 'tss-react/mui';
 type IStyleParams = {
 	themeType: 'light' | 'dark';
 	input: string;
+	isSelected: boolean;
 };
 
-export const useStyles = makeStyles<IStyleParams>()((theme: Theme, { themeType, input }) => ({
+export const useStyles = makeStyles<IStyleParams>()((theme: Theme, { themeType, input, isSelected }) => ({
 	root: {
 		display: 'flex',
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'center',
 		width: '100%',
-		borderRadius: theme.spacing(1),
+		border: '2px solid',
+		borderRadius: theme.spacing(1.5),
+		borderColor: isSelected ? theme.palette.primary.main : theme.palette.grey[300],
 	},
 	searchWrapper: {
 		display: 'flex',
@@ -22,7 +25,7 @@ export const useStyles = makeStyles<IStyleParams>()((theme: Theme, { themeType, 
 		width: '100%',
 		height: 36,
 		background: theme.palette.secondary.main,		
-		borderRadius: theme.spacing(1),
+		borderRadius: theme.spacing(1.2),
 	},
 	inputContainer: {
 		display: 'flex',
@@ -52,10 +55,11 @@ export const useStyles = makeStyles<IStyleParams>()((theme: Theme, { themeType, 
 		'::placeholder': {
 			color: theme.palette.text.secondary,
 		},
-		padding: theme.spacing(1, 2),
+		padding: theme.spacing(1, 0, 1, 2),
 	},
 	searchButton: {
 		background: theme.palette.primary.main,
+		borderRadius: theme.spacing(1.2),
 		borderTopLeftRadius: 0,
 		borderBottomLeftRadius: 0,
 		alignSelf: 'stretch',
@@ -68,6 +72,9 @@ export const useStyles = makeStyles<IStyleParams>()((theme: Theme, { themeType, 
 		width: 'auto',
 		visibility: input === '' ? 'hidden' : 'visible',
 		marginRight: theme.spacing(1),
+		'&:hover': {
+			cursor: 'pointer',
+		},
 	},
 	searchIcon: {
 		color: themeType === 'dark' ? theme.palette.common.white : theme.palette.common.black,
