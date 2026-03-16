@@ -21,7 +21,7 @@ export const SearchBar = ({ searchResults, handleSearch, handleDebounce }: ISear
 	
 	const themeType = useThemeMode();
 
-	const isExpanded = (searchResults && searchResults.length > 0 && input.length > 0) ?? false;
+	const isExpanded = (searchResults && searchResults.length > 0 && input.length > 0 && isSelected) ?? false;
 
 	const { classes } = useStyles({ themeType: themeType.mode, input, isSelected, isExpanded });
 

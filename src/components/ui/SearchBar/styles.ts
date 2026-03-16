@@ -13,10 +13,13 @@ const BORDER_RADIUS = 1.2;
 export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { themeType, input, isSelected, isExpanded }) => ({
 	root: {
 		display: 'flex',
+		position: 'absolute',
+		left: 0,
+		right: 0,
+		width: '100%',
 		flexDirection: 'column',
 		alignItems: 'center',
 		justifyContent: 'center',
-		width: '100%',
 		border: '2px solid',
 		borderRadius: theme.spacing(1.5),
 		borderColor: isSelected ? theme.palette.primary.main : theme.palette.grey[300],

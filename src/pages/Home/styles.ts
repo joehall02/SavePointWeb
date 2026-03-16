@@ -9,9 +9,10 @@ export const useStyles = makeStyles()((theme: Theme) => ({
 		justifyContent: 'center',
 		alignItems: 'center',
 		gap: theme.spacing(3),
-		marginBottom: theme.spacing(10),
+		marginBottom: theme.spacing(40),
 	},
 	searchBarContainer: {
+		position: 'relative',
 		width: '100%',
 
 		[theme.breakpoints.up('md')]: {

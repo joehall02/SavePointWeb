@@ -108,7 +108,8 @@ class GameService {
 	): Promise<ExternalGame[]> {
 		return SavePointApiManager
 			.post<ExternalGameDao[], SearchParam>(`${this.gamesBaseUrl}/search`, { 'searchParam': searchTerm })
-			.then((response) => response.data.map(mapExternalGameDaoToExternalGame));
+			.then((response) => response.data.slice(0, 4))
+			.then((response) => response.map(mapExternalGameDaoToExternalGame));
 	}
 
 	/**
