@@ -22,8 +22,11 @@ export const Home = () => {
 	}, [navigate]);
 
 	const handleDebounce = useCallback((input: string, delay: number) => {
+		// Clear timeout when handleDebounce is called again
+		// This stops multiple requests queuing up
 		clearTimeout(timeout.current);
 		
+		// Sets timeout to fetch game data after delay
 		timeout.current = setTimeout(async () => {
 			if (input === '') {
 				setSearchResults([]);

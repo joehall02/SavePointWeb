@@ -1,19 +1,25 @@
 import ImageNotSupportedIcon from '@mui/icons-material/ImageNotSupported';
 import { Box, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 import { useStyles } from './styles';
 
 interface IGameProps {
+	id: number;
 	name: string;
 	cover?: string
 }
 
-export const Game = ({ name, cover }: IGameProps) => {
+export const Game = ({ id, name, cover }: IGameProps) => {
 
 	const { classes } = useStyles();
 
+	const navigate = useNavigate();
+
 	return (
-		<Box className={classes.root}>
+		// tabIndex allows the element to be focused
+		// Allows us to click element without triggering onBlur event
+		<Box tabIndex={0} className={classes.root} onClick={() => navigate(`/game/${id}`)}>
 			{cover ? (
 				<img className={classes.cover} src={cover} alt={name} />
 			) : (

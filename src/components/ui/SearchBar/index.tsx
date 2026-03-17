@@ -32,7 +32,20 @@ export const SearchBar = ({ searchResults, handleSearch, handleDebounce }: ISear
 	};
 
 	return (
-		<Box className={classes.root} component='form' onSubmit={onSearch}>
+		<Box 
+			className={classes.root} 
+			component='form' 
+			onSubmit={onSearch} 
+			// onBlur: handles when the search bar loses focus. 
+			// currentTarget: the whole element the handler is attached to.
+			// relatedTarger: the element that is about to receive focus.
+			// Full logic: only close if focus moves outside the searchbar.
+			// This stops search results from triggering the event handler when clicked.
+			onBlur={(e) => {
+				if (!e.currentTarget.contains(e.relatedTarget)) {
+					setIsSelected(false);
+				}
+			}}>
 			<div className={classes.searchWrapper}>
 				<div className={classes.inputContainer}>
 					<Box 
@@ -48,13 +61,15 @@ export const SearchBar = ({ searchResults, handleSearch, handleDebounce }: ISear
 							}
 						}}
 						onFocus={() => setIsSelected(true)}
-						onBlur={() => setIsSelected(false)}
+
 					/>
 					<CloseIcon 
 						className={classes.discardButton}
 						onClick={() => {
 							setInput('');
-							handleSearch('');
+							if (handleDebounce) {
+								handleDebounce('', 0);
+							}
 						}}
 						fontSize='small'
 					/>
@@ -68,7 +83,7 @@ export const SearchBar = ({ searchResults, handleSearch, handleDebounce }: ISear
 					{searchResults?.map((game) => (
 						<React.Fragment key={game.id}>
 							<Divider className={classes.divider} />
-							<Game name={game.name} cover={game.cover} />
+							<Game id={game.id} name={game.name} cover={game.cover} />
 						</React.Fragment>
 					))}
 				</div>

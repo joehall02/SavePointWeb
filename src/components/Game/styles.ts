@@ -11,6 +11,10 @@ export const useStyles = makeStyles()((theme: Theme) => ({
 		padding: theme.spacing(1, 1.5),
 		height: 80,
 		borderRadius: theme.spacing(1.5),
+		'&:hover': {
+			background: theme.palette.action.hover,
+			cursor: 'pointer',
+		},
 	},
 	cover: {
 		width: 48,
