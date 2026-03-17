@@ -226,7 +226,7 @@ Implementation notes:
 ### Milestone 4 — Home page
 
 - [x] Build centered search layout
-- [ ] On submit navigate to `/search?q=...`
+- [x] On submit navigate to `/search?q=...`
 - [x] Typeahead suggestions (debounced)
 - [x] Theme mode toggle
 

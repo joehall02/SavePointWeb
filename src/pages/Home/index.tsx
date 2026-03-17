@@ -1,6 +1,7 @@
 import IncompleteCircleRoundedIcon from '@mui/icons-material/IncompleteCircleRounded';
 import { Box } from '@mui/material';
 import { useCallback, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import GameService from '../../api/services/GameService';
 import { SearchBar } from '../../components/ui/SearchBar';
@@ -12,29 +13,32 @@ export const Home = () => {
 	const { classes } = useStyles();
 	const [searchResults, setSearchResults] = useState<ExternalGame[]>([]);
 	const timeout = useRef(0);
-	
+	const navigate = useNavigate();
+
 	usePageTitle('Home');
 	
-	const handleSearch = useCallback(async (searchParam: string) => {
-		if (searchParam === '') {
-			setSearchResults([]);
-			return;
-		}
-		
-		const results = await GameService.searchGameHome(searchParam);
-		
-		if (results.length > 0) {
-			setSearchResults(results);
-		} else {
-			setSearchResults([]);
-		}
-	}, []);
+	const handleSearch = useCallback((input: string) => {
+		navigate(`/search?search=${input}`);
+	}, [navigate]);
 
 	const handleDebounce = useCallback((input: string, delay: number) => {
 		clearTimeout(timeout.current);
 		
-		timeout.current = setTimeout(() => handleSearch(input), delay);
-	}, [handleSearch]);
+		timeout.current = setTimeout(async () => {
+			if (input === '') {
+				setSearchResults([]);
+				return;
+			}
+			
+			const results = await GameService.searchGameHome(input);
+			
+			if (results.length > 0) {
+				setSearchResults(results);
+			} else {
+				setSearchResults([]);
+			}
+		}, delay);
+	}, []);
 
 	return (
 		<Box className={classes.root}>
