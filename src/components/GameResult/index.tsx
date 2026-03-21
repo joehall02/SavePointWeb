@@ -10,7 +10,7 @@ interface IGameProps {
 	cover?: string
 }
 
-export const Game = ({ id, name, cover }: IGameProps) => {
+export const GameResult = ({ id, name, cover }: IGameProps) => {
 
 	const { classes } = useStyles();
 

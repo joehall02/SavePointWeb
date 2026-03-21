@@ -15,7 +15,7 @@ import {
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { useScreenDetection } from '../../../hooks/useScreenDetection';
+import { useScreenDetection } from '../../hooks/useScreenDetection';
 import { useStyles } from './styles';
 
 const pages = [

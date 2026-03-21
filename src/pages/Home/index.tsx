@@ -4,7 +4,7 @@ import { useCallback, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import GameService from '../../api/services/GameService';
-import { SearchBar } from '../../components/ui/SearchBar';
+import { SearchBar } from '../../components/SearchBar';
 import { usePageTitle } from '../../hooks/usePageTitle';
 import type { ExternalGame } from '../../types/game.types';
 import { useStyles } from './styles';

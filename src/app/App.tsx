@@ -6,8 +6,8 @@ import '@fontsource/roboto/700.css';
 import { Container } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 
+import { Nav } from '../components/Nav';
 import { ThemeModeToggle } from '../components/ThemeModeToggle';
-import { Nav } from '../components/ui/Nav';
 import { useStyles } from './styles';
 import { ThemeModeProvider } from './ThemeModeProvider';
 

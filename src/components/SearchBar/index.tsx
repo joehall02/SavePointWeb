@@ -4,9 +4,9 @@ import { Box, Button, Divider } from '@mui/material';
 import { useState } from 'react';
 import React from 'react';
 
-import { useThemeMode } from '../../../hooks/useThemeMode';
-import type { ExternalGame } from '../../../types/game.types';
-import { Game } from '../../Game';
+import { useThemeMode } from '../../hooks/useThemeMode';
+import type { ExternalGame } from '../../types/game.types';
+import { GameResult } from '../GameResult';
 import { useStyles } from './styles';
 
 interface ISearchBarProps {
@@ -83,7 +83,7 @@ export const SearchBar = ({ searchResults, handleSearch, handleDebounce }: ISear
 					{searchResults?.map((game) => (
 						<React.Fragment key={game.id}>
 							<Divider className={classes.divider} />
-							<Game id={game.id} name={game.name} cover={game.cover} />
+							<GameResult id={game.id} name={game.name} cover={game.cover} />
 						</React.Fragment>
 					))}
 				</div>
