@@ -11,12 +11,11 @@ import {
 	ListItemText, 
 	Toolbar, 
 	Typography, 
-	useMediaQuery, 
-	useTheme, 
 } from '@mui/material';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { useScreenDetection } from '../../../hooks/useScreenDetection';
 import { useStyles } from './styles';
 
 const pages = [
@@ -26,9 +25,7 @@ const pages = [
 ];
 
 export const Nav = () => {
-	const theme = useTheme();
-
-	const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+	const { isMobile } = useScreenDetection();
 
 	const [mobileOpen, setMobileOpen] = useState<boolean>(false);
 
