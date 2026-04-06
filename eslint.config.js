@@ -9,6 +9,7 @@ import jest from "eslint-plugin-jest"
 import stylistic from '@stylistic/eslint-plugin'
 import simpleImportSort from "eslint-plugin-simple-import-sort"
 import unusedImports from "eslint-plugin-unused-imports"
+import pluginQuery from '@tanstack/eslint-plugin-query'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
@@ -23,6 +24,7 @@ export default defineConfig([
       jsxA11y.flatConfigs.recommended,
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
+	  ...pluginQuery.configs['flat/recommended'],
     ],
     plugins: {
       '@stylistic': stylistic,
