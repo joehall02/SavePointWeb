@@ -4,13 +4,14 @@ import { useNavigate } from 'react-router-dom';
 
 import { useStyles } from './styles';
 
-interface IGameProps {
+interface IResultProps {
 	id: number;
 	name: string;
-	cover?: string
+	cover?: string;
+	isGrid?: boolean;
 }
 
-export const GameResult = ({ id, name, cover }: IGameProps) => {
+export const Result = ({ id, name, cover }: IResultProps) => {
 
 	const { classes } = useStyles();
 

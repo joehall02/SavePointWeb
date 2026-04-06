@@ -1,8 +1,8 @@
 import Collection from '../pages/Collection';
+import { ExternalResults } from '../pages/ExternalResults';
 import GameDetails from '../pages/GameDetails';
 import { Home } from '../pages/Home';
 import Platforms from '../pages/Platforms';
-import Search from '../pages/Search';
 import type { RouterType } from '../types/router.types';
 
 const publicRoutes: RouterType[] = [
@@ -14,7 +14,7 @@ const publicRoutes: RouterType[] = [
 	{
 		path: '/search',
 		title: 'Search',
-		element: <Search />,
+		element: <ExternalResults />,
 	},
 	{
 		path: '/collection',

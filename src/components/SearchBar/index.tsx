@@ -6,7 +6,7 @@ import React from 'react';
 
 import { useThemeMode } from '../../hooks/useThemeMode';
 import type { ExternalGame } from '../../types/game.types';
-import { GameResult } from '../GameResult';
+import { Result } from '../Result';
 import { useStyles } from './styles';
 
 interface ISearchBarProps {
@@ -83,7 +83,7 @@ export const SearchBar = ({ searchResults, handleSearch, handleDebounce }: ISear
 					{searchResults?.map((game) => (
 						<React.Fragment key={game.id}>
 							<Divider className={classes.divider} />
-							<GameResult id={game.id} name={game.name} cover={game.cover} />
+							<Result id={game.id} name={game.name} cover={game.cover} />
 						</React.Fragment>
 					))}
 				</div>
