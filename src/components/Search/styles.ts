@@ -1,7 +1,13 @@
 import type { Theme } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
-export const useStyles = makeStyles()((theme: Theme) => ({
+import type { LayoutType } from '../../types/layout.types';
+
+interface IStyleProps {
+	layoutType?: LayoutType
+}
+
+export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { layoutType }) => ({
 	root: {
 		display: 'flex',
 		flexDirection: 'column',
@@ -44,6 +50,19 @@ export const useStyles = makeStyles()((theme: Theme) => ({
 
 	},
 	gameResults: {
+		display: 'grid',
+		gridTemplateColumns: layoutType === 'grid' ? 'repeat(4, minmax(0, 1fr))' : 'minmax(0, 1fr)',
+		gap: layoutType === 'grid' ? theme.spacing(5) : theme.spacing(2),
+		[theme.breakpoints.down('lg')]: {
+			gridTemplateColumns: layoutType === 'grid' ? 'repeat(3, minmax(0, 1fr))' : 'minmax(0, 1fr)',
+		},
+		[theme.breakpoints.down('md')]: {
+			gridTemplateColumns: layoutType === 'grid' ? 'repeat(2, minmax(0, 1fr))' : 'minmax(0, 1fr)',
+		},
+		[theme.breakpoints.down('sm')]: {
+			gridTemplateColumns: 'minmax(0, 1fr)',
+		},
+
 		// Override padding on Result component so SearchBar isn't effected
 		'&& .MuiBox-root': {
 			padding: theme.spacing(1, 0),

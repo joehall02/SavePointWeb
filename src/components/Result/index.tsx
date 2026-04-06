@@ -2,18 +2,19 @@ import ImageNotSupportedIcon from '@mui/icons-material/ImageNotSupported';
 import { Box, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
+import type { LayoutType } from '../../types/layout.types';
 import { useStyles } from './styles';
 
 interface IResultProps {
 	id: number;
 	name: string;
 	cover?: string;
-	isGrid?: boolean;
+	layoutType?: LayoutType;
 }
 
-export const Result = ({ id, name, cover }: IResultProps) => {
+export const Result = ({ id, name, cover, layoutType }: IResultProps) => {
 
-	const { classes } = useStyles();
+	const { classes } = useStyles({ layoutType: layoutType || 'grid' });
 
 	const navigate = useNavigate();
 

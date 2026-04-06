@@ -234,9 +234,9 @@ Implementation notes:
 
 ### Milestone 5 — Search page (IGDB results)
 
-- [ ] Results grid/list components
+- [x] Results grid/list components
 - [ ] Hover title behaviour in grid view
-- [ ] View toggle persists (Redux UI state)
+- [ ] View toggle persists
 - [ ] Pagination controls (`page`/`limit`)
 
 **Exit criteria:** results display correctly in both views; paging works.

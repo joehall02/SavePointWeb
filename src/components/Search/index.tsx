@@ -19,7 +19,7 @@ interface ISearchProps {
 export const Search = ({ results, searchTerm, handleSearch }: ISearchProps) => {
 	const [layoutType, setlayoutType] = useState<LayoutType>('grid');
 	
-	const { classes } = useStyles();
+	const { classes } = useStyles({ layoutType: layoutType || 'grid' });
 
 	const handleBarSeach = useCallback((input: string) => {
 		handleSearch('search', input);
@@ -61,7 +61,7 @@ export const Search = ({ results, searchTerm, handleSearch }: ISearchProps) => {
 				{results?.map((result) => {
 					return (
 						<React.Fragment key={result.id}>
-							<Result id={result.id} name={result.name} cover={result.cover} />
+							<Result id={result.id} name={result.name} cover={result.cover} layoutType={layoutType} />
 						</React.Fragment>
 					);
 				})}
