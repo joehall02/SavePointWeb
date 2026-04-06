@@ -131,7 +131,7 @@ class GameService {
 		};
 
 		return SavePointApiManager
-			.post<ExternalGameDao[]>(`${this.gamesBaseUrl}/results`, undefined, config)
+			.post<ExternalGameDao[]>(`${this.gamesBaseUrl}/result`, undefined, config)
 			.then((response) => response.data.map(mapExternalGameDaoToExternalGame));
 	}
 

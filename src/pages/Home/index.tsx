@@ -12,7 +12,7 @@ import { useStyles } from './styles';
 export const Home = () => {
 	const { classes } = useStyles();
 	const [searchResults, setSearchResults] = useState<ExternalGame[]>([]);
-	const timeout = useRef(0);
+	const timeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 	const navigate = useNavigate();
 
 	usePageTitle('Home');
@@ -24,7 +24,7 @@ export const Home = () => {
 	const handleDebounce = useCallback((input: string, delay: number) => {
 		// Clear timeout when handleDebounce is called again
 		// This stops multiple requests queuing up
-		clearTimeout(timeout.current);
+		if (timeout.current) clearTimeout(timeout.current);
 		
 		// Sets timeout to fetch game data after delay
 		timeout.current = setTimeout(async () => {

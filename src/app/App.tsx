@@ -4,6 +4,8 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
 import { Container } from '@mui/material';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import { Nav } from '../components/Nav';
@@ -14,16 +16,20 @@ import { ThemeModeProvider } from './ThemeModeProvider';
 function App() {
 	const { classes } = useStyles();
 
+	const [queryClient] = useState(() => new QueryClient());
+
 	return (
-		<ThemeModeProvider>
-			<div className={classes.root}>
-				<Nav />
-				<Container className={classes.content} maxWidth='xl'>
-					<ThemeModeToggle />
-					<Outlet />
-				</Container>
-			</div>
-		</ThemeModeProvider>
+		<QueryClientProvider client={queryClient}>
+			<ThemeModeProvider>
+				<div className={classes.root}>
+					<Nav />
+					<Container className={classes.content} maxWidth='xl'>
+						<ThemeModeToggle />
+						<Outlet />
+					</Container>
+				</div>
+			</ThemeModeProvider>
+		</QueryClientProvider>
 	);
 }
 
