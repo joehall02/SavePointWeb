@@ -1,4 +1,4 @@
-import { Box, FormControl, InputLabel, MenuItem, Select, type SelectChangeEvent } from '@mui/material';
+import { Box, FormControl, InputLabel, MenuItem, Select, type SelectChangeEvent,Typography } from '@mui/material';
 import { useState } from 'react';
 
 import { PlatformLabels } from '../../enums/platforms';
@@ -29,7 +29,9 @@ export const PlatformFilter = ({ handlePlatformFilter }: IPlatformFilterProps) =
 	return (
 		<Box className={classes.root}>
 			<FormControl fullWidth size='small'>
-				<InputLabel>Platform</InputLabel>
+				<InputLabel>
+					<Typography variant='body2'>Platform</Typography>
+				</InputLabel>
 			
 				<Select 
 					fullWidth
@@ -37,10 +39,16 @@ export const PlatformFilter = ({ handlePlatformFilter }: IPlatformFilterProps) =
 					value={platform}
 					onChange={handlePlatformChange}
 				>
-					<MenuItem value='all'>All</MenuItem>
+					<MenuItem value='all'>
+						<Typography variant='body2'>
+							All
+						</Typography>
+					</MenuItem>
 					{Object.entries(PlatformLabels).map(([key, value]) => (
 						<MenuItem key={key} value={key}>
-							{value}
+							<Typography variant='body2'>
+								{value}
+							</Typography>
 						</MenuItem>
 					))}
 				</Select>
