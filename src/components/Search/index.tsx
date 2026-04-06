@@ -1,20 +1,23 @@
-import { Box } from '@mui/material';
-import React, { useCallback } from 'react';
+import { Box, Typography } from '@mui/material';
+import React, { useCallback, useState } from 'react';
 
 import { Result } from '../../components/Result';
+import { LayoutToggle } from '../../LayoutToggle';
 import type { ExternalGame } from '../../types/game.types';
+import type { LayoutType } from '../../types/layout.types';
 import { PlatformFilter } from '../PlatformFilter';
 import { SearchBar } from '../SearchBar';
 import { useStyles } from './styles';
 
 interface ISearchProps {
-	results?: ExternalGame[]
-	isLoading: boolean
+	results?: ExternalGame[];
+	isLoading: boolean;
+	searchTerm: string;
 	handleSearch: (key: string, input: string) => void;
 }
 
-export const Search = ({ results, handleSearch }: ISearchProps) => {
-	// const [isGrid, setIsGrid] = useState<boolean>(true);
+export const Search = ({ results, searchTerm, handleSearch }: ISearchProps) => {
+	const [layoutType, setlayoutType] = useState<LayoutType>('grid');
 	
 	const { classes } = useStyles();
 
@@ -26,10 +29,14 @@ export const Search = ({ results, handleSearch }: ISearchProps) => {
 		handleSearch('platform', input);
 	}, [handleSearch]);
 
+	const handleLayoutToggle = useCallback((input: LayoutType) => {
+		setlayoutType(input);
+	}, []);
+
 	return (
 		<Box className={classes.root}>
 			{/* Top Bar */}
-			<div className={classes.topBar}>
+			<div className={classes.topSection}>
 				<div className={classes.platformFilter}>
 					<PlatformFilter handlePlatformFilter={handlePlatformFilter} />
 				</div>
@@ -40,15 +47,25 @@ export const Search = ({ results, handleSearch }: ISearchProps) => {
 			</div>
 
 			{/* Middle Bar */}
+			<div className={classes.middleSection}>
+				<div className={classes.resultsNumber}>
+					<Typography variant='body1'>{`XX Results for ${searchTerm}`}</Typography>
+				</div>
+				<div className={classes.layoutToggle}>
+					<LayoutToggle layoutType={layoutType} handleToggle={handleLayoutToggle} />
+				</div>
+			</div>
 
 			{/* Game Results */}
-			{results?.map((result) => {
-				return (
-					<React.Fragment key={result.id}>
-						<Result id={result.id} name={result.name} cover={result.cover} />
-					</React.Fragment>
-				);
-			})}
+			<div className={classes.gameResults}>
+				{results?.map((result) => {
+					return (
+						<React.Fragment key={result.id}>
+							<Result id={result.id} name={result.name} cover={result.cover} />
+						</React.Fragment>
+					);
+				})}
+			</div>
 		</Box>
 	);
 };

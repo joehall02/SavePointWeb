@@ -6,7 +6,7 @@ export const useStyles = makeStyles()((theme: Theme) => ({
 		display: 'flex',
 		flexDirection: 'column',
 	},
-	topBar: {
+	topSection: {
 		display: 'flex',
 		justifyContent: 'space-between',
 		[theme.breakpoints.down('md')]: {
@@ -30,5 +30,23 @@ export const useStyles = makeStyles()((theme: Theme) => ({
 	platformFilter: {
 		display: 'flex',
 		flex: 1,
+	},
+	middleSection: {
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		margin: theme.spacing(2, 0),
+	},
+	resultsNumber: {
+		alignSelf: 'center',
+	},
+	layoutToggle: {
+
+	},
+	gameResults: {
+		// Override padding on Result component so SearchBar isn't effected
+		'&& .MuiBox-root': {
+			padding: theme.spacing(1, 0),
+		},
 	},
 }));

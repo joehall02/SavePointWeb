@@ -47,7 +47,12 @@ export const ExternalResults = () => {
 
 	return (
 		<>
-			<Search results={results} isLoading={isLoading} handleSearch={handleSearch} />
+			<Search 
+				results={results}
+				isLoading={isLoading}
+				searchTerm={searchParams.search || ''} 
+				handleSearch={handleSearch} 
+			/>
 			{/* <Pagination /> */}
 		</>
 	);
