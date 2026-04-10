@@ -14,7 +14,7 @@ interface IResultProps {
 
 export const Result = ({ id, name, cover, layoutType }: IResultProps) => {
 
-	const { classes } = useStyles({ layoutType: layoutType || 'grid' });
+	const { classes } = useStyles({ layoutType: layoutType || 'list' });
 
 	const navigate = useNavigate();
 

@@ -23,7 +23,7 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { layoutType }
 		},
 	},
 	cover: {
-		width: layoutType === 'grid' ? '100%' : 80,
+		width: layoutType === 'grid' ? '100%' : 64,
 		height: 'auto',
 		whiteSpace: 'nowrap',
 		textOverflow: 'ellipsis',
