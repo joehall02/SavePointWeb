@@ -51,9 +51,7 @@ export const Search = ({ results, searchTerm, handleSearch }: ISearchProps) => {
 				<div className={classes.resultsNumber}>
 					<Typography variant='body1'>{`XX Results for ${searchTerm}`}</Typography>
 				</div>
-				<div className={classes.layoutToggle}>
-					<LayoutToggle layoutType={layoutType} handleToggle={handleLayoutToggle} />
-				</div>
+				<LayoutToggle layoutType={layoutType} handleToggle={handleLayoutToggle} />
 			</div>
 
 			{/* Game Results */}

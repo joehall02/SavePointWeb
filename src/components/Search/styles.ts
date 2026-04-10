@@ -46,13 +46,10 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { layoutType }
 	resultsNumber: {
 		alignSelf: 'center',
 	},
-	layoutToggle: {
-
-	},
 	gameResults: {
 		display: 'grid',
 		gridTemplateColumns: layoutType === 'grid' ? 'repeat(4, minmax(0, 1fr))' : 'minmax(0, 1fr)',
-		gap: layoutType === 'grid' ? theme.spacing(5) : theme.spacing(2),
+		gap: layoutType === 'grid' ? theme.spacing(2) : theme.spacing(2),
 		[theme.breakpoints.down('lg')]: {
 			gridTemplateColumns: layoutType === 'grid' ? 'repeat(3, minmax(0, 1fr))' : 'minmax(0, 1fr)',
 		},
@@ -65,7 +62,7 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { layoutType }
 
 		// Override padding on Result component so SearchBar isn't effected
 		'&& .MuiBox-root': {
-			padding: theme.spacing(1, 0),
+			padding: theme.spacing(1),
 		},
 	},
 }));

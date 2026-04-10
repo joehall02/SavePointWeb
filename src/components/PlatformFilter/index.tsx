@@ -38,6 +38,7 @@ export const PlatformFilter = ({ handlePlatformFilter }: IPlatformFilterProps) =
 					label='Platform'
 					value={platform}
 					onChange={handlePlatformChange}
+					className={classes.select}
 				>
 					<MenuItem value='all'>
 						<Typography variant='body2'>

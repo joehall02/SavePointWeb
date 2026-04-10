@@ -27,7 +27,7 @@ export const Result = ({ id, name, cover, layoutType }: IResultProps) => {
 			) : (
 				<ImageNotSupportedIcon className={classes.cover} />
 			)}
-			<Typography variant='body1' noWrap={true}>{name}</Typography>
+			<Typography variant='body1' noWrap={true} className={classes.name}>{name}</Typography>
 		</Box>
 	);
 };
