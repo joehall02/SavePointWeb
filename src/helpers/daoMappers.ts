@@ -3,14 +3,14 @@ import type { EditGameDao, ExternalGameDao, ExternalGameDetailsDao, FetchFromCol
 import type { Platform } from '../types/platform.types';
 import type { PlatformDao } from '../types/platformDao.types';
 
-export function mapGameDaoToGame(dto: FetchFromCollectionDao): FetchFromCollectionGame {
+export const mapGameDaoToGame = (dto: FetchFromCollectionDao): FetchFromCollectionGame => {
 	return {
 		id: dto.id,
 		title: dto.title,
 	};
-}
+};
 
-export function mapGameDetailsDaoToGameDetails(dto: GameDetailsDao): GameDetails {
+export const mapGameDetailsDaoToGameDetails = (dto: GameDetailsDao): GameDetails => {
 	return {
 		id: dto.id,
 		title: dto.title,
@@ -21,9 +21,9 @@ export function mapGameDetailsDaoToGameDetails(dto: GameDetailsDao): GameDetails
 		igdbId: dto.igdbId,
 		platformId: dto.platformId,
 	};
-}
+};
 
-export function mapEditGameDaoToEditGame(dto: EditGameDao): EditGame {
+export const mapEditGameDaoToEditGame = (dto: EditGameDao): EditGame => {
 	return {
 		id: dto.id,
 		title: dto.title,
@@ -32,17 +32,17 @@ export function mapEditGameDaoToEditGame(dto: EditGameDao): EditGame {
 		boxIncluded: dto.boxIncluded,
 		rating: dto.rating,
 	};
-}
+};
 
-export function mapExternalGameDaoToExternalGame(dto: ExternalGameDao): ExternalGame {
+export const mapExternalGameDaoToExternalGame = (dto: ExternalGameDao): ExternalGame => {
 	return {
 		id: dto.id,
 		name: dto.name,
 		cover: dto.cover?.url,
 	};
-}
+};
 
-export function mapExGameDetailsDaoToExGameDetails(dto: ExternalGameDetailsDao): ExternalGameDetails {
+export const mapExGameDetailsDaoToExGameDetails = (dto: ExternalGameDetailsDao): ExternalGameDetails => {
 	return {
 		id: dto.id,
 		name: dto.name,
@@ -55,12 +55,12 @@ export function mapExGameDetailsDaoToExGameDetails(dto: ExternalGameDetailsDao):
 		artworks: dto.artworks,
 		release_dates: dto.release_dates,
 	};
-}
+};
 
-export function mapPlatformDaoToPlatform(dto: PlatformDao): Platform {
+export const mapPlatformDaoToPlatform = (dto: PlatformDao): Platform => {
 	return {
 		id: dto.id,
 		title: dto.title,
 		cover: dto.cover,
 	};
-}
+};
