@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, CircularProgress, Typography } from '@mui/material';
 import React, { useCallback, useState } from 'react';
 
 import { Result } from '../../components/Result';
@@ -16,7 +16,7 @@ interface ISearchProps {
 	handleSearch: (key: string, input: string) => void;
 }
 
-export const Search = ({ results, searchTerm, handleSearch }: ISearchProps) => {
+export const Search = ({ results, isLoading, searchTerm, handleSearch }: ISearchProps) => {
 	const [layoutType, setlayoutType] = useState<LayoutType>('grid');
 	
 	const { classes } = useStyles({ layoutType: layoutType || 'grid' });
@@ -53,6 +53,20 @@ export const Search = ({ results, searchTerm, handleSearch }: ISearchProps) => {
 				</div>
 				<LayoutToggle layoutType={layoutType} handleToggle={handleLayoutToggle} />
 			</div>
+
+			{/* Loading */}
+			{isLoading ? (
+				<div className={classes.loading}>
+					<CircularProgress aria-label='Loading…' />
+				</div>
+			) : null}
+
+			{/* No Results */}
+			{!isLoading && typeof results === 'undefined' ? (
+				<div className={classes.noResults}>
+					<Typography variant='body1' color='error'>No results found. Please try again later.</Typography>
+				</div>
+			) : null}
 
 			{/* Game Results */}
 			<div className={classes.gameResults}>
