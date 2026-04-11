@@ -99,6 +99,12 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { themeType, i
 		borderRadius: theme.spacing(BORDER_RADIUS),
 		borderTopLeftRadius: 0,
 		borderTopRightRadius: 0,
+		
+		// Override padding/margin on Result component so Search page results aren't effected
+		'&& .MuiBox-root': {
+			padding: theme.spacing(1),
+			margin: theme.spacing(0),
+		},
 	},
 	divider: {
 		background: theme.palette.secondary.main,

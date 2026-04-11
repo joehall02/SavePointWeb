@@ -62,7 +62,7 @@ export const Search = ({ results, isLoading, searchTerm, handleSearch }: ISearch
 			) : null}
 
 			{/* No Results */}
-			{!isLoading && typeof results === 'undefined' ? (
+			{!isLoading && (typeof results === 'undefined' || results.length === 0) ? (
 				<div className={classes.noResults}>
 					<Typography variant='body1' color='error'>No results found. Please try again later.</Typography>
 				</div>

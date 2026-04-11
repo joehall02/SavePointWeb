@@ -67,10 +67,5 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { layoutType }
 		[theme.breakpoints.up('sm')]: {
 			display: 'grid',
 		},
-
-		// Override padding on Result component so SearchBar isn't effected
-		'&& .MuiBox-root': {
-			padding: theme.spacing(1),
-		},
 	},
 }));
