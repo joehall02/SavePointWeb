@@ -24,12 +24,9 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { layoutType }
 	},
 	cover: {
 		width: layoutType === 'grid' ? '100%' : 64,
-		height: 'auto',
-		[theme.breakpoints.up('sm')]: {
-			height: layoutType === 'grid' ? 350 : 'auto',
-			objectFit: layoutType === 'grid' ? 'cover' : 'unset',
-			overflow: 'hidden',
-		},
+		height: layoutType === 'grid' ? 350 : 'auto',
+		objectFit: layoutType === 'grid' ? 'cover' : 'unset',
+		overflow: 'hidden',
 	},
 	name: {
 		whiteSpace: 'nowrap',

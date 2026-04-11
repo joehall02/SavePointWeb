@@ -48,16 +48,15 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { layoutType }
 	},
 	gameResults: {
 		display: 'grid',
-		gridTemplateColumns: layoutType === 'grid' ? 'repeat(4, minmax(0, 1fr))' : 'minmax(0, 1fr)',
 		gap: layoutType === 'grid' ? theme.spacing(2) : theme.spacing(2),
-		[theme.breakpoints.down('lg')]: {
-			gridTemplateColumns: layoutType === 'grid' ? 'repeat(3, minmax(0, 1fr))' : 'minmax(0, 1fr)',
+		[theme.breakpoints.up('lg')]: {
+			gridTemplateColumns: layoutType === 'grid' ? 'repeat(4, minmax(0, 1fr))' : 'minmax(0, 1fr)',
 		},
-		[theme.breakpoints.down('md')]: {
+		[theme.breakpoints.between('sm', 'lg')]: {
 			gridTemplateColumns: layoutType === 'grid' ? 'repeat(2, minmax(0, 1fr))' : 'minmax(0, 1fr)',
 		},
 		[theme.breakpoints.down('sm')]: {
-			gridTemplateColumns: 'minmax(0, 1fr)',
+			gridTemplateColumns: 'minmax(1, 1fr)',
 		},
 
 		// Override padding on Result component so SearchBar isn't effected
