@@ -11,6 +11,7 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { layoutType }
 	root: {
 		display: 'flex',
 		flexDirection: 'column',
+		width: '100%',
 	},
 	topSection: {
 		display: 'flex',

@@ -1,34 +1,9 @@
 import type { AxiosRequestConfig } from 'axios';
 
-import { 
-	mapEditGameDaoToEditGame, 
-	mapExGameDetailsDaoToExGameDetails, 
-	mapExternalGameDaoToExternalGame, 
-	mapGameDaoToGame, 
-	mapGameDetailsDaoToGameDetails,
-	mapSearchGameResultsDaoToSearchGameResults, 
-} from '../../helpers/daoMappers';
-import type { 
-	CreateGame, 
-	EditGame, 
-	ExternalGame, 
-	ExternalGameDetails, 
-	FetchFromCollectionGame, 
-	GameDetails, 
-	GetExternalGameDetailsParams, 
-	SearchGameResults, 
-	SearchGameResultsParams,
-} from '../../types/game.types';
+import { mapEditGameDaoToEditGame, mapExGameDetailsDaoToExGameDetails, mapExternalGameDaoToExternalGame, mapGameDaoToGame, mapGameDetailsDaoToGameDetails, mapSearchGameResultsDaoToSearchGameResults } from '../../helpers/daoMappers';
+import type { CreateGame, EditGame, ExternalGame, ExternalGameDetails, FetchFromCollectionGame, GameDetails, GetExternalGameDetailsParams, SearchGameResults, SearchGameResultsParams } from '../../types/game.types';
 import type { FetchFromCollectionParams } from '../../types/game.types';
-import type { 
-	CreateGameDao, 
-	EditGameDao, 
-	ExternalGameDao, 
-	ExternalGameDetailsDao, 
-	FetchFromCollectionDao, 
-	GameDetailsDao, 
-	SearchGameResultsDao,
-} from '../../types/gameDao.types';
+import type { CreateGameDao, EditGameDao, ExternalGameDao, ExternalGameDetailsDao, FetchFromCollectionDao, GameDetailsDao, SearchGameResultsDao } from '../../types/gameDao.types';
 import type { SearchParam } from '../../types/search.types';
 import SavePointApiManager from '../SavePointApiManager';
 
@@ -123,6 +98,10 @@ class GameService {
 		params: SearchGameResultsParams = {},
 	): Promise<SearchGameResults> {
 		const { search, platform, pagination } = params;
+
+		if (search === undefined) {
+			// TODO: Global error handling 
+		}
 
 		const config: AxiosRequestConfig = {
 			params: {

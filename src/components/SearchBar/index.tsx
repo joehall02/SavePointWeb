@@ -28,6 +28,8 @@ export const SearchBar = ({ searchResults, handleSearch, handleDebounce }: ISear
 	const onSearch = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
+		if (!input) return;
+
 		handleSearch(input);
 	};
 
