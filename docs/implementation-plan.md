@@ -235,7 +235,7 @@ Implementation notes:
 ### Milestone 5 — Search page (IGDB results)
 
 - [x] Results grid/list components
-- [ ] Hover title behaviour in grid view
+- [x] Hover title behaviour in grid view
 - [ ] View toggle persists
 - [ ] Pagination controls (`page`/`limit`)
 

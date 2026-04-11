@@ -41,6 +41,12 @@ export type ExternalGameDao = {
 	cover?: CoverDao
 };
 
+export type SearchGameResultsDao = {
+	count: number,
+	pages: number,
+	games: ExternalGameDao[]
+}
+
 type PlatformDao = {
 	name?: string,
 };

@@ -1,5 +1,5 @@
-import type { EditGame, ExternalGame, ExternalGameDetails, FetchFromCollectionGame, GameDetails } from '../types/game.types';
-import type { EditGameDao, ExternalGameDao, ExternalGameDetailsDao, FetchFromCollectionDao, GameDetailsDao } from '../types/gameDao.types';
+import type { EditGame, ExternalGame, ExternalGameDetails, FetchFromCollectionGame, GameDetails, SearchGameResults } from '../types/game.types';
+import type { EditGameDao, ExternalGameDao, ExternalGameDetailsDao, FetchFromCollectionDao, GameDetailsDao, SearchGameResultsDao } from '../types/gameDao.types';
 import type { Platform } from '../types/platform.types';
 import type { PlatformDao } from '../types/platformDao.types';
 
@@ -39,6 +39,14 @@ export const mapExternalGameDaoToExternalGame = (dto: ExternalGameDao): External
 		id: dto.id,
 		name: dto.name,
 		cover: dto.cover?.url,
+	};
+};
+
+export const mapSearchGameResultsDaoToSearchGameResults = (dto: SearchGameResultsDao): SearchGameResults => {
+	return {
+		count: dto.count,
+		pages: dto.pages,
+		games: dto.games.map(mapExternalGameDaoToExternalGame),
 	};
 };
 

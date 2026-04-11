@@ -47,6 +47,12 @@ export type ExternalGame = {
 	cover?: string
 };
 
+export type SearchGameResults = {
+	count: number,
+	pages: number,
+	games: ExternalGame[]
+};
+
 export type SearchGameResultsParams = {
 	search?: string,
 	platform?: string,

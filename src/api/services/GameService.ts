@@ -5,7 +5,8 @@ import {
 	mapExGameDetailsDaoToExGameDetails, 
 	mapExternalGameDaoToExternalGame, 
 	mapGameDaoToGame, 
-	mapGameDetailsDaoToGameDetails, 
+	mapGameDetailsDaoToGameDetails,
+	mapSearchGameResultsDaoToSearchGameResults, 
 } from '../../helpers/daoMappers';
 import type { 
 	CreateGame, 
@@ -15,7 +16,8 @@ import type {
 	FetchFromCollectionGame, 
 	GameDetails, 
 	GetExternalGameDetailsParams, 
-	SearchGameResultsParams, 
+	SearchGameResults, 
+	SearchGameResultsParams,
 } from '../../types/game.types';
 import type { FetchFromCollectionParams } from '../../types/game.types';
 import type { 
@@ -24,7 +26,8 @@ import type {
 	ExternalGameDao, 
 	ExternalGameDetailsDao, 
 	FetchFromCollectionDao, 
-	GameDetailsDao ,
+	GameDetailsDao, 
+	SearchGameResultsDao,
 } from '../../types/gameDao.types';
 import type { SearchParam } from '../../types/search.types';
 import SavePointApiManager from '../SavePointApiManager';
@@ -118,7 +121,7 @@ class GameService {
 	 */
 	public static async searchGameResults(
 		params: SearchGameResultsParams = {},
-	): Promise<ExternalGame[]> {
+	): Promise<SearchGameResults> {
 		const { search, platform, pagination } = params;
 
 		const config: AxiosRequestConfig = {
@@ -131,8 +134,8 @@ class GameService {
 		};
 
 		return SavePointApiManager
-			.post<ExternalGameDao[]>(`${this.gamesBaseUrl}/result`, undefined, config)
-			.then((response) => response.data.map(mapExternalGameDaoToExternalGame));
+			.post<SearchGameResultsDao>(`${this.gamesBaseUrl}/result`, undefined, config)
+			.then((response) => mapSearchGameResultsDaoToSearchGameResults(response.data));
 	}
 
 	/**
