@@ -39,7 +39,7 @@ export default defineConfig([
       "@stylistic/max-len": ["warn", {
         "code": 150,
         "ignoreComments": true,
-        "ignoreImports": true,
+        "ignorePattern": "^(?:import|export)\\s",
       }],
       "@stylistic/object-curly-spacing": ["error", "always"],
       "react/jsx-indent": ["error", "tab"],
