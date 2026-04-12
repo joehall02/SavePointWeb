@@ -24,7 +24,7 @@ export const useSearchQueryParams = (setQueryParams: SetURLSearchParams): (key: 
 			setQueryParams(prev => 
 				((next => (
 					next.set(key, input),
-					next.forEach((_value, paramKey) => 
+					Array.from(next.keys()).forEach(paramKey => 
 						key === 'platform' 
 							? ((paramKey !== 'search' && paramKey !=='platform') && next.delete(paramKey))
 							: (paramKey !== 'search' && next.delete(paramKey)),  
