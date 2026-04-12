@@ -2,12 +2,13 @@ import { CssBaseline,ThemeProvider } from '@mui/material';
 import { type ReactNode,useCallback, useEffect, useMemo, useState } from 'react';
 
 import { ThemeModeContext } from '../context/ThemeModeContext';
+import { getLocalStorageItem, setLocalStorageItem } from '../helpers/localStorage';
 import type { ThemeMode } from '../types/themeMode.types';
 import { darkTheme,lightTheme } from './themes';
 
 function getInitialMode(): ThemeMode {
 	// Fetch mode from local storage if available
-	const savedMode = localStorage.getItem('themeMode') as ThemeMode | null;
+	const savedMode = getLocalStorageItem<ThemeMode | null>('themeMode', 'dark');
 
 	if (savedMode === 'light' || savedMode === 'dark') return savedMode;
 
@@ -21,7 +22,7 @@ export function ThemeModeProvider({ children }: { children: ReactNode }) {
 
 	// Set 'themeMode' in local storage when mode changes
 	useEffect(() => {
-		localStorage.setItem('themeMode', mode);
+		setLocalStorageItem('themeMode', mode);
 	}, [mode]);
 
 	// useCallback stores the function so it isn't re-created between renders
