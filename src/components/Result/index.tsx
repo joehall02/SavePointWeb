@@ -2,6 +2,7 @@ import ImageNotSupportedIcon from '@mui/icons-material/ImageNotSupported';
 import { Box, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
+import { useThemeMode } from '../../hooks/useThemeMode';
 import type { LayoutType } from '../../types/layout.types';
 import { useStyles } from './styles';
 
@@ -13,8 +14,9 @@ interface IResultProps {
 }
 
 export const Result = ({ id, name, cover, layoutType }: IResultProps) => {
+	const themeMode = useThemeMode();
 
-	const { classes } = useStyles({ layoutType: layoutType || 'list' });
+	const { classes } = useStyles({ layoutType: layoutType || 'list', themeMode: themeMode });
 
 	const navigate = useNavigate();
 

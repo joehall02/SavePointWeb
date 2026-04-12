@@ -237,7 +237,7 @@ Implementation notes:
 - [x] Results grid/list components
 - [x] Hover title behaviour in grid view
 - [ ] View toggle persists
-- [ ] Pagination controls (`page`/`limit`)
+- [x] Pagination controls (`page`/`limit`)
 
 **Exit criteria:** results display correctly in both views; paging works.
 
