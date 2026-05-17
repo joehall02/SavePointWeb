@@ -54,7 +54,7 @@ export const ExternalResults = () => {
 					<Pagination 
 						count={results?.pages}
 						page={searchParams.pagination?.page ?? 1}
-						onChange={(_event, value) => handleSearch('page', value.toString())}
+						onChange={(_, value) => handleSearch('page', value.toString())}
 						size='large'
 						color='primary'
 					/>

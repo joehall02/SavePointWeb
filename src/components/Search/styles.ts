@@ -47,12 +47,6 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { layoutType }
 	resultsNumber: {
 		alignSelf: 'center',
 	},
-	loading: {
-		display: 'flex',
-		justifyContent: 'center',
-		alignContent: 'center',
-		marginTop: theme.spacing(2),
-	},
 	noResults: {
 		textAlign: 'center',
 		margin: theme.spacing(2, 0),

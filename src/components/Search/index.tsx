@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import React, { useCallback, useState } from 'react';
 
 import { Result } from '../../components/Result';
@@ -6,6 +6,7 @@ import { getLocalStorageItem, setLocalStorageItem } from '../../helpers/localSto
 import { LayoutToggle } from '../../LayoutToggle';
 import type { SearchGameResults } from '../../types/game.types';
 import type { LayoutType } from '../../types/layout.types';
+import { Loading } from '../Loading';
 import { PlatformFilter } from '../PlatformFilter';
 import { SearchBar } from '../SearchBar';
 import { useStyles } from './styles';
@@ -59,11 +60,7 @@ export const Search = ({ results, isLoading, searchTerm, handleSearch }: ISearch
 			</div>
 
 			{/* Loading */}
-			{isLoading ? (
-				<div className={classes.loading}>
-					<CircularProgress aria-label='Loading…' />
-				</div>
-			) : null}
+			<Loading isLoading={isLoading} />
 
 			{/* No Results */}
 			{!isLoading && (typeof results === 'undefined' || results.games.length === 0) ? (

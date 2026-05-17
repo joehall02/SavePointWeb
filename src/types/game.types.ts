@@ -94,9 +94,24 @@ export type ExternalGameDetails = {
 	storyline?: string | null,
 	summary?: string | null,
 	platforms?: Platform[] | null
-	cover?: Cover[] | null
+	cover?: Cover | null
 	videos?: Video[] | null
 	genres?: Genre[] | null
 	artworks?: Artwork[] | null
 	release_dates?: ReleaseDate[] | null
 };
+
+export type CollectionDetails = {
+	id: number,
+	title: string,
+	condition: string,
+	notes: string,
+	boxIncluded: boolean,
+	rating: number,
+	igdbId: number,
+	platformId: number
+};
+
+export type DetailsResults = 
+	| (ExternalGameDetails & { type: 'external' }) 
+	| (CollectionDetails & ExternalGameDetails & { type: 'collection' });

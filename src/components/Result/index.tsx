@@ -23,7 +23,7 @@ export const Result = ({ id, name, cover, layoutType }: IResultProps) => {
 	return (
 		// tabIndex allows the element to be focused
 		// Allows us to click element without triggering onBlur event
-		<Box tabIndex={0} className={classes.root} onClick={() => navigate(`/game/${id}`)}>
+		<Box tabIndex={0} className={classes.root} onClick={() => navigate(`/game?id=${id}`)}>
 			{cover ? (
 				<img className={classes.cover} src={cover} alt={name} />
 			) : (

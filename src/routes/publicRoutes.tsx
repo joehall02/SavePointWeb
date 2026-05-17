@@ -1,6 +1,6 @@
 import Collection from '../pages/Collection';
+import { ExternalGameDetails } from '../pages/ExternalGameDetails';
 import { ExternalResults } from '../pages/ExternalResults';
-import GameDetails from '../pages/GameDetails';
 import { Home } from '../pages/Home';
 import Platforms from '../pages/Platforms';
 import type { RouterType } from '../types/router.types';
@@ -29,7 +29,7 @@ const publicRoutes: RouterType[] = [
 	{
 		path: '/game',
 		title: 'Game',
-		element: <GameDetails />,
+		element: <ExternalGameDetails />,
 	},
 ];
 
