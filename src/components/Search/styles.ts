@@ -52,15 +52,13 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { layoutType }
 		margin: theme.spacing(2, 0),
 	},
 	gameResults: {
-		gap: layoutType === 'grid' ? theme.spacing(2) : theme.spacing(2),
+		display: 'grid',
+		gap: theme.spacing(2),
 		[theme.breakpoints.up('lg')]: {
 			gridTemplateColumns: layoutType === 'grid' ? 'repeat(4, minmax(0, 1fr))' : 'minmax(0, 1fr)',
 		},
 		[theme.breakpoints.between('sm', 'lg')]: {
 			gridTemplateColumns: layoutType === 'grid' ? 'repeat(2, minmax(0, 1fr))' : 'minmax(0, 1fr)',
-		},
-		[theme.breakpoints.up('sm')]: {
-			display: 'grid',
 		},
 	},
 }));

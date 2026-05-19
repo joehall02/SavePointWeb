@@ -1,6 +1,7 @@
+import type { Theme } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
-export const useStyles = makeStyles()(() => ({
+export const useStyles = makeStyles()((theme: Theme) => ({
 	root: {
 		display: 'flex',
 		flexDirection: 'column',
@@ -9,7 +10,6 @@ export const useStyles = makeStyles()(() => ({
 	sectionOne: {
 		display: 'flex',
 		flexDirection: 'row',
-		height: '70dvh',
 	},
 	sectionOneLeft: {
 		display: 'flex',
@@ -19,11 +19,9 @@ export const useStyles = makeStyles()(() => ({
 	coverContainer: {
 		display: 'flex',
 		alignItems: 'center',
-		// justifyContent: 'center',
 		width: 600,
 	},
 	cover: {
-		// objectFit: 'cover',
 		width: '100%',
 	},
 	sectionOneRight: {
@@ -33,9 +31,17 @@ export const useStyles = makeStyles()(() => ({
 	},
 	info: {
 		display: 'flex',
-		justifyContent: 'center',
 		flexDirection: 'column',
 		width: '100%',
+	},
+	summary: {
+
+	},
+	pillsContainer: {
+		display: 'flex',
+		flexWrap: 'wrap',
+		flexDirection: 'row',
+		gap: theme.spacing(1),
 	},
 	imageCarousel: {
 

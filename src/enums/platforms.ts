@@ -1,4 +1,4 @@
-export enum Platforms {
+enum Platforms {
 	Ps1 = 'ps1',
 	Ps2 = 'ps2',
 	Ps3 = 'ps3',

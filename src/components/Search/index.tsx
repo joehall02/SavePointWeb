@@ -36,6 +36,11 @@ export const Search = ({ results, isLoading, searchTerm, handleSearch }: ISearch
 		setlayoutType(input);
 	}, []);
 
+	{/* Loading */}
+	if (isLoading) {
+		return <Loading isLoading={isLoading} />;
+	}
+
 	return (
 		<Box className={classes.root}>
 			{/* Top Bar */}
@@ -59,11 +64,8 @@ export const Search = ({ results, isLoading, searchTerm, handleSearch }: ISearch
 				<LayoutToggle layoutType={layoutType} handleToggle={handleLayoutToggle} />
 			</div>
 
-			{/* Loading */}
-			<Loading isLoading={isLoading} />
-
 			{/* No Results */}
-			{!isLoading && (typeof results === 'undefined' || results.games.length === 0) ? (
+			{typeof results === 'undefined' || results.games.length === 0 ? (
 				<div className={classes.noResults}>
 					<Typography variant='body1' color='error'>No results found. Please try again later.</Typography>
 				</div>
