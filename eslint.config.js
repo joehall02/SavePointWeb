@@ -47,9 +47,13 @@ export default defineConfig([
       "react/jsx-tag-spacing": ["error", { "beforeSelfClosing": "always" }],
       "jsx-quotes": ["error", "prefer-single"],
       "no-console": ["warn", { "allow": ["warn", "error"] }],
+      
+      // Unused variables rules configuration
       "no-unused-vars": "off",
       "unused-imports/no-unused-imports": "error",
       "unused-imports/no-unused-vars": ["warn", { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }],
+      "@typescript-eslint/no-unused-vars": ["warn", { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }],
+      
       "simple-import-sort/imports": "error",
       "simple-import-sort/exports": "error",
       "no-multiple-empty-lines": ["error", { "max": 1, "maxBOF": 0, "maxEOF": 0 }]

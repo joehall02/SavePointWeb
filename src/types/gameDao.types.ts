@@ -78,7 +78,7 @@ export type ExternalGameDetailsDao = {
 	storyline?: string | null,
 	summary?: string | null,
 	platforms?: PlatformDao[] | null
-	cover?: CoverDao[] | null
+	cover?: CoverDao | null
 	videos?: VideoDao[] | null
 	genres?: GenreDao[] | null
 	artworks?: ArtworkDao[] | null

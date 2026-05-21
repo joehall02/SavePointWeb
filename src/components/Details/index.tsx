@@ -1,5 +1,7 @@
+import ImageNotSupportedIcon from '@mui/icons-material/ImageNotSupported';
 import { Box, Typography } from '@mui/material';
 
+import { isResultsNullOrUndefined } from '../../helpers/isResultsNullOrUndefined';
 import { isTypeCollection } from '../../helpers/isTypeCollection';
 import type { DetailsResults } from '../../types/game.types';
 import { Loading } from '../Loading';
@@ -16,9 +18,13 @@ export const Details = ({ results, isLoading }: IDetailsProps) => {
 	
 	const isCollection = isTypeCollection(results);
 	
-	{/* Loading */}
 	if (isLoading) {
 		return <Loading isLoading={isLoading} />;
+	}
+
+	// Check if data is valid before rendering the component
+	if (!results || isResultsNullOrUndefined(results)) {
+		return <Typography variant='body1'>Data Invalid</Typography>;
 	}
 
 	return (
@@ -33,45 +39,66 @@ export const Details = ({ results, isLoading }: IDetailsProps) => {
 
 					{/* Cover Image */}
 					<div className={classes.coverContainer}>
-						<img className={classes.cover} src={results?.cover?.url} alt={results?.name} />
+						{results?.cover?.url ? (
+							<img className={classes.cover} src={results?.cover?.url} alt={results?.name} />
+						) : (
+							<ImageNotSupportedIcon className={classes.cover} />
+						)}
 					</div>
 				</div>
 			
 				<div className={classes.sectionOneRight}>
 					{/* Info */}
 					<div className={classes.info}>
-						{/* Name */}
-						<Typography variant='h4'>{isCollection ? results?.title : results?.name}</Typography>
 						
+						{/* Name */}
+						<Typography variant='h4' className={classes.title}>{isCollection ? results?.title : results?.name}</Typography>
+							
 						{/* Platforms */}
-						<Typography variant='h6'>Platforms:</Typography>
-						<div className={classes.pillsContainer}>
-							{results?.platforms?.map((platform, index) => (
-								<Pill key={index} text={platform.name} />
-							))}
-						</div>
+						{results?.platforms && (
+							<>
+								<Typography variant='h6'>Platforms:</Typography>
+								<div className={classes.pillsContainer}>
+									{results?.platforms?.map((platform, index) => (
+										<Pill key={index} text={platform.name} />
+									))}
+								</div>
+							</>
+						)}
 
 						{/* Release */}
-						<Typography variant='h6'>Releases:</Typography>
-						<div className={classes.pillsContainer}>
-							{results?.release_dates?.map((release, index) => (
-								<Pill key={index} text={release.date} region={release.region} />
-							))}
-						</div>
+						{results?.release_dates && (
+							<>
+								<Typography variant='h6'>Releases:</Typography>
+								<div className={classes.pillsContainer}>
+									{results?.release_dates?.map((release, index) => (
+										<Pill key={index} text={release.date} region={release.region} />
+									))}
+								</div>
+							</>
+						)}
 
 						{/* Genre */}
-						<Typography variant='h6'>Genres:</Typography>
-						<div className={classes.pillsContainer}>
-							{results?.genres?.map((genre, index) => (
-								<Pill key={index} text={genre.name} />
-							))}
-						</div>
+						{results?.genres && (
+							<>
+								<Typography variant='h6'>Genres:</Typography>
+								<div className={classes.pillsContainer}>
+									{results?.genres?.map((genre, index) => (
+										<Pill key={index} text={genre.name} />
+									))}
+								</div>
+							</>
+						)}
 
 						{/* Summary */}
-						<div className={classes.summary}>
-							<Typography variant='h6'>Summary:</Typography>
-							<Typography variant='body1'>{results?.summary}</Typography>
-						</div>
+						{results?.summary && (
+							<>
+								<div className={classes.summary}>
+									<Typography variant='h6'>Summary:</Typography>
+									<Typography variant='body1'>{results?.summary}</Typography>
+								</div>
+							</>
+						)}
 					</div>
 				</div>
 			</div>

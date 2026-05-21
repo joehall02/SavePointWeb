@@ -19,10 +19,11 @@ export const useStyles = makeStyles()((theme: Theme) => ({
 	coverContainer: {
 		display: 'flex',
 		alignItems: 'center',
-		width: 600,
 	},
 	cover: {
 		width: '100%',
+		height: '100%',
+		maxHeight: 700,
 	},
 	sectionOneRight: {
 		display: 'flex',
@@ -33,15 +34,17 @@ export const useStyles = makeStyles()((theme: Theme) => ({
 		display: 'flex',
 		flexDirection: 'column',
 		width: '100%',
+		justifyContent: 'center',
 	},
-	summary: {
-
+	title: {
+		marginBottom: theme.spacing(3),
 	},
 	pillsContainer: {
 		display: 'flex',
 		flexWrap: 'wrap',
 		flexDirection: 'row',
 		gap: theme.spacing(1),
+		marginBottom: theme.spacing(4),
 	},
 	imageCarousel: {
 
