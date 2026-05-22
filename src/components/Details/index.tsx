@@ -3,7 +3,8 @@ import { Box, Typography } from '@mui/material';
 
 import { isResultsNullOrUndefined } from '../../helpers/isResultsNullOrUndefined';
 import { isTypeCollection } from '../../helpers/isTypeCollection';
-import type { DetailsResults } from '../../types/game.types';
+import { isTypeReleaseDate } from '../../helpers/isTypeReleaseDate';
+import type { DetailsResults, PillItem, Pills } from '../../types/game.types';
 import { Loading } from '../Loading';
 import { Pill } from '../Pill';
 import { useStyles } from './styles';
@@ -12,6 +13,34 @@ interface IDetailsProps {
 	results?: DetailsResults;
 	isLoading: boolean;
 }
+
+interface IPillsContainer {
+	name: string
+	data: Pills;
+}
+
+const PillsContainer = ({ name, data }: IPillsContainer) => {
+	const { classes } = useStyles();
+
+	if (!data) {
+		return null;
+	}
+
+	return (
+		<>
+			<Typography variant='h6'>{name}:</Typography>
+			<div className={classes.pillsContainer}>
+				{data?.map((item: PillItem, index) => {
+					if (isTypeReleaseDate(item)) {
+						return <Pill key={index} text={item.date} region={item.region} />;
+					} else {
+						return <Pill key={index} text={item.name} />;
+					}
+				})}
+			</div>
+		</>
+	);
+};
 
 export const Details = ({ results, isLoading }: IDetailsProps) => {
 	const { classes } = useStyles();
@@ -55,45 +84,18 @@ export const Details = ({ results, isLoading }: IDetailsProps) => {
 						<Typography variant='h4' className={classes.title}>{isCollection ? results?.title : results?.name}</Typography>
 							
 						{/* Platforms */}
-						{results?.platforms && (
-							<>
-								<Typography variant='h6'>Platforms:</Typography>
-								<div className={classes.pillsContainer}>
-									{results?.platforms?.map((platform, index) => (
-										<Pill key={index} text={platform.name} />
-									))}
-								</div>
-							</>
-						)}
+						<PillsContainer name='Platforms' data={results?.platforms} />
 
 						{/* Release */}
-						{results?.release_dates && (
-							<>
-								<Typography variant='h6'>Releases:</Typography>
-								<div className={classes.pillsContainer}>
-									{results?.release_dates?.map((release, index) => (
-										<Pill key={index} text={release.date} region={release.region} />
-									))}
-								</div>
-							</>
-						)}
+						<PillsContainer name='Releases' data={results?.release_dates} />
 
 						{/* Genre */}
-						{results?.genres && (
-							<>
-								<Typography variant='h6'>Genres:</Typography>
-								<div className={classes.pillsContainer}>
-									{results?.genres?.map((genre, index) => (
-										<Pill key={index} text={genre.name} />
-									))}
-								</div>
-							</>
-						)}
+						<PillsContainer name='Genres' data={results?.genres} />
 
 						{/* Summary */}
 						{results?.summary && (
 							<>
-								<div className={classes.summary}>
+								<div>
 									<Typography variant='h6'>Summary:</Typography>
 									<Typography variant='body1'>{results?.summary}</Typography>
 								</div>

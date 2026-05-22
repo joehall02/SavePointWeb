@@ -63,7 +63,7 @@ export type GetExternalGameDetailsParams = {
 	gameId?: number
 };
 
-type Platform = {
+export type Platform = {
 	name?: string,
 };
 
@@ -75,7 +75,7 @@ type Video = {
 	url?: string
 };
 
-type Genre = {
+export type Genre = {
 	name?: string
 };
 
@@ -83,10 +83,14 @@ type Artwork = {
 	url?: string
 };
 
-type ReleaseDate = {
+export type ReleaseDate = {
 	date?: string,
 	region?: string | null
 };
+
+export type Pills = Platform[] | ReleaseDate[] | Genre[] | undefined | null;
+
+export type PillItem = Platform | ReleaseDate | Genre;
 
 export type ExternalGameDetails = {
 	id: number,
