@@ -23,10 +23,17 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { layoutType, 
 			gap: layoutType === 'grid' ? theme.spacing(0) : theme.spacing(2),
 			height: layoutType === 'grid' ? '100%' : 80,
 			borderRadius: layoutType === 'grid' ? theme.spacing(0.5) : theme.spacing(1.5),
-			background: layoutType === 'grid' 
-				? resultBackground
-				: 'none',
-		
+			background: layoutType === 'grid' ? resultBackground : 'none',
+			textDecoration: 'none',
+			color: 'inherit',
+			
+			...layoutType === 'list' && {
+				[theme.breakpoints.up('sm')]: {
+					padding: theme.spacing(1),
+
+				},
+			},
+
 			[theme.breakpoints.down('sm')]: {
 				margin: layoutType === 'grid' ? theme.spacing(2, 0) : theme.spacing(0),
 			},

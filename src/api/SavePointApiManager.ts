@@ -9,7 +9,7 @@ import type { ApiError } from '../types/apiError.types';
  * Responsibilities:
  * - Handle HTTP requests to the API
  * - Centralised error handling
- * - Provide singleton that can be accessed throughout the app
+ * - Provide singleton that can be used for services
  */
 class SavePointApiManager {
 	private static instance: SavePointApiManager;

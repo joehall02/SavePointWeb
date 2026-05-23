@@ -1,6 +1,7 @@
 import ImageNotSupportedIcon from '@mui/icons-material/ImageNotSupported';
 import { Box, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 
 import { useThemeMode } from '../../hooks/useThemeMode';
 import type { LayoutType } from '../../types/layout.types';
@@ -23,7 +24,7 @@ export const Result = ({ id, name, cover, layoutType }: IResultProps) => {
 	return (
 		// tabIndex allows the element to be focused
 		// Allows us to click element without triggering onBlur event
-		<Box tabIndex={0} className={classes.root} onClick={() => navigate(`/game?id=${id}`)}>
+		<Box component={RouterLink} to={`/game?id=${id}`} tabIndex={0} className={classes.root}>
 			{cover ? (
 				<img className={classes.cover} src={cover} alt={name} />
 			) : (

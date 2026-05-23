@@ -21,7 +21,6 @@ const Cover = ({ results, isMobile }: ICoverProps) => {
 	return (
 		<div className={classes.coverContainer}>
 			{results?.cover?.url ? (
-				// <div className={classes.cover} aria-label={results?.name} role='img' />
 				<img className={classes.cover} src={results?.cover?.url} alt={results?.name} />
 			) : (
 				<ImageNotSupportedIcon className={classes.cover} />
@@ -60,9 +59,7 @@ export const Details = ({ results, isLoading }: IDetailsProps) => {
 			<div className={classes.sectionOne}>
 				{/* Cover Image & Image Carousel */}
 				<div className={classes.sectionOneLeft}>
-					{isMobile ? (
-						<ImageCarousel images={results.screenshots} isMobile={isMobile} />
-					) : null}
+					<ImageCarousel images={results.screenshots} isMobile={isMobile} />
 					<Cover results={results} isMobile={isMobile} />
 				</div>
 			
