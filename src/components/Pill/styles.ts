@@ -23,3 +23,13 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { region }) =>
 		height: 24,
 	},
 }));
+
+export const usePillsContainerStyles = makeStyles()((theme: Theme) => ({
+	pillsContainer: {
+		display: 'flex',
+		flexWrap: 'wrap',
+		flexDirection: 'row',
+		gap: theme.spacing(1),
+		marginBottom: theme.spacing(4),
+	},
+}));

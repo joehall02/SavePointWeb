@@ -60,7 +60,7 @@ export const mapExGameDetailsDaoToExGameDetails = (dto: ExternalGameDetailsDao):
 		cover: dto.cover,
 		videos: dto.videos,
 		genres: dto.genres,
-		artworks: dto.artworks,
+		screenshots: dto.screenshots,
 		release_dates: dto.release_dates,
 	};
 };

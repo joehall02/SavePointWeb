@@ -93,3 +93,5 @@ export const SearchBar = ({ searchResults, handleSearch, handleDebounce }: ISear
 		</Box>
 	);
 };
+
+SearchBar.displayName = 'SearchBar';

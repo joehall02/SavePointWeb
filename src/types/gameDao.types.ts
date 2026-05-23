@@ -63,7 +63,7 @@ type GenreDao = {
 	name?: string
 };
 
-type ArtworkDao = {
+type ScreenshotDao = {
 	url?: string
 };
 
@@ -81,6 +81,6 @@ export type ExternalGameDetailsDao = {
 	cover?: CoverDao | null
 	videos?: VideoDao[] | null
 	genres?: GenreDao[] | null
-	artworks?: ArtworkDao[] | null
+	screenshots?: ScreenshotDao[] | null
 	release_dates?: ReleaseDateDao[] | null
 };

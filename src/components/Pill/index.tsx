@@ -2,12 +2,9 @@ import { Box, Typography } from '@mui/material';
 import type { ReactElement } from 'react';
 
 import { FLAG_MAP } from '../../enums/flags';
-import { useStyles } from './styles';
-
-interface IPillProps {
-	text?: string;
-	region?: string | null;
-}
+import { isTypeReleaseDate } from '../../helpers/isTypeReleaseDate';
+import type { PillItem, Pills } from '../../types/game.types';
+import { usePillsContainerStyles, useStyles } from './styles';
 
 interface IResolverProps {
 	region: string;
@@ -21,6 +18,11 @@ const RegionIconResolver = ({ region }: IResolverProps): ReactElement | undefine
 	return <FlagComponent width={32} height={24} />;
 };
 
+interface IPillProps {
+	text?: string;
+	region?: string | null;
+}
+
 export const Pill = ({ text, region }: IPillProps) => {
 	const { classes } = useStyles({ region });
 
@@ -32,5 +34,33 @@ export const Pill = ({ text, region }: IPillProps) => {
 				<RegionIconResolver region={region} />
 			) : null}
 		</Box>
+	);
+};
+
+interface IPillsContainer {
+	name: string
+	data: Pills;
+}
+
+export const PillsContainer = ({ name, data }: IPillsContainer) => {
+	const { classes } = usePillsContainerStyles();
+
+	if (!data) {
+		return null;
+	}
+
+	return (
+		<>
+			<Typography variant='h6'>{name}:</Typography>
+			<div className={classes.pillsContainer}>
+				{data?.map((item: PillItem, index) => {
+					if (isTypeReleaseDate(item)) {
+						return <Pill key={index} text={item.date} region={item.region} />;
+					} else {
+						return <Pill key={index} text={item.name} />;
+					}
+				})}
+			</div>
+		</>
 	);
 };

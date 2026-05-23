@@ -1,7 +1,12 @@
 import type { Theme } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
-export const useStyles = makeStyles()((theme: Theme) => ({
+interface IStyleProps {
+	isMobile?: boolean
+	coverImage?: string;
+}
+
+export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { isMobile }) => ({
 	root: {
 		display: 'flex',
 		flexDirection: 'column',
@@ -9,21 +14,14 @@ export const useStyles = makeStyles()((theme: Theme) => ({
 	},
 	sectionOne: {
 		display: 'flex',
-		flexDirection: 'row',
+		flexDirection: isMobile ? 'column' : 'row',
+		gap: theme.spacing(3),
 	},
 	sectionOneLeft: {
-		display: 'flex',
-		justifyContent: 'center',
-		width: '100%',
-	},
-	coverContainer: {
-		display: 'flex',
-		alignItems: 'center',
-	},
-	cover: {
-		width: '100%',
-		height: '100%',
-		maxHeight: 700,
+		...(!isMobile && {
+			display: 'flex',
+			width: '100%',
+		}),
 	},
 	sectionOneRight: {
 		display: 'flex',
@@ -39,14 +37,26 @@ export const useStyles = makeStyles()((theme: Theme) => ({
 	title: {
 		marginBottom: theme.spacing(3),
 	},
-	pillsContainer: {
-		display: 'flex',
-		flexWrap: 'wrap',
-		flexDirection: 'row',
-		gap: theme.spacing(1),
-		marginBottom: theme.spacing(4),
-	},
-	imageCarousel: {
+}));
 
+export const useCoverStyles = makeStyles<IStyleProps>()((theme: Theme, { isMobile }) => ({
+	coverContainer: {
+		display: 'flex',
+		justifyContent: isMobile ? 'start' : 'center',
+		width: '100%',
+		...(isMobile && {
+			transform: `translateY(${theme.spacing(-10)})`,
+			marginBottom: theme.spacing(-10),
+		}),
+	},
+	cover: {
+		width: isMobile ? 'auto' : '100%',
+		height: 'auto',
+		maxHeight: 650,
+		objectFit: 'contain',
+		...(isMobile && {
+			border: `3px solid ${theme.palette.primary.main}`,
+			maxHeight: 200,
+		}),
 	},
 }));

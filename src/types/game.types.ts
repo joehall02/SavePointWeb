@@ -79,7 +79,7 @@ export type Genre = {
 	name?: string
 };
 
-type Artwork = {
+export type Screenshot = {
 	url?: string
 };
 
@@ -101,7 +101,7 @@ export type ExternalGameDetails = {
 	cover?: Cover | null
 	videos?: Video[] | null
 	genres?: Genre[] | null
-	artworks?: Artwork[] | null
+	screenshots?: Screenshot[] | null
 	release_dates?: ReleaseDate[] | null
 };
 
