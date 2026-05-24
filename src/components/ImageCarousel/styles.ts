@@ -4,16 +4,23 @@ import { makeStyles } from 'tss-react/mui';
 interface IStyleProps {
 	isMobile?: boolean;
 	slideIndex: number;
+	isHovering: boolean;
 }
 
-export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { slideIndex, isMobile }) => ({
+export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { slideIndex, isMobile, isHovering }) => ({
 	root: {
 		position: 'relative',
-		margin: theme.spacing(0, -3),
 		overflow: 'hidden',
-
+		
 		...isMobile && {
 			borderBottom: `3px solid ${theme.palette.primary.main}`,
+			
+			[theme.breakpoints.down('sm')]: {
+				margin: theme.spacing(0, -2),
+			},
+			[theme.breakpoints.up('sm')]: {
+				margin: theme.spacing(0, -3),
+			},
 		},
 	},
   
@@ -40,7 +47,12 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { slideIndex, 
 		transform: 'translateY(-50%)',
 		backgroundColor: 'rgba(0,0,0,0.45)',
 		color: theme.palette.common.white,
-  
+
+		transition: 'opacity 0.5s ease, visibility 0.5s ease',
+
+		opacity: isHovering ? 1 : 0,
+		visibility: isHovering ? 'visible' : 'hidden',
+		
 		'&:hover': {
 			backgroundColor: 'rgba(0,0,0,0.75)',
 		},
@@ -61,6 +73,12 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { slideIndex, 
 		display: 'flex',
 		justifyContent: 'center',
 		gap: theme.spacing(1.2),
+
+		transition: 'opacity 0.5s ease, visibility 0.5s ease',
+
+		opacity: isHovering ? 1 : 0,
+		visibility: isHovering ? 'visible' : 'hidden',
+		
 	},
 	dot: {
 		width: 10,

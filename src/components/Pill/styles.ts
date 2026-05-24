@@ -9,6 +9,7 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { region }) =>
 	root: {
 		display: 'flex',
 		alignItems: 'center',
+		width: 'fit-content',
 		backgroundColor: region ? theme.palette.secondary.main : theme.palette.primary.main,
 		borderRadius: theme.spacing(1.5),
 		padding: theme.spacing(0.5, 1.5),
@@ -27,9 +28,14 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { region }) =>
 export const usePillsContainerStyles = makeStyles()((theme: Theme) => ({
 	pillsContainer: {
 		display: 'flex',
-		flexWrap: 'wrap',
-		flexDirection: 'row',
+		flexDirection: 'column',
 		gap: theme.spacing(1),
 		marginBottom: theme.spacing(4),
+	},
+	pill: {
+		display: 'flex',
+		flexWrap: 'wrap',
+		gap: theme.spacing(1),
+
 	},
 }));

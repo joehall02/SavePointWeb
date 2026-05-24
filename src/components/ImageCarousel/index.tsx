@@ -2,6 +2,7 @@ import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import { Box, IconButton } from '@mui/material';
 import { useState } from 'react';
 
+import { isTouchScreen } from '../../helpers/isTouchScreen';
 import type { Screenshot } from '../../types/game.types';
 import { useStyles } from './styles';
 
@@ -11,8 +12,13 @@ interface ICarouselProps {
 }
 
 export const ImageCarousel = ({ images, isMobile }: ICarouselProps) => {
-	const [index, setIndex] = useState(0);
-	const { classes, cx } = useStyles({ isMobile, slideIndex: index });
+	const isTouchDevice = isTouchScreen();
+	
+	// When on a touch device we want to always show the next/previous button and indicator dots
+	const [isHovering, setIsHovering] = useState<boolean>(isTouchDevice ? true : false);
+	const [index, setIndex] = useState<number>(0);
+	
+	const { classes, cx } = useStyles({ isMobile, slideIndex: index, isHovering });
 	
 	if (!images) {
 		return null;
@@ -31,7 +37,17 @@ export const ImageCarousel = ({ images, isMobile }: ICarouselProps) => {
 	};
 
 	return (
-		<Box className={classes.root}>			
+		<Box 
+			className={classes.root}
+			onMouseEnter={() => {
+				if (isTouchDevice) return;
+				setIsHovering(true);
+			}}
+			onMouseLeave={() => {
+				if (isTouchDevice) return;
+				setIsHovering(false);
+			}}
+		>
 			{/* Images */}
 			<Box className={classes.imageContainer}>
 				{images.map((src, i) => (

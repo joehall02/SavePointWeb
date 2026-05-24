@@ -50,9 +50,9 @@ export const PillsContainer = ({ name, data }: IPillsContainer) => {
 	}
 
 	return (
-		<>
+		<div className={classes.pillsContainer}>
 			<Typography variant='h6'>{name}:</Typography>
-			<div className={classes.pillsContainer}>
+			<div className={classes.pill}>
 				{data?.map((item: PillItem, index) => {
 					if (isTypeReleaseDate(item)) {
 						return <Pill key={index} text={item.date} region={item.region} />;
@@ -61,6 +61,6 @@ export const PillsContainer = ({ name, data }: IPillsContainer) => {
 					}
 				})}
 			</div>
-		</>
+		</div>
 	);
 };

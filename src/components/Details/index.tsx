@@ -68,8 +68,13 @@ export const Details = ({ results, isLoading }: IDetailsProps) => {
 					<div className={classes.info}>
 						
 						{/* Name */}
-						<Typography variant='h4' className={classes.title}>{isCollection ? results?.title : results?.name}</Typography>
-							
+						<Typography 
+							variant={isMobile ? 'h4' : 'h3'} 
+							className={classes.title}
+						>
+							{isCollection ? results?.title : results?.name}
+						</Typography>
+						
 						{/* Platforms */}
 						<PillsContainer name='Platforms' data={results?.platforms} />
 
