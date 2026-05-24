@@ -71,7 +71,7 @@ type Cover = {
 	url?: string
 };
 
-type Video = {
+export type Video = {
 	url?: string
 };
 

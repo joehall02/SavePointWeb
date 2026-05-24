@@ -37,6 +37,10 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { isMobile }) 
 	title: {
 		marginBottom: theme.spacing(3),
 	},
+	sectionTwo: {
+		display: 'flex',
+		flexDirection: 'column',
+	},
 }));
 
 export const useCoverStyles = makeStyles<IStyleProps>()((theme: Theme, { isMobile }) => ({

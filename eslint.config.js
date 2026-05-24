@@ -56,7 +56,9 @@ export default defineConfig([
       
       "simple-import-sort/imports": "error",
       "simple-import-sort/exports": "error",
-      "no-multiple-empty-lines": ["error", { "max": 1, "maxBOF": 0, "maxEOF": 0 }]
+      "no-multiple-empty-lines": ["error", { "max": 1, "maxBOF": 0, "maxEOF": 0 }],
+
+	  "jsx-a11y/media-has-caption": 'off'
     },
     languageOptions: {
       ecmaVersion: 2020,

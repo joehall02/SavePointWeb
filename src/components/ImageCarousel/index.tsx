@@ -1,17 +1,20 @@
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import { Box, IconButton } from '@mui/material';
 import { useState } from 'react';
+import React from 'react';
 
+import { getYouTubeEmbedUrl } from '../../helpers/getYoutubeEmbedUrl';
 import { isTouchScreen } from '../../helpers/isTouchScreen';
-import type { Screenshot } from '../../types/game.types';
+import type { Screenshot, Video } from '../../types/game.types';
 import { useStyles } from './styles';
 
 interface ICarouselProps {
-	images: Screenshot[] | null | undefined;
+	media? : Screenshot[] | Video[] | null | undefined;
 	isMobile?: boolean;
+	isVideo?: boolean;
 }
 
-export const ImageCarousel = ({ images, isMobile }: ICarouselProps) => {
+export const ImageCarousel = ({ media, isMobile, isVideo = false }: ICarouselProps) => {
 	const isTouchDevice = isTouchScreen();
 	
 	// When on a touch device we want to always show the next/previous button and indicator dots
@@ -20,19 +23,42 @@ export const ImageCarousel = ({ images, isMobile }: ICarouselProps) => {
 	
 	const { classes, cx } = useStyles({ isMobile, slideIndex: index, isHovering });
 	
-	if (!images) {
+	if (!media) {
 		return null;
 	}
 	
 	const prev = () => {
 		setIndex((prev) =>
-			prev === 0 ? images.length - 1 : prev - 1,
+			prev === 0 ? media.length - 1 : prev - 1,
 		);
 	};
 
 	const next = () => {
 		setIndex((prev) =>
-			prev === images.length - 1 ? 0 : prev + 1,
+			prev === media.length - 1 ? 0 : prev + 1,
+		);
+	};
+
+	// Conditionally render either video iframe or regular image based on isVideo prop
+	const renderMediaItem = (src: Screenshot | Video, i: number) => {
+		if (isVideo) {
+			return (
+				<iframe
+					title={`slide-${i}`}
+					className={classes.video}
+					src={getYouTubeEmbedUrl(src.url)}
+					allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+					allowFullScreen
+				/>
+			);
+		}
+	
+		return (
+			<div
+				aria-label={`slide-${i}`}
+				className={classes.image}
+				style={{ backgroundImage: `url(${src.url})` }}
+			/>
 		);
 	};
 
@@ -49,19 +75,16 @@ export const ImageCarousel = ({ images, isMobile }: ICarouselProps) => {
 			}}
 		>
 			{/* Images */}
-			<Box className={classes.imageContainer}>
-				{images.map((src, i) => (
-					<div
-						key={src.url}
-						aria-label={`slide-${i}`}
-						className={classes.image}
-						style={{
-							backgroundImage: `url(${src.url})`,
-						}}
-					/>
-				))}
-			</Box>
-
+			{media && (
+				<Box className={classes.imageContainer}>
+					{media.map((src, i) => (
+						<React.Fragment key={src.url}>
+							{renderMediaItem(src, i)}
+						</React.Fragment>
+					))}
+				</Box>
+			)}
+			
 			{/* Left button */}
 			<IconButton onClick={prev} className={cx(classes.navButton, classes.leftButton)}>
 				<ChevronLeft />
@@ -74,7 +97,7 @@ export const ImageCarousel = ({ images, isMobile }: ICarouselProps) => {
 
 			{/* Dot image indicators */}
 			<Box className={classes.indicators}>
-				{images.map((src, i) => (
+				{media.map((src, i) => (
 					<Box
 						key={src.url}
 						onClick={() => setIndex(i)}

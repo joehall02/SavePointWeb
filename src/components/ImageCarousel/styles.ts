@@ -40,7 +40,12 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { slideIndex, 
 		backgroundRepeat: 'no-repeat',
 		backgroundPosition: 'center top',
 	},
-  
+
+	video: {
+		minWidth: '100%',
+		border: 0,
+		aspectRatio: '16 / 9',
+	},
 	navButton: {
 		position: 'absolute',
 		top: '50%',

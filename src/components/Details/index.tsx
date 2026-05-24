@@ -46,20 +46,22 @@ export const Details = ({ results, isLoading }: IDetailsProps) => {
 		return <Loading isLoading={isLoading} />;
 	}
 
-	// Check if data is valid before rendering the component
 	if (!results) {
 		return <Typography variant='body1'>No results found</Typography>;
 	}
-
+	
+	// Check if data is valid before rendering the component
 	if (isResultsNullOrUndefined(results)) {
 		return <Typography variant='body1'>Data invalid</Typography>;
 	}
+
 	return (
 		<Box className={classes.root}>			
+			{/* Section One */}
 			<div className={classes.sectionOne}>
 				{/* Cover Image & Image Carousel */}
 				<div className={classes.sectionOneLeft}>
-					<ImageCarousel images={results.screenshots} isMobile={isMobile} />
+					<ImageCarousel media={results?.screenshots} isMobile={isMobile} />
 					<Cover results={results} isMobile={isMobile} />
 				</div>
 			
@@ -95,6 +97,15 @@ export const Details = ({ results, isLoading }: IDetailsProps) => {
 						)}
 					</div>
 				</div>
+			</div>
+
+			{/* Section Two */}
+			<div className={classes.sectionTwo}>
+				<ImageCarousel 
+					media={results?.videos}
+					isMobile={isMobile} 
+					isVideo
+				/>
 			</div>
 		</Box>
 	);
