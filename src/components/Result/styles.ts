@@ -49,6 +49,9 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { layoutType, 
 			objectFit: layoutType === 'grid' ? 'cover' : 'unset',
 			overflow: 'hidden',
 		},
+		coverNotLoaded: {
+			display: 'none',
+		},
 		name: {
 			whiteSpace: 'nowrap',
 			overflow: 'hidden',

@@ -59,7 +59,7 @@ export const SearchBar = ({ searchResults, handleSearch, handleDebounce }: ISear
 						onInput={(e) => {
 							setInput(e.currentTarget.value);
 							if (handleDebounce) {
-								handleDebounce(e.currentTarget.value, 150);
+								handleDebounce(e.currentTarget.value, 500);
 							}
 						}}
 						onFocus={() => setIsSelected(true)}
