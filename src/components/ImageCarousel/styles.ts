@@ -24,7 +24,7 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { slideIndex, 
 		},
 	},
   
-	imageContainer: {
+	mediaContainer: {
 		display: 'flex',
 		transition: 'transform 0.4s ease-in-out',
 		width: '100%',

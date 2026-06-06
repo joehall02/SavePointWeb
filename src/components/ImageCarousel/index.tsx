@@ -1,6 +1,6 @@
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import { Box, IconButton } from '@mui/material';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import React from 'react';
 
 import { getYouTubeEmbedUrl } from '../../helpers/getYoutubeEmbedUrl';
@@ -23,21 +23,36 @@ export const ImageCarousel = ({ media, isMobile, isVideo = false }: ICarouselPro
 	
 	const { classes, cx } = useStyles({ isMobile, slideIndex: index, isHovering });
 	
-	if (!media) {
-		return null;
-	}
-	
 	const prev = () => {
-		setIndex((prev) =>
-			prev === 0 ? media.length - 1 : prev - 1,
+		setIndex((prev) => {
+			if (!media) return 0;
+
+			return prev === 0 ? media.length - 1 : prev - 1;
+		},
 		);
 	};
 
-	const next = () => {
-		setIndex((prev) =>
-			prev === media.length - 1 ? 0 : prev + 1,
-		);
-	};
+	const next = useCallback(() => {
+		setIndex((prev) => {
+			if (!media) return 0;
+
+			return prev === media.length - 1 ? 0 : prev + 1;
+		});
+	}, [media]);
+
+	useEffect(() => {
+		if (isVideo) return;
+
+		const timer = setInterval(() => {
+			next();
+		}, 5000);
+
+		return () => clearInterval(timer);
+	}, [next, isVideo]);
+	
+	if (!media) {
+		return null;
+	}
 
 	// Conditionally render either video iframe or regular image based on isVideo prop
 	const renderMediaItem = (src: Screenshot | Video, i: number) => {
@@ -74,9 +89,9 @@ export const ImageCarousel = ({ media, isMobile, isVideo = false }: ICarouselPro
 				setIsHovering(false);
 			}}
 		>
-			{/* Images */}
+			{/* Media */}
 			{media && (
-				<Box className={classes.imageContainer}>
+				<Box className={classes.mediaContainer}>
 					{media.map((src, i) => (
 						<React.Fragment key={src.url}>
 							{renderMediaItem(src, i)}
