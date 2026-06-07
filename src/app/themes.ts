@@ -19,7 +19,7 @@ export const darkTheme = createTheme({
 			main: '#6a5acd',
 		},
 		secondary: {
-			main: '#8a8484',
+			main: '#4f4b57',
 		},
 	},
 });

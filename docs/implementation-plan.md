@@ -243,8 +243,8 @@ Implementation notes:
 
 ### Milestone 6 — Game details page
 
-- [ ] Fetch IGDB details by `igdbId`
-- [ ] Render IGDB metadata + media
+- [x] Fetch IGDB details by `igdbId`
+- [x] Render IGDB metadata + media
 - [ ] Implement “Add to collection” modal and `POST /api/game`
 
 **Exit criteria:** detail renders; can add game to collection.

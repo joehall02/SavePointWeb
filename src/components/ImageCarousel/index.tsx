@@ -21,7 +21,7 @@ export const ImageCarousel = ({ media, isMobile, isVideo = false }: ICarouselPro
 	const [isHovering, setIsHovering] = useState<boolean>(isTouchDevice ? true : false);
 	const [index, setIndex] = useState<number>(0);
 	
-	const { classes, cx } = useStyles({ isMobile, slideIndex: index, isHovering });
+	const { classes, cx } = useStyles({ isMobile, slideIndex: index, isHovering, isVideo });
 	
 	const prev = () => {
 		setIndex((prev) => {
@@ -40,6 +40,7 @@ export const ImageCarousel = ({ media, isMobile, isVideo = false }: ICarouselPro
 		});
 	}, [media]);
 
+	// Auto loop through images only
 	useEffect(() => {
 		if (isVideo) return;
 

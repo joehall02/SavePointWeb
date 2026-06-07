@@ -5,6 +5,7 @@ import { isResultsNullOrUndefined } from '../../helpers/isResultsNullOrUndefined
 import { isTypeCollection } from '../../helpers/isTypeCollection';
 import { useScreenDetection } from '../../hooks/useScreenDetection';
 import type { DetailsResults } from '../../types/game.types';
+import ExpandableText from '../ExpandableText';
 import { ImageCarousel } from '../ImageCarousel';
 import { Loading } from '../Loading';
 import { PillsContainer } from '../Pill';
@@ -16,7 +17,7 @@ interface ICoverProps {
 }
 
 const Cover = ({ results, isMobile }: ICoverProps) => {
-	const { classes } = useCoverStyles({ isMobile, coverImage: results?.cover?.url });
+	const { classes } = useCoverStyles({ isMobile });
 
 	return (
 		<div className={classes.coverContainer}>
@@ -66,34 +67,41 @@ export const Details = ({ results, isLoading }: IDetailsProps) => {
 				</div>
 			
 				<div className={classes.sectionOneRight}>
+					{/* Name */}
+					<Typography 
+						variant={isMobile ? 'h4' : 'h3'} 
+						className={classes.title}
+					>
+						{isCollection ? results?.title : results?.name}
+					</Typography>
+
 					{/* Info */}
 					<div className={classes.info}>
 						
-						{/* Name */}
-						<Typography 
-							variant={isMobile ? 'h4' : 'h3'} 
-							className={classes.title}
-						>
-							{isCollection ? results?.title : results?.name}
-						</Typography>
-						
 						{/* Platforms */}
-						<PillsContainer name='Platforms' data={results?.platforms} />
+						{results?.platforms?.length !== 0 && (
+							<PillsContainer name='Platforms' data={results?.platforms} />
+						)}
 
 						{/* Release */}
-						<PillsContainer name='Releases' data={results?.release_dates} />
+						{results?.release_dates?.length !== 0 && (
+							<PillsContainer name='Releases' data={results?.release_dates} />
+						)}
 
 						{/* Genre */}
-						<PillsContainer name='Genres' data={results?.genres} />
+						{results?.genres?.length !== 0 && (
+							<PillsContainer name='Genres' data={results?.genres} />
+						)}
 
 						{/* Summary */}
 						{results?.summary && (
 							<>
 								<div>
-									<Typography variant='h6'>Summary:</Typography>
-									<Typography variant='body1'>{results?.summary}</Typography>
+									<Typography className={classes.text} variant='h6'>Summary:</Typography>
+									<ExpandableText text={results?.summary} limit={550} />
 								</div>
 							</>
+						
 						)}
 					</div>
 				</div>
@@ -101,11 +109,23 @@ export const Details = ({ results, isLoading }: IDetailsProps) => {
 
 			{/* Section Two */}
 			<div className={classes.sectionTwo}>
-				<ImageCarousel 
-					media={results?.videos}
-					isMobile={isMobile} 
-					isVideo
-				/>
+				<div className={classes.videoContainer}>
+					<ImageCarousel 
+						media={results?.videos}
+						isMobile={isMobile} 
+						isVideo
+					/>
+				</div>
+				<Box>
+					<Typography variant='h6' className={classes.text}>Storyline:</Typography>
+					{results?.storyline ? (
+						<>
+							<ExpandableText text={results?.storyline} limit={350} />
+						</>
+					) : (
+						<Typography variant='body1'>N/A</Typography>
+					)}
+				</Box>
 			</div>
 		</Box>
 	);

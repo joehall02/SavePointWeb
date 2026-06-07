@@ -5,22 +5,26 @@ interface IStyleProps {
 	isMobile?: boolean;
 	slideIndex: number;
 	isHovering: boolean;
+	isVideo: boolean
 }
 
-export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { slideIndex, isMobile, isHovering }) => ({
+export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { slideIndex, isMobile, isHovering, isVideo }) => ({
 	root: {
 		position: 'relative',
 		overflow: 'hidden',
 		
 		...isMobile && {
 			borderBottom: `3px solid ${theme.palette.primary.main}`,
-			
 			[theme.breakpoints.down('sm')]: {
 				margin: theme.spacing(0, -2),
 			},
 			[theme.breakpoints.up('sm')]: {
 				margin: theme.spacing(0, -3),
 			},
+		},
+		...isVideo && {
+			border: `3px solid ${theme.palette.primary.main}`,
+			borderRadius: theme.spacing(0.5),
 		},
 	},
   

@@ -3,7 +3,6 @@ import { makeStyles } from 'tss-react/mui';
 
 interface IStyleProps {
 	isMobile?: boolean
-	coverImage?: string;
 }
 
 export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { isMobile }) => ({
@@ -25,7 +24,7 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { isMobile }) 
 	},
 	sectionOneRight: {
 		display: 'flex',
-		justifyContent: 'center',
+		flexDirection: 'column',
 		width: '100%',
 	},
 	info: {
@@ -33,13 +32,41 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { isMobile }) 
 		flexDirection: 'column',
 		width: '100%',
 		justifyContent: 'center',
+		borderRadius: theme.spacing(0.5),
+
+		'& > *:not(:last-child)': {
+			borderBottom: `2px solid ${theme.palette.divider}`,
+			paddingBottom: theme.spacing(2.5),
+			marginBottom: theme.spacing(2),
+		},
+	},
+	text: {
+		marginBottom: theme.spacing(1),
 	},
 	title: {
-		marginBottom: theme.spacing(3),
+		marginBottom: theme.spacing(5),
 	},
 	sectionTwo: {
 		display: 'flex',
-		flexDirection: 'column',
+		flexDirection: isMobile ? 'column' : 'row',
+		alignItems: isMobile ? 'center' : 'start',
+		marginTop: theme.spacing(5),
+		gap: theme.spacing(3),
+		borderTop: `2px solid ${theme.palette.divider}`,
+		padding: theme.spacing(4.5, 0),
+
+		...!isMobile && {
+			padding: theme.spacing(6, 2.5),
+		},
+	},
+	videoContainer: {
+		...!isMobile && {
+			flex: '0 0 50%',
+		},
+		width: '100%',
+		...isMobile && {
+			width: '95%',
+		},
 	},
 }));
 
