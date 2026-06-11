@@ -15,6 +15,7 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { isMobile }) 
 		display: 'flex',
 		flexDirection: isMobile ? 'column' : 'row',
 		gap: theme.spacing(3),
+		marginBottom: theme.spacing(1.5),
 	},
 	sectionOneLeft: {
 		...(!isMobile && {
@@ -59,7 +60,7 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { isMobile }) 
 			padding: theme.spacing(6, 2.5),
 		},
 	},
-	videoContainer: {
+	mediaContainer: {
 		...!isMobile && {
 			flex: '0 0 50%',
 		},
@@ -67,6 +68,10 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { isMobile }) 
 		...isMobile && {
 			width: '95%',
 		},
+	},
+	storyline: {
+		alignSelf: 'start',
+		width: '100%',
 	},
 }));
 

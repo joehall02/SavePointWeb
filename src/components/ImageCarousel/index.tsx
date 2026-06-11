@@ -12,16 +12,17 @@ interface ICarouselProps {
 	media? : Screenshot[] | Video[] | null | undefined;
 	isMobile?: boolean;
 	isVideo?: boolean;
+	showBorder?: boolean;
 }
 
-export const ImageCarousel = ({ media, isMobile, isVideo = false }: ICarouselProps) => {
+export const ImageCarousel = ({ media, isMobile, isVideo = false, showBorder = false }: ICarouselProps) => {
 	const isTouchDevice = isTouchScreen();
 	
 	// When on a touch device we want to always show the next/previous button and indicator dots
 	const [isHovering, setIsHovering] = useState<boolean>(isTouchDevice ? true : false);
 	const [index, setIndex] = useState<number>(0);
 	
-	const { classes, cx } = useStyles({ isMobile, slideIndex: index, isHovering, isVideo });
+	const { classes, cx } = useStyles({ isMobile, slideIndex: index, isHovering, showBorder });
 	
 	const prev = () => {
 		setIndex((prev) => {
