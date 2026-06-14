@@ -245,6 +245,7 @@ Implementation notes:
 
 - [x] Fetch IGDB details by `igdbId`
 - [x] Render IGDB metadata + media
+- [x] Platform box art cover iamge
 - [ ] Implement “Add to collection” modal and `POST /api/game`
 
 **Exit criteria:** detail renders; can add game to collection.

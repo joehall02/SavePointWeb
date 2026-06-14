@@ -1,36 +1,18 @@
-import ImageNotSupportedIcon from '@mui/icons-material/ImageNotSupported';
 import { Box, Typography } from '@mui/material';
+import { useCallback, useState } from 'react';
 
+import { PillContainer } from '../../enums/pillContainer';
+import { PlatformLabel } from '../../enums/platforms';
 import { isResultsNullOrUndefined } from '../../helpers/isResultsNullOrUndefined';
 import { isTypeCollection } from '../../helpers/isTypeCollection';
 import { useScreenDetection } from '../../hooks/useScreenDetection';
 import type { DetailsResults } from '../../types/game.types';
+import { Cover } from '../Cover';
 import ExpandableText from '../ExpandableText';
 import { ImageCarousel } from '../ImageCarousel';
 import { Loading } from '../Loading';
 import { PillsContainer } from '../Pill';
-import { useCoverStyles, useStyles } from './styles';
-
-interface ICoverProps {
-	results?: DetailsResults;
-	isMobile?: boolean;
-}
-
-const Cover = ({ results, isMobile }: ICoverProps) => {
-	const { classes } = useCoverStyles({ isMobile });
-
-	return (
-		<div className={classes.coverContainer}>
-			{results?.cover?.url ? (
-				<img className={classes.cover} src={results?.cover?.url} alt={results?.name} />
-			) : (
-				<ImageNotSupportedIcon className={classes.cover} />
-			)}
-		</div>
-	);
-};
-
-Cover.displayName = 'Cover';
+import { useStyles } from './styles';
 
 interface IDetailsProps {
 	results?: DetailsResults;
@@ -38,11 +20,21 @@ interface IDetailsProps {
 }
 
 export const Details = ({ results, isLoading }: IDetailsProps) => {
-	const { isMobile } = useScreenDetection();
-	const { classes } = useStyles({ isMobile });
+	const { isMobile, isTablet  } = useScreenDetection();
+	const mobileUi = isMobile || isTablet;
+	
+	const { classes } = useStyles({ mobileUi });
+
+	const [boxPlatform, setBoxPlatform] = useState<PlatformLabel>();
 	
 	const isCollection = isTypeCollection(results);
-	
+
+	const triggerBox = useCallback((platform: string | undefined) => {
+		if (!platform) return;
+
+		setBoxPlatform(platform as PlatformLabel);
+	}, []);
+
 	if (isLoading) {
 		return <Loading isLoading={isLoading} />;
 	}
@@ -62,14 +54,14 @@ export const Details = ({ results, isLoading }: IDetailsProps) => {
 			<div className={classes.sectionOne}>
 				{/* Cover Image & Image Carousel */}
 				<div className={classes.sectionOneLeft}>
-					<ImageCarousel media={results?.screenshots} isMobile={isMobile} />
-					<Cover results={results} isMobile={isMobile} />
+					<ImageCarousel media={results?.screenshots} isMobile={mobileUi} />
+					<Cover results={results} mobileUi={mobileUi} boxPlatform={boxPlatform} isTablet={isTablet} />
 				</div>
 			
 				<div className={classes.sectionOneRight}>
 					{/* Name */}
 					<Typography 
-						variant={isMobile ? 'h4' : 'h3'} 
+						variant={mobileUi ? 'h4' : 'h3'} 
 						className={classes.title}
 					>
 						{isCollection ? results?.title : results?.name}
@@ -80,17 +72,17 @@ export const Details = ({ results, isLoading }: IDetailsProps) => {
 						
 						{/* Platforms */}
 						{results?.platforms?.length !== 0 && (
-							<PillsContainer name='Platforms' data={results?.platforms} />
+							<PillsContainer name={PillContainer.Platforms} data={results?.platforms} triggerBox={triggerBox} />
 						)}
 
 						{/* Release */}
 						{results?.release_dates?.length !== 0 && (
-							<PillsContainer name='Releases' data={results?.release_dates} />
+							<PillsContainer name={PillContainer.Releases} data={results?.release_dates} />
 						)}
 
 						{/* Genre */}
 						{results?.genres?.length !== 0 && (
-							<PillsContainer name='Genres' data={results?.genres} />
+							<PillsContainer name={PillContainer.Genres} data={results?.genres} />
 						)}
 
 						{/* Summary */}
@@ -109,14 +101,15 @@ export const Details = ({ results, isLoading }: IDetailsProps) => {
 
 			{/* Section Two */}
 			<div className={classes.sectionTwo}>
-				<div className={classes.videoContainer}>
+				<div className={classes.mediaContainer}>
 					<ImageCarousel 
 						media={results?.videos}
-						isMobile={isMobile} 
+						isMobile={mobileUi} 
 						isVideo
+						showBorder
 					/>
 				</div>
-				<Box>
+				<Box className={classes.storyline}>
 					<Typography variant='h6' className={classes.text}>Storyline:</Typography>
 					{results?.storyline ? (
 						<>
@@ -126,6 +119,29 @@ export const Details = ({ results, isLoading }: IDetailsProps) => {
 						<Typography variant='body1'>N/A</Typography>
 					)}
 				</Box>
+			</div>
+
+			{/* Section Three */}
+			<div className={classes.sectionTwo}>
+				<Box className={classes.storyline}>
+					<Typography variant='h6' className={classes.text}>Storyline:</Typography>
+					{results?.storyline ? (
+						<>
+							<ExpandableText text={results?.storyline} limit={350} />
+						</>
+					) : (
+						<Typography variant='body1'>N/A</Typography>
+					)}
+				</Box>
+				{!mobileUi && (
+					<div className={classes.mediaContainer}>
+						<ImageCarousel 
+							media={results?.screenshots}
+							isMobile={mobileUi}
+							showBorder
+						/>
+					</div>
+				)}
 			</div>
 		</Box>
 	);

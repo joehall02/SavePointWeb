@@ -8,7 +8,7 @@ export const useScreenDetection = () => {
 	const theme = useTheme();
 
 	const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-	const isTablet = useMediaQuery(theme.breakpoints.between('md', 'lg'));
+	const isTablet = useMediaQuery(theme.breakpoints.between('md', 1443));
 	const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
 
 	return {

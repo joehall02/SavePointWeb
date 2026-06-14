@@ -3,9 +3,10 @@ import { makeStyles } from 'tss-react/mui';
 
 interface IStyleProps {
 	region?: string | null;
+	isPlatform? : boolean;
 }
 
-export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { region }) => ({ 
+export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { region, isPlatform }) => ({ 
 	root: {
 		display: 'flex',
 		alignItems: 'center',
@@ -17,6 +18,13 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { region }) =>
 		
 		...region && {
 			gap: theme.spacing(1),
+		},
+
+		...isPlatform && {
+			['&:hover']: {
+				backgroundColor: theme.palette.secondary.main,
+				cursor: 'pointer',
+			},
 		},
 	},
 	regionIcon: {
@@ -36,6 +44,5 @@ export const usePillsContainerStyles = makeStyles()((theme: Theme) => ({
 		display: 'flex',
 		flexWrap: 'wrap',
 		gap: theme.spacing(1),
-
 	},
 }));

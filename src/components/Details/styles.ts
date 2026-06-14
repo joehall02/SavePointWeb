@@ -2,10 +2,10 @@ import type { Theme } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
 interface IStyleProps {
-	isMobile?: boolean
+	mobileUi?: boolean;
 }
 
-export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { isMobile }) => ({
+export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { mobileUi }) => ({
 	root: {
 		display: 'flex',
 		flexDirection: 'column',
@@ -13,12 +13,12 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { isMobile }) 
 	},
 	sectionOne: {
 		display: 'flex',
-		flexDirection: isMobile ? 'column' : 'row',
+		flexDirection: mobileUi ? 'column' : 'row',
 		gap: theme.spacing(3),
 		marginBottom: theme.spacing(1.5),
 	},
 	sectionOneLeft: {
-		...(!isMobile && {
+		...(!mobileUi && {
 			display: 'flex',
 			width: '100%',
 		}),
@@ -49,50 +49,28 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { isMobile }) 
 	},
 	sectionTwo: {
 		display: 'flex',
-		flexDirection: isMobile ? 'column' : 'row',
-		alignItems: isMobile ? 'center' : 'start',
+		flexDirection: mobileUi ? 'column' : 'row',
+		alignItems: mobileUi ? 'center' : 'start',
 		marginTop: theme.spacing(5),
 		gap: theme.spacing(3),
 		borderTop: `2px solid ${theme.palette.divider}`,
 		padding: theme.spacing(4.5, 0),
 
-		...!isMobile && {
+		...!mobileUi && {
 			padding: theme.spacing(6, 2.5),
 		},
 	},
 	mediaContainer: {
-		...!isMobile && {
+		...!mobileUi && {
 			flex: '0 0 50%',
 		},
 		width: '100%',
-		...isMobile && {
+		...mobileUi && {
 			width: '95%',
 		},
 	},
 	storyline: {
 		alignSelf: 'start',
 		width: '100%',
-	},
-}));
-
-export const useCoverStyles = makeStyles<IStyleProps>()((theme: Theme, { isMobile }) => ({
-	coverContainer: {
-		display: 'flex',
-		justifyContent: isMobile ? 'start' : 'center',
-		width: '100%',
-		...(isMobile && {
-			transform: `translateY(${theme.spacing(-10)})`,
-			marginBottom: theme.spacing(-10),
-		}),
-	},
-	cover: {
-		width: isMobile ? 'auto' : '100%',
-		height: 'auto',
-		maxHeight: 650,
-		objectFit: 'contain',
-		...(isMobile && {
-			border: `3px solid ${theme.palette.primary.main}`,
-			maxHeight: 200,
-		}),
 	},
 }));

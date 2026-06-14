@@ -28,6 +28,7 @@ const ExpandableText: React.FC<ExpandableTextProps> = ({ text, limit = 350 }) =>
 				disableFocusRipple
 				disableTouchRipple
 			>
+				{/* TODO: Add a pop up dialog */}
 				{isExpanded ? 'Read less' : 'Read more'}
 			</Button>
 		</>
