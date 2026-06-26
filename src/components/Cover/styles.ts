@@ -9,6 +9,11 @@ interface IStyleProps {
 	isTablet?: boolean;
 }
 
+const mobileHeights = (isTablet: boolean | undefined, mobile: number, tablet: number) => ({
+	maxHeight: mobile,
+	...(isTablet && { maxHeight: tablet }),
+});
+
 export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { mobileUi, isTablet, boxPlatform }) => ({
 	coverContainer: {
 		display: 'flex',
@@ -135,11 +140,8 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { mobileUi, is
 		maxHeight: 565,
 		top: -20,
 		...(mobileUi && {
-			maxHeight: 218,
 			top: -18,
-			...(isTablet && {
-				maxHeight: 650,
-			}),
+			...mobileHeights(isTablet, 218, 650),
 		}),
 	},
 	ps4: {
@@ -147,32 +149,19 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { mobileUi, is
 	},
 	ps5: {
 		maxHeight: 630,
-		...(mobileUi && {
-			maxHeight: 350,
-			...(isTablet && {
-				maxHeight: 470,
-			}),
-		}),
+		...(mobileUi && mobileHeights(isTablet, 350, 470)),
 	},
 	psp: {
 		maxHeight: 620,
 		top: -20,
-		...(mobileUi && {
-			maxHeight: 350,
-			...(isTablet && {
-				maxHeight: 650,
-			}),
-		}),
+		...(mobileUi && mobileHeights(isTablet, 350, 650)),
 	},
 	psVita: {
 		maxHeight: 620,
 		top: -20,
 		...(mobileUi && {
-			maxHeight: 350,
 			top: -15,
-			...(isTablet && {
-				maxHeight: 650,
-			}),
+			...mobileHeights(isTablet, 350, 650),
 		}),
 	},
 	originalXbox: {
@@ -187,11 +176,8 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { mobileUi, is
 		maxHeight: 620,
 		top: -25,
 		...(mobileUi && {
-			maxHeight: 350,
 			top: -15,
-			...(isTablet && {
-				maxHeight: 650,
-			}),
+			...mobileHeights(isTablet, 350, 650),
 		}),
 	},
 	xboxSeriesXandS: {
@@ -200,12 +186,7 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { mobileUi, is
 	},
 	segaMegaDrive: {
 		maxHeight: 750,
-		...(mobileUi && {
-			maxHeight: 250,
-			...(isTablet && {
-				maxHeight: 550,
-			}),
-		}),
+		...(mobileUi && mobileHeights(isTablet, 250, 550)),
 	},
 	wii: {
 		maxHeight: 675,
@@ -213,21 +194,11 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { mobileUi, is
 	switch: {
 		maxHeight: 650,
 		left: 3,
-		...(mobileUi && {
-			maxHeight: 250,
-			...(isTablet && {
-				maxHeight: 500,
-			}),
-		}),
+		...(mobileUi && mobileHeights(isTablet, 250, 500)),
 	},
 	nes: {
 		maxHeight: 750,
-		...(mobileUi && {
-			maxHeight: 250,
-			...(isTablet && {
-				maxHeight: 550,
-			}),
-		}),
+		...(mobileUi && mobileHeights(isTablet, 250, 550)),
 	},
 	ds: {
 		...(mobileUi) && {

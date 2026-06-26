@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material';
 import { useCallback, useState } from 'react';
 
 import { PillContainer } from '../../enums/pillContainer';
-import { PlatformLabel } from '../../enums/platforms';
+import { PlatformBoxes, PlatformLabel } from '../../enums/platforms';
 import { isResultsNullOrUndefined } from '../../helpers/isResultsNullOrUndefined';
 import { isTypeCollection } from '../../helpers/isTypeCollection';
 import { useScreenDetection } from '../../hooks/useScreenDetection';
@@ -30,7 +30,8 @@ export const Details = ({ results, isLoading }: IDetailsProps) => {
 	const isCollection = isTypeCollection(results);
 
 	const triggerBox = useCallback((platform: string | undefined) => {
-		if (!platform) return;
+		// Check platform is truthy and platform box cover is supported
+		if (!platform || !Object.keys(PlatformBoxes).includes(platform)) return;
 
 		setBoxPlatform(platform as PlatformLabel);
 	}, []);
