@@ -14,7 +14,9 @@ export interface ICoverProps {
 
 export const Cover = ({ results, mobileUi, boxPlatform, isTablet }: ICoverProps) => {
 	const { classes, cx } = useStyles({ mobileUi, boxPlatform, isTablet });
-	
+
+	const platformImageClass = boxPlatform ? PlatformImageClasses[boxPlatform] : undefined;
+
 	return (
 		<div className={cx(classes.coverContainer)}>
 			<div className={cx(classes.coverImageWrapper)}>
@@ -24,9 +26,9 @@ export const Cover = ({ results, mobileUi, boxPlatform, isTablet }: ICoverProps)
 					<ImageNotSupportedIcon className={classes.cover} />
 				)}
 
-				{boxPlatform && (
+				{boxPlatform && platformImageClass && (
 					<img
-						className={cx(classes.boxPlatformOverlay, classes[PlatformImageClasses[boxPlatform]])}
+						className={cx(classes.boxPlatformOverlay, classes[platformImageClass])}
 						src={PlatformBoxes[boxPlatform]}
 						alt='Platform Overlay'
 					/>

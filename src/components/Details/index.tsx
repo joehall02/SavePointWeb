@@ -9,8 +9,8 @@ import { useScreenDetection } from '../../hooks/useScreenDetection';
 import type { DetailsResults } from '../../types/game.types';
 import { Cover } from '../Cover';
 import ExpandableText from '../ExpandableText';
-import { ImageCarousel } from '../ImageCarousel';
 import { Loading } from '../Loading';
+import { MediaCarousel } from '../MediaCarousel';
 import { PillsContainer } from '../Pill';
 import { useStyles } from './styles';
 
@@ -23,7 +23,7 @@ export const Details = ({ results, isLoading }: IDetailsProps) => {
 	const { isMobile, isTablet  } = useScreenDetection();
 	const mobileUi = isMobile || isTablet;
 	
-	const { classes } = useStyles({ mobileUi });
+	const { classes, cx } = useStyles({ mobileUi });
 
 	const [boxPlatform, setBoxPlatform] = useState<PlatformLabel>();
 	
@@ -33,8 +33,13 @@ export const Details = ({ results, isLoading }: IDetailsProps) => {
 		// Check platform is truthy and platform box cover is supported
 		if (!platform || !Object.keys(PlatformBoxes).includes(platform)) return;
 
+		if (platform === boxPlatform) {
+			setBoxPlatform(undefined);
+			return;
+		}
+
 		setBoxPlatform(platform as PlatformLabel);
-	}, []);
+	}, [boxPlatform]);
 
 	if (isLoading) {
 		return <Loading isLoading={isLoading} />;
@@ -55,7 +60,7 @@ export const Details = ({ results, isLoading }: IDetailsProps) => {
 			<div className={classes.sectionOne}>
 				{/* Cover Image & Image Carousel */}
 				<div className={classes.sectionOneLeft}>
-					<ImageCarousel media={results?.screenshots} isMobile={mobileUi} />
+					<MediaCarousel media={results?.screenshots} isMobile={mobileUi} />
 					<Cover results={results} mobileUi={mobileUi} boxPlatform={boxPlatform} isTablet={isTablet} />
 				</div>
 			
@@ -102,8 +107,8 @@ export const Details = ({ results, isLoading }: IDetailsProps) => {
 
 			{/* Section Two */}
 			<div className={classes.sectionTwo}>
-				<div className={classes.mediaContainer}>
-					<ImageCarousel 
+				<div className={cx(classes.mediaContainer, classes.mediaContainerSmall)}>
+					<MediaCarousel 
 						media={results?.videos}
 						isMobile={mobileUi} 
 						isVideo
@@ -124,19 +129,9 @@ export const Details = ({ results, isLoading }: IDetailsProps) => {
 
 			{/* Section Three */}
 			<div className={classes.sectionTwo}>
-				<Box className={classes.storyline}>
-					<Typography variant='h6' className={classes.text}>Storyline:</Typography>
-					{results?.storyline ? (
-						<>
-							<ExpandableText text={results?.storyline} limit={350} />
-						</>
-					) : (
-						<Typography variant='body1'>N/A</Typography>
-					)}
-				</Box>
 				{!mobileUi && (
 					<div className={classes.mediaContainer}>
-						<ImageCarousel 
+						<MediaCarousel 
 							media={results?.screenshots}
 							isMobile={mobileUi}
 							showBorder

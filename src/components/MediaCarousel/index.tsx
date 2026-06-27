@@ -15,7 +15,7 @@ interface ICarouselProps {
 	showBorder?: boolean;
 }
 
-export const ImageCarousel = ({ media, isMobile, isVideo = false, showBorder = false }: ICarouselProps) => {
+export const MediaCarousel = ({ media, isMobile, isVideo = false, showBorder = false }: ICarouselProps) => {
 	const isTouchDevice = isTouchScreen();
 	
 	// When on a touch device we want to always show the next/previous button and indicator dots
@@ -126,4 +126,4 @@ export const ImageCarousel = ({ media, isMobile, isVideo = false, showBorder = f
 	);
 };
 
-ImageCarousel.displayName = 'ImageCarousel';
+MediaCarousel.displayName = 'MediaCarousel';

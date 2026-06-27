@@ -61,12 +61,15 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { mobileUi }) 
 		},
 	},
 	mediaContainer: {
-		...!mobileUi && {
-			flex: '0 0 50%',
-		},
+		flex: '0 0 100%',
 		width: '100%',
 		...mobileUi && {
 			width: '95%',
+		},
+	},
+	mediaContainerSmall: {
+		...!mobileUi && {
+			flex: '0 0 50%',
 		},
 	},
 	storyline: {
