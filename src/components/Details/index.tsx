@@ -1,10 +1,13 @@
-import { Box, Typography } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import { Box, Button, Typography } from '@mui/material';
 import { useCallback, useState } from 'react';
 
+import { Dialogs } from '../../enums/dialogs';
 import { PillContainer } from '../../enums/pillContainer';
 import { PlatformBoxes, PlatformLabel } from '../../enums/platforms';
 import { isResultsNullOrUndefined } from '../../helpers/isResultsNullOrUndefined';
 import { isTypeCollection } from '../../helpers/isTypeCollection';
+import { useDialogContext } from '../../hooks/useDialogContext';
 import { useScreenDetection } from '../../hooks/useScreenDetection';
 import type { DetailsResults } from '../../types/game.types';
 import { Cover } from '../Cover';
@@ -28,6 +31,8 @@ export const Details = ({ results, isLoading }: IDetailsProps) => {
 	const [boxPlatform, setBoxPlatform] = useState<PlatformLabel>();
 	
 	const isCollection = isTypeCollection(results);
+
+	const { setDialog } = useDialogContext();
 
 	const triggerBox = useCallback((platform: string | undefined) => {
 		// Check platform is truthy and platform box cover is supported
@@ -101,6 +106,19 @@ export const Details = ({ results, isLoading }: IDetailsProps) => {
 							</>
 						
 						)}
+
+						{isCollection ? (
+							<p>Collection buttons</p>
+						) : (
+							<Button 
+								variant='contained'
+								size='large'
+								startIcon={<AddIcon />}
+								onClick={() => setDialog(Dialogs.AddToCollection)}
+							>
+								Add to collection
+							</Button>
+						)}
 					</div>
 				</div>
 			</div>
@@ -119,7 +137,7 @@ export const Details = ({ results, isLoading }: IDetailsProps) => {
 					<Typography variant='h6' className={classes.text}>Storyline:</Typography>
 					{results?.storyline ? (
 						<>
-							<ExpandableText text={results?.storyline} limit={350} />
+							<ExpandableText text={results?.storyline} limit={900} />
 						</>
 					) : (
 						<Typography variant='body1'>N/A</Typography>

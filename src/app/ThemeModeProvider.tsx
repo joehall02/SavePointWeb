@@ -6,7 +6,7 @@ import { getLocalStorageItem, setLocalStorageItem } from '../helpers/localStorag
 import type { ThemeMode } from '../types/themeMode.types';
 import { darkTheme,lightTheme } from './themes';
 
-function getInitialMode(): ThemeMode {
+const getInitialMode = (): ThemeMode => {
 	// Fetch mode from local storage if available
 	const savedMode = getLocalStorageItem<ThemeMode | null>('themeMode', 'dark');
 
@@ -14,9 +14,9 @@ function getInitialMode(): ThemeMode {
 
 	// Default to light mode
 	return 'light';
-}
+};
 
-export function ThemeModeProvider({ children }: { children: ReactNode }) {
+export const ThemeModeProvider = ({ children }: { children: ReactNode }) => {
 	// Use state expects generic type of ThemeMode
 	const [mode, setMode] = useState<ThemeMode>(() => getInitialMode());
 
@@ -42,4 +42,4 @@ export function ThemeModeProvider({ children }: { children: ReactNode }) {
 			</ThemeProvider>
 		</ThemeModeContext.Provider>
 	);
-}
+};
