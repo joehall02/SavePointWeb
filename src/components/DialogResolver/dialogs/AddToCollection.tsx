@@ -14,13 +14,15 @@ export const AddToCollection = () => {
 	const { classes } = useStyles();
 	const { gameId, results, isLoading } = useGameDetails('external');
 
+	const filteredPlatforms = getFilteredPlatforms(results);
+
 	const [formData, setFormData] = useState<Omit<CreateGameDao, 'igdbId'>>({
 		title: results?.name || '',
 		condition: Conditions.Good,
 		notes: '',
 		boxIncluded: true,
 		rating: 0,
-		platformId: 0,
+		platformId: filteredPlatforms[0]?.[1],
 	});
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
@@ -33,8 +35,6 @@ export const AddToCollection = () => {
 
 		await GameService.createGame(gamePayload);
 	};
-
-	const filteredPlatforms = getFilteredPlatforms(results);
 
 	if (isLoading) {
 		return (
@@ -80,7 +80,7 @@ export const AddToCollection = () => {
 					label='Platform'
 					variant='outlined'
 					required
-					value={formData.platformId || filteredPlatforms[0]?.[1] || ''}
+					value={formData.platformId || ''}
 					onChange={(e) => setFormData({ ...formData, platformId: Number(e.target.value) || 0 })}
 				>
 					{/* Filter out platforms that aren't returned in the results?.platforms response data */}
