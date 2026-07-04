@@ -9,6 +9,7 @@ export const useStyles = makeStyles()((theme: Theme) => ({
 		height: 'auto',
 		border: `3px solid ${theme.palette.primary.main}`,
 		borderRadius: theme.spacing(1.5),
+		minHeight: 500,
 	},
 	formContainer: {
 		display: 'flex',

@@ -1,3 +1,4 @@
+import type { GameDetail } from '../enums/games';
 import type { Pagination } from './pagination.types';
 
 export type FetchFromCollectionGame = {
@@ -63,6 +64,10 @@ export type GetExternalGameDetailsParams = {
 	gameId?: number
 };
 
+export type GetGameDetailsParams = {
+	id?: number
+};
+
 export type Platform = {
 	name?: string,
 };
@@ -105,17 +110,14 @@ export type ExternalGameDetails = {
 	release_dates?: ReleaseDate[] | null
 };
 
-export type CollectionDetails = {
-	id: number,
-	title: string,
-	condition: string,
-	notes: string,
-	boxIncluded: boolean,
-	rating: number,
-	igdbId: number,
-	platformId: number
-};
+export type GameDetailType = 'external' | 'collection';
 
-export type DetailsResults = 
-	| (ExternalGameDetails & { type: 'external' }) 
-	| (CollectionDetails & ExternalGameDetails & { type: 'collection' });
+export type DetailsResults =
+	| (ExternalGameDetails & { type: GameDetail.External })
+	| (GameDetails & ExternalGameDetails & { type: GameDetail.Collection });
+
+export type UseGameDetailsResult = {
+	results: DetailsResults | undefined;
+	isLoading: boolean;
+	gameId: number | undefined;
+};

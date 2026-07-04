@@ -1,23 +1,24 @@
 import { Box, Button, Checkbox, FormControlLabel, Rating, Stack,TextField, Typography } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
 
 import GameService from '../../../api/services/GameService';
 import { Conditions } from '../../../enums/condition';
-import { PlatformIds } from '../../../enums/platforms';
+import { getFilteredPlatforms } from '../../../helpers/getFilteredPlatforms';
+import { useGameDetails } from '../../../hooks/useGameDetails';
 import type { CreateGameDao } from '../../../types/gameDao.types';
+import { Loading } from '../../Loading';
 import { useStyles } from './styles';
 
 export const AddToCollection = () => {
 	const { classes } = useStyles();
-	const location = useLocation();
+	const { gameId, results, isLoading } = useGameDetails('external');
 
 	const [formData, setFormData] = useState<Omit<CreateGameDao, 'igdbId'>>({
-		title: '',
-		condition: '',
+		title: results?.name || '',
+		condition: Conditions.Good,
 		notes: '',
-		boxIncluded: false,
+		boxIncluded: true,
 		rating: 0,
 		platformId: 0,
 	});
@@ -25,20 +26,26 @@ export const AddToCollection = () => {
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
 		event.preventDefault();
 
-		const searchParams = new URLSearchParams(location.search);
-
 		const gamePayload: CreateGameDao = {
 			...formData,
-			igdbId: Number(searchParams.get('id')) || 0,
+			igdbId: gameId ?? 0,
 		};
 
 		await GameService.createGame(gamePayload);
 	};
 
+	const filteredPlatforms = getFilteredPlatforms(results);
+
+	if (isLoading) {
+		return (
+			<Loading isLoading={isLoading} />
+		);
+	}
+	
 	return (
-		<Box 
-			component='form' 
-			onSubmit={handleSubmit} 
+		<Box
+			component='form'
+			onSubmit={handleSubmit}
 			className={classes.root}
 		>
 			<Stack spacing={4} >
@@ -66,17 +73,18 @@ export const AddToCollection = () => {
 						</MenuItem>
 					))}
 				</TextField>
-				
+
 				{/* Platform */}
 				<TextField
 					select
 					label='Platform'
 					variant='outlined'
 					required
-					value={formData.platformId ?? ''}
+					value={formData.platformId || filteredPlatforms[0]?.[1] || ''}
 					onChange={(e) => setFormData({ ...formData, platformId: Number(e.target.value) || 0 })}
 				>
-					{Object.entries(PlatformIds).map(([label, id]) => (
+					{/* Filter out platforms that aren't returned in the results?.platforms response data */}
+					{filteredPlatforms.map(([label, id]) => (
 						<MenuItem key={id} value={id}>
 							{label}
 						</MenuItem>
