@@ -1,0 +1,1 @@
+export type DialogMeta = { title: string; description: string };

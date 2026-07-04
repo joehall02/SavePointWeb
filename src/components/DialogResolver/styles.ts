@@ -3,14 +3,24 @@ import { makeStyles } from 'tss-react/mui';
 
 export const useStyles = makeStyles()((theme: Theme) => ({
 	root: {
-		display: 'flex',
-		justifyContent: 'flex-end',
-		alignItems: 'center',
-		gap: theme.spacing(0.5),
-		padding: theme.spacing(1.5, 0.5),
+		zIndex: theme.zIndex.modal,
 	},
-	themeText: {
-		opacity: 0.65,
-		textTransform: 'capitalize',
+	dialog: {
+		height: 'auto',
+		border: `3px solid ${theme.palette.primary.main}`,
+		borderRadius: theme.spacing(1.5),
+	},
+	formContainer: {
+		display: 'flex',
+		flexDirection: 'column',
+		width: '100%',
+	},
+	dialogHeader: {
+		display: 'flex',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+	},
+	closeButton: {
+		margin: theme.spacing(2),
 	},
 }));

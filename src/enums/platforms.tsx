@@ -56,6 +56,26 @@ export enum PlatformLabel {
 	PC = 'PC (Microsoft Windows)',
 }
 
+export const PlatformIds: Record<PlatformLabel, number> = {
+	[PlatformLabel.Ps1]: 7,
+	[PlatformLabel.Ps2]: 8,
+	[PlatformLabel.Ps3]: 9,
+	[PlatformLabel.Ps4]: 48,
+	[PlatformLabel.Ps5]: 167,
+	[PlatformLabel.Psp]: 38,
+	[PlatformLabel.PsVita]: 46,
+	[PlatformLabel.OriginalXbox]: 11,
+	[PlatformLabel.Xbox360]: 12,
+	[PlatformLabel.XboxOne]: 49,
+	[PlatformLabel.XboxSeriesXandS]: 169,
+	[PlatformLabel.SegaMegaDrive]: 29,
+	[PlatformLabel.Wii]: 5,
+	[PlatformLabel.Switch]: 130,
+	[PlatformLabel.NES]: 18,
+	[PlatformLabel.DS]: 20,
+	[PlatformLabel.PC]: 6,
+};
+
 export const PlatformLabels: Record<Platforms, PlatformLabel> = {
 	[Platforms.Ps1]: PlatformLabel.Ps1,
 	[Platforms.Ps2]: PlatformLabel.Ps2,

@@ -114,6 +114,7 @@ export const Details = ({ results, isLoading }: IDetailsProps) => {
 								variant='contained'
 								size='large'
 								startIcon={<AddIcon />}
+								disableRipple
 								onClick={() => setDialog(Dialogs.AddToCollection)}
 							>
 								Add to collection

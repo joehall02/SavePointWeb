@@ -1,4 +1,4 @@
-import { AddToCollection } from '../components/DialogResolver/dialogs/addToCollection';
+import { AddToCollection } from '../components/DialogResolver/dialogs/AddToCollection';
 
 export enum Dialogs {
 	AddToCollection = 'AddToCollection',

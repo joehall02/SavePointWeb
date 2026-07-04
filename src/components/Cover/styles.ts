@@ -18,6 +18,7 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { mobileUi, is
 	coverContainer: {
 		display: 'flex',
 		justifyContent: mobileUi ? 'start' : 'center',
+		alignItems: mobileUi ? 'none' : 'center',
 		width: '100%',
 		...(mobileUi && {
 			transform: `translateY(${theme.spacing(-10)})`,
