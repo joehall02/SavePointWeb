@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import GameService from '../../../api/services/GameService';
 import { Conditions } from '../../../enums/condition';
+import { GameDetail } from '../../../enums/games';
 import { getFilteredPlatforms } from '../../../helpers/getFilteredPlatforms';
 import { useGameDetails } from '../../../hooks/useGameDetails';
 import type { CreateGameDao } from '../../../types/gameDao.types';
@@ -12,7 +13,7 @@ import { useStyles } from './styles';
 
 export const AddToCollection = () => {
 	const { classes } = useStyles();
-	const { gameId, results, isLoading } = useGameDetails('external');
+	const { gameId, results, isLoading } = useGameDetails(GameDetail.External);
 
 	const filteredPlatforms = getFilteredPlatforms(results);
 

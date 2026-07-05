@@ -1,15 +1,22 @@
 import type { GameDetail } from '../enums/games';
 import type { Pagination } from './pagination.types';
 
-export type FetchFromCollectionGame = {
-	id: number;
-	title: string;
-};
-
 export type FetchFromCollectionParams = {
 	title?: string;
 	platform?: string;
 	pagination?: Pagination;
+};
+
+export type CollectionGame = {
+	id: number,
+	title: string,
+	cover?: string
+};
+
+export type CollectionGameResults = {
+	count: number,
+	pages: number,
+	games: CollectionGame[]
 };
 
 export type CreateGame = {
@@ -110,7 +117,7 @@ export type ExternalGameDetails = {
 	release_dates?: ReleaseDate[] | null
 };
 
-export type GameDetailType = 'external' | 'collection';
+export type GameDetailType = GameDetail.External | GameDetail.Collection;
 
 export type DetailsResults =
 	| (ExternalGameDetails & { type: GameDetail.External })
@@ -120,4 +127,15 @@ export type UseGameDetailsResult = {
 	results: DetailsResults | undefined;
 	isLoading: boolean;
 	gameId: number | undefined;
+};
+
+export type GameResults = 
+	| (SearchGameResults & { type: GameDetail.External })
+	| (CollectionGameResults & { type: GameDetail.Collection });
+
+export type UseGameResultsResult = {
+	results: GameResults | undefined;
+	isLoading: boolean;
+	searchParams: SearchGameResultsParams;
+	handleSearch: (key: string, input: string) => void;
 };

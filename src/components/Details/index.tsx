@@ -5,8 +5,8 @@ import { useCallback, useState } from 'react';
 import { Dialogs } from '../../enums/dialogs';
 import { PillContainer } from '../../enums/pillContainer';
 import { PlatformBoxes, PlatformLabel } from '../../enums/platforms';
+import { isDetailsTypeCollection } from '../../helpers/isDetailsTypeCollection';
 import { isResultsNullOrUndefined } from '../../helpers/isResultsNullOrUndefined';
-import { isTypeCollection } from '../../helpers/isTypeCollection';
 import { useDialogContext } from '../../hooks/useDialogContext';
 import { useScreenDetection } from '../../hooks/useScreenDetection';
 import type { DetailsResults } from '../../types/game.types';
@@ -30,7 +30,7 @@ export const Details = ({ results, isLoading }: IDetailsProps) => {
 
 	const [boxPlatform, setBoxPlatform] = useState<PlatformLabel>();
 	
-	const isCollection = isTypeCollection(results);
+	const isCollection = isDetailsTypeCollection(results);
 
 	const { setDialog } = useDialogContext();
 

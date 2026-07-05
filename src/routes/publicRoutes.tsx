@@ -1,4 +1,4 @@
-import Collection from '../pages/Collection';
+import { CollectionResults } from '../pages/CollectionResults';
 import { ExternalGameDetails } from '../pages/ExternalGameDetails';
 import { ExternalResults } from '../pages/ExternalResults';
 import { Home } from '../pages/Home';
@@ -19,7 +19,7 @@ const publicRoutes: RouterType[] = [
 	{
 		path: '/collection',
 		title: 'Collection',
-		element: <Collection />,
+		element: <CollectionResults />,
 	},
 	{
 		path: '/platforms',

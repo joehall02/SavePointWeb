@@ -4,9 +4,9 @@ import { GameDetail } from '../../enums/games';
 import { useGameResults } from '../../hooks/useGameResults';
 import { useStyles } from './styles';
 
-export const ExternalResults = () => {
+export const CollectionResults = () => {
 	const { classes } = useStyles();
-	const { results, isLoading, searchParams, handleSearch } = useGameResults(GameDetail.External);
+	const { results, isLoading, searchParams, handleSearch } = useGameResults(GameDetail.Collection);
 
 	return (
 		<div className={classes.root}>

@@ -252,11 +252,11 @@ Implementation notes:
 
 ### Milestone 7 — Collection page
 
-- [ ] Fetch from collection (`GET /api/game`)
-- [ ] Add top search bar (binds to `search`)
-- [ ] Add platform filter
-- [ ] Add grid/list toggle
-- [ ] Add pagination (`page`/`limit`)
+- [x] Fetch from collection (`GET /api/game`)
+- [x] Add top search bar (binds to `search`)
+- [x] Add platform filter
+- [x] Add grid/list toggle
+- [x] Add pagination (`page`/`limit`)
 
 **Exit criteria:** collection browsing works with filters and paging.
 

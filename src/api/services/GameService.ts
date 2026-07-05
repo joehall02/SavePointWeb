@@ -1,7 +1,7 @@
 import type { AxiosRequestConfig } from 'axios';
 
-import { mapEditGameDaoToEditGame, mapExGameDetailsDaoToExGameDetails, mapExternalGameDaoToExternalGame, mapGameDaoToGame, mapGameDetailsDaoToGameDetails, mapSearchGameResultsDaoToSearchGameResults } from '../../helpers/daoMappers';
-import type { CreateGame, EditGame, ExternalGame, ExternalGameDetails, FetchFromCollectionGame, GameDetails, GetExternalGameDetailsParams, SearchGameResults, SearchGameResultsParams } from '../../types/game.types';
+import { mapCollectionGameResultsDaoToCollectionGameResults, mapEditGameDaoToEditGame, mapExGameDetailsDaoToExGameDetails, mapExternalGameDaoToExternalGame, mapGameDetailsDaoToGameDetails, mapSearchGameResultsDaoToSearchGameResults } from '../../helpers/daoMappers';
+import type { CollectionGameResults, CreateGame, EditGame, ExternalGame, ExternalGameDetails, GameDetails, GetExternalGameDetailsParams, SearchGameResults, SearchGameResultsParams } from '../../types/game.types';
 import type { FetchFromCollectionParams } from '../../types/game.types';
 import type { CreateGameDao, EditGameDao, ExternalGameDao, ExternalGameDetailsDao, FetchFromCollectionDao, GameDetailsDao, SearchGameResultsDao } from '../../types/gameDao.types';
 import type { SearchParam } from '../../types/search.types';
@@ -16,7 +16,7 @@ class GameService {
 	 */
 	public static async fetchFromCollection(
 		params: FetchFromCollectionParams = {},
-	): Promise<FetchFromCollectionGame[]> {
+	): Promise<CollectionGameResults> {
 		const { title, platform, pagination } = params;
 	
 		const config: AxiosRequestConfig = {
@@ -29,8 +29,8 @@ class GameService {
 		};
 		
 		return SavePointApiManager
-			.get<FetchFromCollectionDao[]>(`${this.gamesBaseUrl}`, config)
-			.then((response) => response.data.map(mapGameDaoToGame));
+			.get<FetchFromCollectionDao>(`${this.gamesBaseUrl}`, config)
+			.then((response) => mapCollectionGameResultsDaoToCollectionGameResults(response.data));
 	}
 
 	/**

@@ -2,9 +2,10 @@ import { Box, Typography } from '@mui/material';
 import React, { useCallback, useState } from 'react';
 
 import { Result } from '../../components/Result';
+import { isResultsTypeCollection } from '../../helpers/isResultsTypeCollection';
 import { getLocalStorageItem, setLocalStorageItem } from '../../helpers/localStorage';
 import { LayoutToggle } from '../../LayoutToggle';
-import type { SearchGameResults } from '../../types/game.types';
+import type { CollectionGame, ExternalGame, GameResults } from '../../types/game.types';
 import type { LayoutType } from '../../types/layout.types';
 import { Loading } from '../Loading';
 import { PlatformFilter } from '../PlatformFilter';
@@ -12,7 +13,7 @@ import { SearchBar } from '../SearchBar';
 import { useStyles } from './styles';
 
 interface ISearchProps {
-	results?: SearchGameResults;
+	results?: GameResults;
 	isLoading: boolean;
 	searchTerm: string;
 	handleSearch: (key: string, input: string) => void;
@@ -22,6 +23,8 @@ export const Search = ({ results, isLoading, searchTerm, handleSearch }: ISearch
 	const [layoutType, setlayoutType] = useState<LayoutType>(getLocalStorageItem<LayoutType>('layoutType', 'grid'));
 	
 	const { classes } = useStyles({ layoutType: layoutType || 'grid' });
+
+	const isCollection = isResultsTypeCollection(results);
 
 	const handleBarSeach = useCallback((input: string) => {
 		handleSearch('search', input);
@@ -76,7 +79,12 @@ export const Search = ({ results, isLoading, searchTerm, handleSearch }: ISearch
 				{results?.games.map((result) => {
 					return (
 						<React.Fragment key={result.id}>
-							<Result id={result.id} name={result.name} cover={result.cover} layoutType={layoutType} />
+							<Result 
+								id={result.id}
+								name={isCollection ? (result as CollectionGame).title : (result as ExternalGame).name}
+								cover={result.cover}
+								layoutType={layoutType} 
+							/>
 						</React.Fragment>
 					);
 				})}

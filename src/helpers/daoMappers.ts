@@ -1,14 +1,7 @@
-import type { EditGame, ExternalGame, ExternalGameDetails, FetchFromCollectionGame, GameDetails, SearchGameResults } from '../types/game.types';
-import type { EditGameDao, ExternalGameDao, ExternalGameDetailsDao, FetchFromCollectionDao, GameDetailsDao, SearchGameResultsDao } from '../types/gameDao.types';
+import type { CollectionGame, CollectionGameResults, EditGame, ExternalGame, ExternalGameDetails, GameDetails, SearchGameResults } from '../types/game.types';
+import type { CollectionGameDao, CollectionGameResultsDao, EditGameDao, ExternalGameDao, ExternalGameDetailsDao, GameDetailsDao, SearchGameResultsDao } from '../types/gameDao.types';
 import type { Platform } from '../types/platform.types';
 import type { PlatformDao } from '../types/platformDao.types';
-
-export const mapGameDaoToGame = (dto: FetchFromCollectionDao): FetchFromCollectionGame => {
-	return {
-		id: dto.id,
-		title: dto.title,
-	};
-};
 
 export const mapGameDetailsDaoToGameDetails = (dto: GameDetailsDao): GameDetails => {
 	return {
@@ -47,6 +40,22 @@ export const mapSearchGameResultsDaoToSearchGameResults = (dto: SearchGameResult
 		count: dto.count,
 		pages: dto.pages,
 		games: dto.games.map(mapExternalGameDaoToExternalGame),
+	};
+};
+
+export const mapCollectionGameDaoToCollectionGame = (dto: CollectionGameDao): CollectionGame => {
+	return {
+		id: dto.id,
+		title: dto.title,
+		cover: dto.cover?.url,
+	};
+};
+
+export const mapCollectionGameResultsDaoToCollectionGameResults = (dto: CollectionGameResultsDao): CollectionGameResults => {
+	return {
+		count: dto.count,
+		pages: dto.pages,
+		games: dto.games.map(mapCollectionGameDaoToCollectionGame),
 	};
 };
 

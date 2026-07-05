@@ -1,6 +1,19 @@
 export type FetchFromCollectionDao = {
-	id: number;
-	title: string;
+	count: number,
+	pages: number,
+	games: CollectionGameDao[]
+};
+
+export type CollectionGameDao = {
+	id: number,
+	title: string,
+	cover?: CoverDao
+};
+
+export type CollectionGameResultsDao = {
+	count: number,
+	pages: number,
+	games: CollectionGameDao[]
 };
 
 export type CreateGameDao = {
