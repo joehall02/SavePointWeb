@@ -85,7 +85,7 @@ export const SearchBar = ({ searchResults, handleSearch, handleDebounce }: ISear
 					{searchResults?.map((game) => (
 						<React.Fragment key={game.id}>
 							<Divider className={classes.divider} />
-							<Result id={game.id} name={game.name} cover={game.cover} />
+							<Result url={`/game?id=${game.id}`} name={game.name} cover={game.cover} />
 						</React.Fragment>
 					))}
 				</div>
