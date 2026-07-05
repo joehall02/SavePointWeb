@@ -31,18 +31,22 @@ export const useGameResults = (type: GameDetailType): UseGameResultsResult => {
 	const { data: results, isLoading } = useQuery({
 		queryKey: ['gameResults', type, searchParams],
 		queryFn: async (): Promise<GameResults> => {
-			if (type === GameDetail.External) {
-				const data = await GameService.searchGameResults(searchParams);
-				return { ...data, type: GameDetail.External };
+			switch(type) {
+				case GameDetail.External: {
+					const data = await GameService.searchGameResults(searchParams);
+					return { ...data, type: GameDetail.External };
+				}
+				case GameDetail.Collection: {
+					const data = await GameService.fetchFromCollection({
+						title: searchParams.search,
+						platform: searchParams.platform,
+						pagination: searchParams.pagination,
+					});
+					return { ...data, type: GameDetail.Collection };
+				}
+				default:
+					throw new Error('Unknown game detail');
 			}
-			
-			const data = await GameService.fetchFromCollection({
-				title: searchParams.search,
-				platform: searchParams.platform,
-				pagination: searchParams.pagination,
-			});
-			return { ...data, type: GameDetail.Collection };
-
 		},
 	});
 

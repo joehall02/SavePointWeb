@@ -30,7 +30,7 @@ export const Pill = ({ text, region, triggerBox, isPlatform = false }: IPillProp
 	const { classes } = useStyles({ region, isPlatform });
 
 	return (
-		<Box className={classes.root} onClick={() => { if (triggerBox) triggerBox(text);}}>
+		<Box className={classes.root} onClick={() => triggerBox ? triggerBox(text) : undefined}>
 			<Typography variant='body2'>{text}</Typography>
 
 			{region ? (
