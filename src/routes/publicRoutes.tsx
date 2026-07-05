@@ -1,3 +1,4 @@
+import { CollectionGameDetails } from '../pages/CollectionGameDetails';
 import { CollectionResults } from '../pages/CollectionResults';
 import { ExternalGameDetails } from '../pages/ExternalGameDetails';
 import { ExternalResults } from '../pages/ExternalResults';
@@ -30,6 +31,11 @@ const publicRoutes: RouterType[] = [
 		path: '/game',
 		title: 'Game',
 		element: <ExternalGameDetails />,
+	},
+	{
+		path: '/collection-game',
+		title: 'Collection Game',
+		element: <CollectionGameDetails />,
 	},
 ];
 

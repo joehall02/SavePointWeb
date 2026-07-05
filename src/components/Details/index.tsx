@@ -80,7 +80,6 @@ export const Details = ({ results, isLoading }: IDetailsProps) => {
 
 					{/* Info */}
 					<div className={classes.info}>
-						
 						{/* Platforms */}
 						{results?.platforms?.length !== 0 && (
 							<PillsContainer name={PillContainer.Platforms} data={results?.platforms} triggerBox={triggerBox} />
@@ -106,20 +105,23 @@ export const Details = ({ results, isLoading }: IDetailsProps) => {
 							</>
 						
 						)}
-
-						{isCollection ? (
-							<p>Collection buttons</p>
-						) : (
-							<Button 
-								variant='contained'
-								size='large'
-								startIcon={<AddIcon />}
-								disableRipple
-								onClick={() => setDialog(Dialogs.AddToCollection)}
-							>
-								Add to collection
-							</Button>
-						)}
+						
+						<div className={classes.dialogButtons}>
+							{isCollection ? (
+								<p>Collection buttons</p>
+							) : (
+								<Button
+									fullWidth
+									variant='contained'
+									size='large'
+									startIcon={<AddIcon />}
+									disableRipple
+									onClick={() => setDialog(Dialogs.AddToCollection)}
+								>
+									Add to collection
+								</Button>
+							)}
+						</div>
 					</div>
 				</div>
 			</div>

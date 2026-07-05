@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import GameService from '../api/services/GameService';
+import { GameDetail } from '../enums/games';
 import type { DetailsResults, ExternalGameDetails, GameDetails, GameDetailType, UseGameDetailsResult } from '../types/game.types';
 
 /**
@@ -22,10 +23,16 @@ export const useGameDetails = (type: GameDetailType): UseGameDetailsResult => {
 
 	const { data: results, isLoading } = useQuery<ExternalGameDetails | GameDetails, Error, DetailsResults>({
 		queryKey: ['game-details', type, gameId],
-		queryFn: (): Promise<ExternalGameDetails | GameDetails> =>
-			type === 'external'
-				? GameService.getExternalGameDetails({ gameId })
-				: GameService.getGameDetails(gameId!), // TODO: remove non-null assertion
+		queryFn: (): Promise<ExternalGameDetails | GameDetails> => {
+			switch (type) {
+				case GameDetail.External:
+					return GameService.getExternalGameDetails({ gameId });
+				case GameDetail.Collection:
+					return GameService.getGameDetails(gameId!); // TODO: remove non-null assertion
+				default: 
+					throw new Error('Unknown game detail');
+			}
+		},
 		select: (data): DetailsResults => ({ ...data, type } as DetailsResults),
 	});
 

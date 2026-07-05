@@ -32,7 +32,7 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { mobileUi }) 
 		display: 'flex',
 		flexDirection: 'column',
 		width: '100%',
-		justifyContent: 'center',
+		height: '100%',
 		borderRadius: theme.spacing(0.5),
 
 		'& > *:not(:last-child)': {
@@ -40,6 +40,9 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { mobileUi }) 
 			paddingBottom: theme.spacing(2.5),
 			marginBottom: theme.spacing(2),
 		},
+	},
+	dialogButtons: {
+		marginTop: 'auto',
 	},
 	text: {
 		marginBottom: theme.spacing(1),

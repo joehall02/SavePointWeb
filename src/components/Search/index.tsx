@@ -80,7 +80,7 @@ export const Search = ({ results, isLoading, searchTerm, handleSearch }: ISearch
 					return (
 						<React.Fragment key={result.id}>
 							<Result 
-								id={result.id}
+								url={isCollection ? `/collection-game?id=${result.id}` : `/game?id=${result.id}`}
 								name={isCollection ? (result as CollectionGame).title : (result as ExternalGame).name}
 								cover={result.cover}
 								layoutType={layoutType} 

@@ -8,13 +8,13 @@ import type { LayoutType } from '../../types/layout.types';
 import { useStyles } from './styles';
 
 interface IResultProps {
-	id: number;
+	url: string;
 	name: string;
 	cover?: string;
 	layoutType?: LayoutType;
 }
 
-export const Result = ({ id, name, cover, layoutType }: IResultProps) => {
+export const Result = ({ url, name, cover, layoutType }: IResultProps) => {
 	const [coverLoaded, setCoverLoaded] = useState<boolean>(false);
 	const themeMode = useThemeMode();
 
@@ -23,7 +23,7 @@ export const Result = ({ id, name, cover, layoutType }: IResultProps) => {
 	return (
 		// tabIndex allows the element to be focused
 		// Allows us to click element without triggering onBlur event
-		<Box component={RouterLink} to={`/game?id=${id}`} tabIndex={0} className={classes.root}>
+		<Box component={RouterLink} to={url} tabIndex={0} className={classes.root}>
 			{cover ? (
 				<>
 					<img 
