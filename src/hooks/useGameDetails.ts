@@ -21,15 +21,20 @@ export const useGameDetails = (type: GameDetailType): UseGameDetailsResult => {
 		return id ? parseInt(id) : undefined;
 	}, [queryParams]);
 
-	const { data: results, isLoading } = useQuery<ExternalGameDetails | GameDetails, Error, DetailsResults>({
+	const { data: results, isLoading } = useQuery<ExternalGameDetails | (GameDetails & ExternalGameDetails), Error, DetailsResults>({
 		queryKey: ['game-details', type, gameId],
-		queryFn: (): Promise<ExternalGameDetails | GameDetails> => {
+		queryFn: async (): Promise<ExternalGameDetails | (GameDetails & ExternalGameDetails)> => {
 			switch (type) {
 				case GameDetail.External:
 					return GameService.getExternalGameDetails({ gameId });
-				case GameDetail.Collection:
-					return GameService.getGameDetails(gameId!); // TODO: remove non-null assertion
-				default: 
+				case GameDetail.Collection: {
+					const collectionData = await GameService.getGameDetails(gameId!);
+
+					const externalData = await GameService.getExternalGameDetails({ gameId: collectionData.igdbId });
+
+					return { ...collectionData, ...externalData };
+				}
+				default:
 					throw new Error('Unknown game detail');
 			}
 		},

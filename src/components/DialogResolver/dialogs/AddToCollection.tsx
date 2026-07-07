@@ -4,8 +4,10 @@ import { useState } from 'react';
 
 import GameService from '../../../api/services/GameService';
 import { Conditions } from '../../../enums/condition';
+import { Dialogs } from '../../../enums/dialogs';
 import { GameDetail } from '../../../enums/games';
 import { getFilteredPlatforms } from '../../../helpers/getFilteredPlatforms';
+import { useDialogContext } from '../../../hooks/useDialogContext';
 import { useGameDetails } from '../../../hooks/useGameDetails';
 import type { CreateGameDao } from '../../../types/gameDao.types';
 import { Loading } from '../../Loading';
@@ -15,6 +17,8 @@ export const AddToCollection = () => {
 	const { classes } = useStyles();
 	const { gameId, results, isLoading } = useGameDetails(GameDetail.External);
 
+	const { setDialog } = useDialogContext();
+	
 	const filteredPlatforms = getFilteredPlatforms(results);
 
 	const [formData, setFormData] = useState<Omit<CreateGameDao, 'igdbId'>>({
@@ -34,6 +38,8 @@ export const AddToCollection = () => {
 			igdbId: gameId ?? 0,
 		};
 
+		setDialog(Dialogs.None);
+		
 		await GameService.createGame(gamePayload);
 	};
 

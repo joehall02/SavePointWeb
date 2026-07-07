@@ -35,7 +35,7 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { mobileUi }) 
 		height: '100%',
 		borderRadius: theme.spacing(0.5),
 
-		'& > *:not(:last-child)': {
+		'& > *:nth-last-child(n+3)': {
 			borderBottom: `2px solid ${theme.palette.divider}`,
 			paddingBottom: theme.spacing(2.5),
 			marginBottom: theme.spacing(2),
@@ -43,6 +43,9 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { mobileUi }) 
 	},
 	dialogButtons: {
 		marginTop: 'auto',
+		...mobileUi && {
+			marginTop: theme.spacing(4),
+		},
 	},
 	text: {
 		marginBottom: theme.spacing(1),
