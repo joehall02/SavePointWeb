@@ -34,7 +34,7 @@ export const DialogResolver = () => {
 			open={dialog !== Dialogs.None}
 			disableScrollLock={true}
 			fullWidth={true}
-			maxWidth='md'
+			maxWidth={dialog === Dialogs.DeleteGame ? 'sm' : 'md'}
 			onClose={handleClose}
 			slotProps={{
 				paper: { className: classes.dialog },

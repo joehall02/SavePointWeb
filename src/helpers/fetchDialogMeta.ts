@@ -16,7 +16,7 @@ export const fetchDialogMeta = (dialog: Dialogs): DialogMeta => {
 		case Dialogs.DeleteGame:
 			return {
 				title: 'Delete Game',
-				description: 'Are you sure you want to delete this game?',
+				description: 'Are you sure you want to do this? This action cannot be undone.',
 			};
 		case Dialogs.None:
 		default:

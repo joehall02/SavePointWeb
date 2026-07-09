@@ -126,7 +126,7 @@ export const Details = ({ results, isLoading }: IDetailsProps) => {
 										color='error'
 										startIcon={<AddIcon />}
 										disableRipple
-										onClick={() => setDialog(Dialogs.AddToCollection)}
+										onClick={() => setDialog(Dialogs.DeleteGame)}
 									>
 										Delete Game	
 									</Button>

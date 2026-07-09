@@ -28,6 +28,7 @@ function App() {
 						<Nav />
 						<DialogResolver />
 						<Container className={classes.content} maxWidth='xl'>
+							{/* TODO: Add a back button - enum for page view urls to detect which page to show the back button on */}
 							<ThemeModeToggle />
 							<Outlet />
 						</Container>
