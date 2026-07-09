@@ -41,11 +41,19 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { mobileUi }) 
 			marginBottom: theme.spacing(2),
 		},
 	},
+	summary: {
+		marginBottom: theme.spacing(3),
+	},
 	dialogButtons: {
 		marginTop: 'auto',
 		...mobileUi && {
 			marginTop: theme.spacing(4),
 		},
+	},
+	collectionButtons: {
+		display: 'flex',
+		justifyContent: 'end',
+		gap: theme.spacing(2),
 	},
 	text: {
 		marginBottom: theme.spacing(1),

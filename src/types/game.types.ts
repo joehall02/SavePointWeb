@@ -41,7 +41,7 @@ export type GameDetails = {
 };
 
 export type EditGame = {
-	id: number,
+	id?: number,
 	title?: string,
 	condition?: string,
 	notes?: string,

@@ -6,49 +6,40 @@ import GameService from '../../../api/services/GameService';
 import { Conditions } from '../../../enums/condition';
 import { Dialogs } from '../../../enums/dialogs';
 import { GameDetail } from '../../../enums/games';
-import { getFilteredPlatforms } from '../../../helpers/getFilteredPlatforms';
 import { useDialogContext } from '../../../hooks/useDialogContext';
 import { useGameDetails } from '../../../hooks/useGameDetails';
-import type { CreateGameDao } from '../../../types/gameDao.types';
+import type { GameDetails } from '../../../types/game.types';
+import type { EditGameDao } from '../../../types/gameDao.types';
 import { Loading } from '../../Loading';
 import { useStyles } from './styles';
 
-export const AddToCollection = () => {
+interface IEditForm {
+	gameId: number;
+	results: GameDetails;
+};
+
+const EditForm = ({ gameId, results }: IEditForm) => {
 	const { classes } = useStyles();
-	const { gameId, results, isLoading } = useGameDetails(GameDetail.External);
-
 	const { setDialog } = useDialogContext();
-	
-	const filteredPlatforms = getFilteredPlatforms(results);
 
-	const [formData, setFormData] = useState<Omit<CreateGameDao, 'igdbId'>>({
-		title: results?.name || '',
-		condition: Conditions.Good,
-		notes: '',
-		boxIncluded: true,
-		rating: 0,
-		platformId: filteredPlatforms[0]?.[1],
+	const [formData, setFormData] = useState<EditGameDao>({
+		title: results.title,
+		condition: results.condition,
+		notes: results.notes,
+		boxIncluded: results.boxIncluded,
+		rating: results.rating,
 	});
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
 		event.preventDefault();
 
-		const gamePayload: CreateGameDao = {
-			...formData,
-			igdbId: gameId ?? 0,
-		};
+		const gamePayload: EditGameDao = { ...formData };
 
 		setDialog(Dialogs.None);
-		
-		await GameService.createGame(gamePayload);
+
+		await GameService.editGame(gameId, gamePayload);
 	};
 
-	if (isLoading) {
-		return (
-			<Loading isLoading={isLoading} />
-		);
-	}
-	
 	return (
 		<Box
 			component='form'
@@ -76,23 +67,6 @@ export const AddToCollection = () => {
 				>
 					{Object.values(Conditions).map((label, index) => (
 						<MenuItem key={index} value={label}>
-							{label}
-						</MenuItem>
-					))}
-				</TextField>
-
-				{/* Platform */}
-				<TextField
-					select
-					label='Platform'
-					variant='outlined'
-					required
-					value={formData.platformId || ''}
-					onChange={(e) => setFormData({ ...formData, platformId: Number(e.target.value) || 0 })}
-				>
-					{/* Filter out platforms that aren't returned in the results?.platforms response data */}
-					{filteredPlatforms.map(([label, id]) => (
-						<MenuItem key={id} value={id}>
 							{label}
 						</MenuItem>
 					))}
@@ -129,10 +103,10 @@ export const AddToCollection = () => {
 					/>
 				</Box>
 
-				<Button 
-					type='submit' 
-					variant='contained' 
-					color='primary' 
+				<Button
+					type='submit'
+					variant='contained'
+					color='primary'
 					size='large'
 				>
 					Save to Collection
@@ -142,4 +116,19 @@ export const AddToCollection = () => {
 	);
 };
 
-AddToCollection.displayName = 'AddToCollection';
+export const EditGameInCollection = () => {
+	const { gameId, results, isLoading } = useGameDetails(GameDetail.Collection, true);
+	const collectionResults = results as (GameDetails & { type: GameDetail.Collection });
+
+	if (isLoading) {
+		return <Loading isLoading={isLoading} />;
+	}
+
+	if (!collectionResults || !gameId) {
+		return null;
+	}
+
+	return <EditForm gameId={gameId} results={collectionResults} />;
+};
+
+EditGameInCollection.displayName = 'EditGameInCollection';

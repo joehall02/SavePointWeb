@@ -98,7 +98,7 @@ export const Details = ({ results, isLoading }: IDetailsProps) => {
 						{/* Summary */}
 						{results?.summary && (
 							<>
-								<div>
+								<div className={classes.summary}>
 									<Typography className={classes.text} variant='h6'>Summary:</Typography>
 									<ExpandableText text={results?.summary} limit={550} />
 								</div>
@@ -108,7 +108,29 @@ export const Details = ({ results, isLoading }: IDetailsProps) => {
 						
 						<div className={classes.dialogButtons}>
 							{isCollection ? (
-								<p>Collection buttons</p>
+								<div className={classes.collectionButtons}>
+									<Button
+										variant='contained'
+										size='large'
+										color='secondary'
+										startIcon={<AddIcon />}
+										disableRipple
+										onClick={() => setDialog(Dialogs.EditGame)}
+									>
+										Edit Game	
+									</Button>
+								
+									<Button
+										variant='contained'
+										size='large'
+										color='error'
+										startIcon={<AddIcon />}
+										disableRipple
+										onClick={() => setDialog(Dialogs.AddToCollection)}
+									>
+										Delete Game	
+									</Button>
+								</div>
 							) : (
 								<Button
 									fullWidth
@@ -118,7 +140,7 @@ export const Details = ({ results, isLoading }: IDetailsProps) => {
 									disableRipple
 									onClick={() => setDialog(Dialogs.AddToCollection)}
 								>
-									Add to collection
+									Add To Collection
 								</Button>
 							)}
 						</div>

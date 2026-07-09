@@ -38,14 +38,13 @@ export type GameDetailsDao = {
 };
 
 export type EditGameDao = {
-	id: number,
-	title: string,
-	condition: string,
+	id?: number,
+	title?: string,
+	condition?: string,
 	notes?: string,
-	boxIncluded: boolean,
+	boxIncluded?: boolean,
 	rating?: number,
-	igdbId: number,
-	platformId: number
+	igdbId?: number,
 };
 
 export type ExternalGameDao = {

@@ -1,4 +1,5 @@
 import { AddToCollection } from '../components/DialogResolver/dialogs/AddToCollection';
+import { EditGameInCollection } from '../components/DialogResolver/dialogs/EditGameInCollection';
 
 export enum Dialogs {
 	AddToCollection = 'AddToCollection',
@@ -9,7 +10,7 @@ export enum Dialogs {
 
 export const DIALOG_MAP: Partial<Record<Dialogs, React.ReactNode>> = {
 	[Dialogs.AddToCollection]: <AddToCollection />,
-	// [Dialogs.EditGame]: ,
+	[Dialogs.EditGame]: <EditGameInCollection />,
 	// [Dialogs.DeleteGame]: ,
 	[Dialogs.None]: null,
 };
