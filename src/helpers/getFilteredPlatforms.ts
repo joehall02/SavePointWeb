@@ -1,4 +1,4 @@
-import { PlatformIds } from '../enums/platforms';
+import { IgdbPlatformId, PlatformIds } from '../enums/platforms';
 import type { DetailsResults } from '../types/game.types';
 
 /**
@@ -7,7 +7,7 @@ import type { DetailsResults } from '../types/game.types';
  * @param results - DetailsResults object
  * @returns Filtered entries of PlatformIds as [label, id] pairs
  */
-export const getFilteredPlatforms = (results: DetailsResults | undefined): [string, number][] => {
+export const getFilteredPlatforms = (results: DetailsResults | undefined): [string, IgdbPlatformId][] => {
 	return Object.entries(PlatformIds).filter(
 		([label]) => results?.platforms?.some((p) => p.name === label),
 	);

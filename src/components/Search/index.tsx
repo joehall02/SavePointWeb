@@ -1,12 +1,11 @@
 import { Box, Typography } from '@mui/material';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 
 import { Result } from '../../components/Result';
 import { isResultsTypeCollection } from '../../helpers/isResultsTypeCollection';
-import { getLocalStorageItem, setLocalStorageItem } from '../../helpers/localStorage';
+import { useLayoutToggle } from '../../hooks/useLayoutToggle';
 import { LayoutToggle } from '../../LayoutToggle';
 import type { CollectionGame, ExternalGame, GameResults } from '../../types/game.types';
-import type { LayoutType } from '../../types/layout.types';
 import { Loading } from '../Loading';
 import { PlatformFilter } from '../PlatformFilter';
 import { SearchBar } from '../SearchBar';
@@ -20,8 +19,7 @@ interface ISearchProps {
 }
 
 export const Search = ({ results, isLoading, searchTerm, handleSearch }: ISearchProps) => {
-	const [layoutType, setlayoutType] = useState<LayoutType>(getLocalStorageItem<LayoutType>('layoutType', 'grid'));
-	
+	const { layoutType, handleLayoutToggle } = useLayoutToggle();
 	const { classes } = useStyles({ layoutType: layoutType || 'grid' });
 
 	const isCollection = isResultsTypeCollection(results);
@@ -33,11 +31,6 @@ export const Search = ({ results, isLoading, searchTerm, handleSearch }: ISearch
 	const handlePlatformFilter = useCallback((input: string) => {
 		handleSearch('platform', input);
 	}, [handleSearch]);
-
-	const handleLayoutToggle = useCallback((input: LayoutType) => {
-		setLocalStorageItem('layoutType', input);
-		setlayoutType(input);
-	}, []);
 
 	{/* Loading */}
 	if (isLoading) {

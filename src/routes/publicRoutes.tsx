@@ -3,7 +3,7 @@ import { CollectionResults } from '../pages/CollectionResults';
 import { ExternalGameDetails } from '../pages/ExternalGameDetails';
 import { ExternalResults } from '../pages/ExternalResults';
 import { Home } from '../pages/Home';
-import Platforms from '../pages/Platforms';
+import { Platforms } from '../pages/Platforms';
 import type { RouterType } from '../types/router.types';
 
 const publicRoutes: RouterType[] = [

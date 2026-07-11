@@ -6,6 +6,7 @@ import GameService from '../../../api/services/GameService';
 import { Conditions } from '../../../enums/condition';
 import { Dialogs } from '../../../enums/dialogs';
 import { GameDetail } from '../../../enums/games';
+import { IgdbPlatformId, IgdbToPlatformId } from '../../../enums/platforms';
 import { getFilteredPlatforms } from '../../../helpers/getFilteredPlatforms';
 import { useDialogContext } from '../../../hooks/useDialogContext';
 import { useGameDetails } from '../../../hooks/useGameDetails';
@@ -36,6 +37,7 @@ export const AddToCollection = () => {
 		const gamePayload: CreateGameDao = {
 			...formData,
 			igdbId: gameId ?? 0,
+			platformId: IgdbToPlatformId[formData.platformId as IgdbPlatformId],
 		};
 
 		setDialog(Dialogs.None);
