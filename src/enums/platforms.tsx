@@ -155,6 +155,25 @@ export const PlatformLabels: Record<Platforms, PlatformLabel> = {
 	[Platforms.DS]: PlatformLabel.DS,
 	[Platforms.PC]: PlatformLabel.PC,
 };
+export const PlatformIdsByLabel: Record<PlatformLabel, Platforms> = {
+	[PlatformLabel.Ps1]: Platforms.Ps1,
+	[PlatformLabel.Ps2]: Platforms.Ps2,
+	[PlatformLabel.Ps3]: Platforms.Ps3,
+	[PlatformLabel.Ps4]: Platforms.Ps4,
+	[PlatformLabel.Ps5]: Platforms.Ps5,
+	[PlatformLabel.Psp]: Platforms.Psp,
+	[PlatformLabel.PsVita]: Platforms.PsVita,
+	[PlatformLabel.OriginalXbox]: Platforms.OriginalXbox,
+	[PlatformLabel.Xbox360]: Platforms.Xbox360,
+	[PlatformLabel.XboxOne]: Platforms.XboxOne,
+	[PlatformLabel.XboxSeriesXandS]: Platforms.XboxSeriesXandS,
+	[PlatformLabel.SegaMegaDrive]: Platforms.SegaMegaDrive,
+	[PlatformLabel.Wii]: Platforms.wii,
+	[PlatformLabel.Switch]: Platforms.Switch,
+	[PlatformLabel.NES]: Platforms.NES,
+	[PlatformLabel.DS]: Platforms.DS,
+	[PlatformLabel.PC]: Platforms.PC,
+};
 
 export const PlatformBoxes: Partial<Record<PlatformLabel, string>> = {
 	[PlatformLabel.Ps1]: playstation,

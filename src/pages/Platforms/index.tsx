@@ -6,6 +6,7 @@ import PlatformService from '../../api/services/PlatformService';
 import { Loading } from '../../components/Loading';
 import { Result } from '../../components/Result';
 import { useStyles } from '../../components/Search/styles';
+import { PlatformIdsByLabel, PlatformLabel } from '../../enums/platforms';
 import { useLayoutToggle } from '../../hooks/useLayoutToggle';
 import { LayoutToggle } from '../../LayoutToggle';
 import type * as platformTypes from '../../types/platform.types';
@@ -51,10 +52,12 @@ export const Platforms = () => {
 			{/* Game Results */}
 			<div className={classes.gameResults}>
 				{results?.map((result) => {
+					const platformByLabel = PlatformIdsByLabel[result.title as PlatformLabel];
+
 					return (
 						<React.Fragment key={result.id}>
 							<Result 
-								url={`/collection?platform=${result.title}`}
+								url={`/collection?platform=${platformByLabel}`}
 								name={result.title}
 								cover={result.cover}
 								layoutType={layoutType} 

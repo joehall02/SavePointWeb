@@ -262,9 +262,9 @@ Implementation notes:
 
 ### Milestone 8 — Platforms page
 
-- [ ] Fetch platforms list
-- [ ] Add grid/list toggle
-- [ ] Platform click navigates to `/collection?search=&platform=...&page=1&limit=6`
+- [x] Fetch platforms list
+- [x] Add grid/list toggle
+- [x] Platform click navigates to `/collection?search=&platform=...&page=1&limit=6`
 
 **Exit criteria:** platforms browse works; navigation applies filter.
 
