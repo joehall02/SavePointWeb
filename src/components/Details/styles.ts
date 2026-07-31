@@ -77,6 +77,7 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { mobileUi }) 
 	mediaContainer: {
 		flex: '0 0 100%',
 		width: '100%',
+		minWidth: 0,
 		...mobileUi && {
 			width: '95%',
 		},
@@ -89,5 +90,6 @@ export const useStyles = makeStyles<IStyleProps>()((theme: Theme, { mobileUi }) 
 	storyline: {
 		alignSelf: 'start',
 		width: '100%',
+		minWidth: 0,
 	},
 }));
