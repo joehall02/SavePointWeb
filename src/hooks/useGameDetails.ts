@@ -10,6 +10,10 @@ import type { DetailsResults, ExternalGameDetails, GameDetails, GameDetailType, 
 /**
  * Fetches game details based on the `id` URL search parameter.
  *
+ * Results are cached by react-query under `['game-details', type, gameId, suppressExternal]`,
+ * so each game/type/suppressExternal combination gets its own cache entry. Cached data is
+ * treated as fresh for `CACHE_TTL_MS` (5 minutes) before it's eligible for a refetch.
+ *
  * @param type - Whether to fetch from the external IGDB source 'external' or the user's collection 'collection'.
  * @param suppressExternal - Whether to suppress the `getExternalGameDetails` request.
  * @returns The resolved game details, loading state, and the parsed game ID.
